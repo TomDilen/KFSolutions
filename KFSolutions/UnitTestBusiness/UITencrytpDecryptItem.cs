@@ -18,13 +18,17 @@ namespace KFSolutions.UnitTestBusiness
 
         public static List<UITencrytpDecryptItem> Test_Encryp_DecryptVersie1(int aAantalTeGenereren)
         {
+            UITcustomEncrypter myEncryption = new UITcustomEncrypter();
+
             List<UITencrytpDecryptItem> terug = new List<UITencrytpDecryptItem>();
 
             string kleineLetters = "abcdefghijklmnopqrstuvwxyz";
             string groteLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string cijfers = "0123456789";
             string toegelatenPaswoord = "!@#$%^&*()_+=[{]};:<>|./?,-";
-            string toegelatenGebruikersnaam = "_";
+            string toegelatenGebruikersnaam = "_" + "";
+
+
 
             string ttPaswoord = kleineLetters + groteLetters + toegelatenPaswoord + cijfers;
             string ttGebruikersnaam = kleineLetters + groteLetters + toegelatenGebruikersnaam + cijfers;
@@ -37,7 +41,7 @@ namespace KFSolutions.UnitTestBusiness
 
                 //randomPaswoord aanmaken
                 //--------------------------------------------------------------
-                int lengteString = rnd.Next(8, 21);//van 8 tem 20
+                int lengteString = rnd.Next(8, 21);//van 8 tem 20 //stond (8, 21)
                 string nieuwePasw = string.Empty;
                 for (int j = 0; j < lengteString; j++)
                 {
@@ -48,10 +52,12 @@ namespace KFSolutions.UnitTestBusiness
                 newUITencrytpDecryptItem.PasswordInitValue = nieuwePasw;
                 //---------------------------------------
 
+
+
                 //random key aanmaken (key is gebruikersnaam)
                 //--------------------------------------------------------------
 
-                lengteString = rnd.Next(5, 21);//van 5 tem 20 (+1tjes om te testen)
+                lengteString = rnd.Next(5, 21);//van 5 tem 20  //stond (5, 21)
                 string nieuweGebr = string.Empty;
                 for (int j = 0; j < lengteString; j++)
                 {
@@ -64,8 +70,8 @@ namespace KFSolutions.UnitTestBusiness
                 //---------------------------------------
 
 
-                string encripted = TDSencryption.TDSencryption.EncriptString(nieuwePasw, nieuweGebr);
-                string decripted = TDSencryption.TDSencryption.DecriptString(encripted, nieuweGebr);
+                string encripted = myEncryption.EncriptString(nieuwePasw, nieuweGebr);
+                string decripted = myEncryption.DecriptString(encripted, nieuweGebr);
 
                 //---------------------------------------
                 newUITencrytpDecryptItem.PasswordEncrypted = encripted;
@@ -73,10 +79,10 @@ namespace KFSolutions.UnitTestBusiness
                 //---------------------------------------
 
 
-                //int r = rnd.Next(100); //testen dat het werkt :-)
-                //if (r == 1) decripted += "p";
+                int r = rnd.Next(5); //testen dat het werkt :-)
+                if (r == 1) decripted += "p";
 
-                //in item steken
+    
 
 
 

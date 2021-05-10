@@ -2,29 +2,75 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace TDSencryption
 {
-    public  class TDSencryption
+    public class TDScrypto
     {
 
         private const int LENGTE_ENCRYPT_ZONDER_SOM = 40;
 
 
         #region ========================================================================EncriptString
-        public static string EncriptString(string aString, string aSleutel)
+        /// <summary>
+        /// deze geeft een enctypted paswoord terug aan de hand van de sleutel, het encrypted paswoord
+        /// is steeds 42 tekens lang, 
+        /// als de sleutel <
+        /// </summary>
+        /// <param name="aStringToEncrypt"></param>
+        /// <param name="aKey"></param>
+        /// <returns></returns>
+        public  string EncriptString(string aStringToEncrypt, string aKey)
         {
+            //=====================================================standaard validatie
+            if(string.IsNullOrEmpty( aStringToEncrypt)|| string.IsNullOrEmpty(aKey))
+            {
+                throw new TDSencryptionException(
+                    $"The value or key is not an acceptable value to encrypt",
+                    $"De waarde van de sleutel is geen acceptabele waarde om te encrypten",
+                    aStringToEncrypt, aKey
+                    );
+            }
+            if (aStringToEncrypt.Length>20 || aKey.Length>20)
+            {
+                throw new TDSencryptionException(
+                    $"cannot encrypt: The length of the value or key can be up to 20 characters",
+                    $"kan niet encrypten: De lengte van de waarde of de sleutel mag maximum 20 tekens lang zijn",
+                    aStringToEncrypt, aKey
+                    );
+            }
+            //=====================================================validation dat je kan overriden
+            if ( ! IsValidStringToEncrypt(aStringToEncrypt))
+            {
+                throw new TDSencryptionException(
+                    $"The value: {aStringToEncrypt} is not a valid value to encrypt",
+                    $"De waarde: {aStringToEncrypt} is geen acceptabele waarde om te encrypten",
+                    aStringToEncrypt,aKey
+                    );
+            }
+            if(!IsValidKeyToEncrypt(aKey)){
+                throw new TDSencryptionException(
+                    $"The Key: {aStringToEncrypt} is not a valid Key to encrypt",
+                    $"De sleutel: {aStringToEncrypt} is geen acceptabele sleutel om te encrypten",
+                    aStringToEncrypt, aKey
+                    );
+            }
+            //===============================================================
 
-            Thread.Sleep(1); //om te testen, nog wegdoen
+
+
+
+            //Thread.Sleep(1); //om te testen, nog wegdoen
             Random rnd = new Random();
-            string terug = aString;
-            int asciSomSleutel = SomAscciVanKarakters(aSleutel);
+            string terug = aStringToEncrypt;
+            int asciSomSleutel = SomAscciVanKarakters(aKey);
             //string tussentegooienrommel = "!@#$%^&*()_+=[{]};:<>|./?,-";
 
 
-            terug = Somvan2stringen(terug, "ma" + aSleutel + "tr");
+            terug = Somvan2stringen(terug, "ma" + aKey + "tr");
             terug = DraaiStringOm(terug);
 
             //karaktertjes nog een beetje bijwerken
@@ -70,7 +116,7 @@ namespace TDSencryption
             //(die we dan in de decryptie berekenen)
             //-------------------------------------------------------------
             int randomInt = rnd.Next(70) + 180;
-            int calculated = randomInt - (aString.Length * 3);
+            int calculated = randomInt - (aStringToEncrypt.Length * 3);
             terug += (char)randomInt;
             terug += (char)calculated;
 
@@ -87,12 +133,57 @@ namespace TDSencryption
 
 
         #region ========================================================================DecriptString
-        public static string DecriptString(string aString, string aSleutel)
+        public  string DecriptString(string aStringToDecrypt, string aKey)
         {
-            byte b1 = (byte)aString[aString.Length - 2];
-            byte b2 = (byte)aString[aString.Length - 1];
+            //=====================================================standaard validatie
+            if (string.IsNullOrEmpty(aStringToDecrypt) || string.IsNullOrEmpty(aKey))
+            {
+                throw new TDSencryptionException(
+                    $"The value or key is not an acceptable value to decrypt",
+                    $"De waarde van de sleutel is geen acceptabele waarde om te decrypten",
+                    aStringToDecrypt, aKey
+                    );
+            }
+            if (aKey.Length > 20)
+            {
+                throw new TDSencryptionException(
+                    $"cannot decrypt: The length of the key can be up to 20 characters",
+                    $"kan niet decrypten: De lengte van de sleutel mag maximum 20 tekens lang zijn",
+                    aStringToDecrypt, aKey
+                    );
+            }
+            if(aStringToDecrypt.Length != 42)
+            {
+                throw new TDSencryptionException(
+                    $"cannot decrypt: the length of the value must be 42 characters long",
+                    $"kan niet decrypten: De lengte van de sleutel moet 42 tekens lang zijn",
+                    aStringToDecrypt, aKey
+                    );
+            }
+            //=====================================================validation dat je kan overriden
+            if (!IsValidStringToEncrypt(aStringToDecrypt))
+            {
+                throw new TDSencryptionException(
+                    $"The value: {aStringToDecrypt} is not a valid value to decrypt",
+                    $"De waarde: {aStringToDecrypt} is geen acceptabele waarde om te decrypten",
+                    aStringToDecrypt, aKey
+                    );
+            }
+            if (!IsValidKeyToEncrypt(aKey))
+            {
+                throw new TDSencryptionException(
+                    $"The Key: {aStringToDecrypt} is not a valid Key to decrypt",
+                    $"De sleutel: {aStringToDecrypt} is geen acceptabele sleutel om te decrypten",
+                    aStringToDecrypt, aKey
+                    );
+            }
+            //===============================================================
 
-            string terug = aString.Substring(0, ((b1 - b2) / 3) * 2);
+
+            byte b1 = (byte)aStringToDecrypt[aStringToDecrypt.Length - 2];
+            byte b2 = (byte)aStringToDecrypt[aStringToDecrypt.Length - 1];
+
+            string terug = aStringToDecrypt.Substring(0, ((b1 - b2) / 3) * 2);
 
             //randomkarakters eruit filteren
             //------------------------------
@@ -117,7 +208,7 @@ namespace TDSencryption
             terug = tmp;
 
             terug = DraaiStringOm(terug);
-            terug = Verschilvan2stringen(terug, "ma" + aSleutel + "tr");
+            terug = Verschilvan2stringen(terug, "ma" + aKey + "tr");
 
 
             //-------------------------------------------- een ramp dat maar half werkt :-(
@@ -149,7 +240,7 @@ namespace TDSencryption
 
 
         #region ============================================================================= helpers
-        private static string DraaiStringOm(string aString)
+        private  string DraaiStringOm(string aString)
         {
             string terug = string.Empty;
             for (int i = aString.Length - 1; i >= 0; i--)
@@ -159,7 +250,7 @@ namespace TDSencryption
 
 
         //--------------------------------------------------------------------------------
-        private static int SomAscciVanKarakters(string aString)
+        private  int SomAscciVanKarakters(string aString)
         {
             int terug = 0;
             for (int i = 0; i < aString.Length; i++)
@@ -169,7 +260,7 @@ namespace TDSencryption
             return terug;
         }
         //-------------------------------------------------------------------------------
-        private static string Somvan2stringen(string aDeTerugTeGevenString, string aString2)
+        private  string Somvan2stringen(string aDeTerugTeGevenString, string aString2)
         {
             string terug = string.Empty;
             int kleinsteString = Math.Min(aDeTerugTeGevenString.Length, aString2.Length);
@@ -186,7 +277,7 @@ namespace TDSencryption
             return @terug;
         }
         //-------------------------------------------------------------------------------
-        private static string Verschilvan2stringen(string aDeTerugTeGevenString, string aString2)
+        private  string Verschilvan2stringen(string aDeTerugTeGevenString, string aString2)
         {
             string terug = string.Empty;
             int kleinsteString = Math.Min(aDeTerugTeGevenString.Length, aString2.Length);
@@ -204,9 +295,26 @@ namespace TDSencryption
             }
             return @terug;
         }
-
-
         #endregion===================================================================================
+
+        public virtual bool IsValidKeyToEncrypt(string aKeyToDecrypt)
+        {
+            return true;
+        }
+        public virtual bool IsValidKeyToDecrypt(string aKeyToDecrypt)
+        {
+            return true;
+        }
+        public virtual bool IsValidStringToEncrypt(string aStringToEncrypt)
+        {
+            return true;
+        }
+        public virtual bool IsValidStringToDecrypt(string aStringToDecrypt)
+        {
+            return true;
+        }
+
+
 
 
     }

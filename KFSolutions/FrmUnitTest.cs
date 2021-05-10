@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KFSolutions.UnitTestBusiness;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +21,25 @@ namespace KFSolutions
         private void btnTestPaswordEncryptAndDecrypt_Click(object sender, EventArgs e)
         {
             dgrvTestEncryption.DataSource =
-               UnitTestBusiness.UITencrytpDecryptItem.Test_Encryp_DecryptVersie1(1000);
+               UnitTestBusiness.UITencrytpDecryptItem.Test_Encryp_DecryptVersie1(100);
+        }
 
+        private void btnValidatePassword_Click(object sender, EventArgs e)
+        {
+            UITcustomEncrypter testEncrypter = new UITcustomEncrypter();
+            if (testEncrypter.IsValidStringToEncrypt(txtTevaliderenPaswoord.Text)){
+                txtPaswoordValdiatieResult.Text = "ok";
+            }
+            else
+            {
+                txtPaswoordValdiatieResult.Text = "ONGELDIG PASSWOORD";
+            }
+
+            //string kleineLetters = "abcdefghijklmnopqrstuvwxyz";
+            //string groteLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            //string cijfers = "0123456789";
+            //string toegelatenPaswoord = "!@#$%^&*()_+=[{]};:<>|./?,-";
+            //string toegelatenGebruikersnaam = "_";
         }
     }
 }
