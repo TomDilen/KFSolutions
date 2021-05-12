@@ -309,10 +309,10 @@ namespace TDSencryption
         {
             return true;
         }
-        public virtual bool IsValidStringToDecrypt(string aStringToDecrypt)
-        {
-            return true;
-        }
+        //public virtual bool IsValidStringToDecrypt(string aStringToDecrypt)
+        //{
+        //    return true;
+        //}
 
 
 

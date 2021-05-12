@@ -39,6 +39,11 @@ namespace KFSolutions
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtPaswoordValdiatieResult = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnValideerKey = new System.Windows.Forms.Button();
+            this.txtTeValiderenKey = new System.Windows.Forms.TextBox();
+            this.txtValideKeyResult = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtLenPasw = new System.Windows.Forms.TextBox();
             this.tabControlUnitTest.SuspendLayout();
             this.tabPasswordEncryptionTester.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrvTestEncryption)).BeginInit();
@@ -55,8 +60,8 @@ namespace KFSolutions
             // 
             // tabControlUnitTest
             // 
-            this.tabControlUnitTest.Controls.Add(this.tabPasswordEncryptionTester);
             this.tabControlUnitTest.Controls.Add(this.tabPage2);
+            this.tabControlUnitTest.Controls.Add(this.tabPasswordEncryptionTester);
             this.tabControlUnitTest.Location = new System.Drawing.Point(57, 106);
             this.tabControlUnitTest.Name = "tabControlUnitTest";
             this.tabControlUnitTest.SelectedIndex = 0;
@@ -65,8 +70,13 @@ namespace KFSolutions
             // 
             // tabPasswordEncryptionTester
             // 
+            this.tabPasswordEncryptionTester.Controls.Add(this.txtLenPasw);
+            this.tabPasswordEncryptionTester.Controls.Add(this.label2);
             this.tabPasswordEncryptionTester.Controls.Add(this.label1);
+            this.tabPasswordEncryptionTester.Controls.Add(this.txtValideKeyResult);
+            this.tabPasswordEncryptionTester.Controls.Add(this.txtTeValiderenKey);
             this.tabPasswordEncryptionTester.Controls.Add(this.txtPaswoordValdiatieResult);
+            this.tabPasswordEncryptionTester.Controls.Add(this.btnValideerKey);
             this.tabPasswordEncryptionTester.Controls.Add(this.txtTevaliderenPaswoord);
             this.tabPasswordEncryptionTester.Controls.Add(this.btnValidatePassword);
             this.tabPasswordEncryptionTester.Controls.Add(this.dgrvTestEncryption);
@@ -85,6 +95,8 @@ namespace KFSolutions
             this.txtTevaliderenPaswoord.Name = "txtTevaliderenPaswoord";
             this.txtTevaliderenPaswoord.Size = new System.Drawing.Size(131, 20);
             this.txtTevaliderenPaswoord.TabIndex = 3;
+            this.txtTevaliderenPaswoord.Text = "iskdjsdlfkD8_";
+            this.txtTevaliderenPaswoord.TextChanged += new System.EventHandler(this.txtTevaliderenPaswoord_TextChanged);
             // 
             // btnValidatePassword
             // 
@@ -121,12 +133,12 @@ namespace KFSolutions
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1077, 512);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "add Employee";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // txtPaswoordValdiatieResult
             // 
-            this.txtPaswoordValdiatieResult.Location = new System.Drawing.Point(298, 9);
+            this.txtPaswoordValdiatieResult.Location = new System.Drawing.Point(322, 9);
             this.txtPaswoordValdiatieResult.Name = "txtPaswoordValdiatieResult";
             this.txtPaswoordValdiatieResult.Size = new System.Drawing.Size(108, 20);
             this.txtPaswoordValdiatieResult.TabIndex = 4;
@@ -134,12 +146,52 @@ namespace KFSolutions
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(417, 12);
+            this.label1.Location = new System.Drawing.Point(446, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(513, 13);
+            this.label1.Size = new System.Drawing.Size(397, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = " minstens 1 speciaal kar, 1 hoofdletter, 1 kleine letter, 1 cijfer en 1 speciaal " +
-    "teken, min 3 max 20 tekens lang";
+            this.label1.Text = "1 hoofdletter, 1 kleine letter, 1 cijfer en 1 speciaal teken, min 8; max 20 teken" +
+    "s lang";
+            // 
+            // btnValideerKey
+            // 
+            this.btnValideerKey.Location = new System.Drawing.Point(159, 35);
+            this.btnValideerKey.Name = "btnValideerKey";
+            this.btnValideerKey.Size = new System.Drawing.Size(124, 21);
+            this.btnValideerKey.TabIndex = 2;
+            this.btnValideerKey.Text = "validate key";
+            this.btnValideerKey.UseVisualStyleBackColor = true;
+            this.btnValideerKey.Click += new System.EventHandler(this.btnValideerKey_Click);
+            // 
+            // txtTeValiderenKey
+            // 
+            this.txtTeValiderenKey.Location = new System.Drawing.Point(22, 36);
+            this.txtTeValiderenKey.Name = "txtTeValiderenKey";
+            this.txtTeValiderenKey.Size = new System.Drawing.Size(131, 20);
+            this.txtTeValiderenKey.TabIndex = 3;
+            // 
+            // txtValideKeyResult
+            // 
+            this.txtValideKeyResult.Location = new System.Drawing.Point(322, 35);
+            this.txtValideKeyResult.Name = "txtValideKeyResult";
+            this.txtValideKeyResult.Size = new System.Drawing.Size(108, 20);
+            this.txtValideKeyResult.TabIndex = 4;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(446, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(248, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "enkel hoofdletters, kleine letters , min = 5, max = 20";
+            // 
+            // txtLenPasw
+            // 
+            this.txtLenPasw.Location = new System.Drawing.Point(291, 14);
+            this.txtLenPasw.Name = "txtLenPasw";
+            this.txtLenPasw.Size = new System.Drawing.Size(22, 20);
+            this.txtLenPasw.TabIndex = 7;
             // 
             // FrmUnitTest
             // 
@@ -170,6 +222,11 @@ namespace KFSolutions
         private System.Windows.Forms.Button btnValidatePassword;
         private System.Windows.Forms.TextBox txtPaswoordValdiatieResult;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtValideKeyResult;
+        private System.Windows.Forms.TextBox txtTeValiderenKey;
+        private System.Windows.Forms.Button btnValideerKey;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtLenPasw;
     }
 }
 

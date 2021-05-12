@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFSolutions_winforms", "KFS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDSencryption", "TDSencryption\TDSencryption.csproj", "{99FE4C6B-F920-4C8C-AA98-44300DD2D2D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFSolutionsModel", "KFSolutionsModel\KFSolutionsModel.csproj", "{09D742FE-FDF1-4D39-A2C5-E1D8B63363DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFSrepository_EF6", "KFSrepository_EF6\KFSrepository_EF6.csproj", "{0297878B-1AE5-4F3C-A349-5BB1942A9633}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReposCreator", "ReposCreator\ReposCreator.csproj", "{C98C349B-6075-4AF2-AF4A-5BFBA0A8EAF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{99FE4C6B-F920-4C8C-AA98-44300DD2D2D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99FE4C6B-F920-4C8C-AA98-44300DD2D2D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99FE4C6B-F920-4C8C-AA98-44300DD2D2D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09D742FE-FDF1-4D39-A2C5-E1D8B63363DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D742FE-FDF1-4D39-A2C5-E1D8B63363DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D742FE-FDF1-4D39-A2C5-E1D8B63363DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D742FE-FDF1-4D39-A2C5-E1D8B63363DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0297878B-1AE5-4F3C-A349-5BB1942A9633}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0297878B-1AE5-4F3C-A349-5BB1942A9633}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0297878B-1AE5-4F3C-A349-5BB1942A9633}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0297878B-1AE5-4F3C-A349-5BB1942A9633}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98C349B-6075-4AF2-AF4A-5BFBA0A8EAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98C349B-6075-4AF2-AF4A-5BFBA0A8EAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98C349B-6075-4AF2-AF4A-5BFBA0A8EAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98C349B-6075-4AF2-AF4A-5BFBA0A8EAF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
