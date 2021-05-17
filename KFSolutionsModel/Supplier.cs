@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KFSolutionsModel
 {
-    public class Supplier : DBentity
+    public class Supplier //: DBentity
     {
 
 

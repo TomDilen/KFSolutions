@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KFSolutionsModel
 {
-    public class OrderStatus : DBentity
+    public class OrderStatus //: DBentity
     {
        
         public string  Description { get; set; }

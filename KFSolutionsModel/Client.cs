@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KFSolutionsModel
 {
-    class Client
+    public class Client 
     {
+
     }
 }

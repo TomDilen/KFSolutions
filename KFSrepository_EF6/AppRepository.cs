@@ -9,19 +9,32 @@ namespace KFSrepository_EF6
     public class AppRepository<T>
     {
 
-        
-        public readonly IDepartmentRepository Department;
+        public readonly IEmpAppAccountRepository EmpAppAccount;
+
+        public readonly IEmpAddressRepository EmpAddress;
+
         public readonly IEmployeeRepository Employee;
-        public readonly IAddressRepository Address;
+        public readonly IEmpContractRepository EmpContract;
+
+        public readonly IEmpContractStatuutTypeRepository EmpContractStatuutType;
+        public readonly IEmpContractTypeRepository EmpContractType;
+
+        public readonly IEmpDepartmentRepository EmpDepartment;
         
         
 
+        //=======================================================================
+
         public AppRepository(string aConnectionString)
         {
-                
+
             Employee = new EmployeeRepository(aConnectionString);
-            Department = new DepartmentRepository(aConnectionString);
-            Address = new AddressRepository(aConnectionString);
+            EmpAddress = new EmpAddressRepository(aConnectionString);
+            EmpAppAccount = new EmpAppAccountRepository(aConnectionString);
+            EmpContract = new EmpContractRepository(aConnectionString);
+            EmpContractStatuutType = new EmpContractStatuutTypeRepository(aConnectionString);
+            EmpContractType = new EmpContractTypeRepository(aConnectionString);
+            EmpDepartment = new EmpDepartmentRepository(aConnectionString);
         }
     }
 }

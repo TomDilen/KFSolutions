@@ -10,12 +10,17 @@ namespace KFSrepository_EF6
 {
     public class KfsContext : DbContext
     {
-
-        public DbSet<Department> Departments { get; set; }
+        public DbSet<EmpAddress> EmpAddresss { get; set; }
+        public DbSet<EmpAppAccount> EmpAppAccounts { get; set; }
+        public DbSet<EmpContract> EmpContracts { get; set; }
+        public DbSet<EmpContractStatuutType> EmpContractStatuutTypes { get; set; }
+        public DbSet<EmpContractType> EmpContractTypes { get; set; }
+        public DbSet<EmpDepartment> EmpDepartments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Address> Addresss { get; set; }
 
 
+
+        //============================================================================================
         public KfsContext(string aNameOrConnectionString) : base(aNameOrConnectionString)
         {
             //this.Configuration.LazyLoadingEnabled = false;
@@ -28,6 +33,68 @@ namespace KFSrepository_EF6
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<Employee>()
+                .HasRequired<EmpDepartment>(b => b.EmpDepartment)
+                .WithMany(a => a.Employees)
+                .HasForeignKey<int>(b => b.Id_EmpDepartment);
+
+
+            //dit is een 1 op 1 relatie
+            modelBuilder.Entity<EmpAddress>()
+                .HasOptional(x => x.Employee)
+                .WithRequired(a => a.EmpAddress);
+
+
+
+            //dit is een 1 op 1 relatie
+            modelBuilder.Entity<EmpContract>()
+                .HasOptional(x => x.Employee)
+                .WithRequired(a => a.EmpContract);
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<EmpContract>()
+                .HasRequired<EmpContractType>(b => b.EmpContractType)
+                .WithMany(a => a.EmpContracts)
+                .HasForeignKey<int>(b => b.Id_EmpContractType);
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<EmpContract>()
+                .HasRequired<EmpContractStatuutType>(b => b.EmpContractStatuutType)
+                .WithMany(a => a.EmpContracts)
+                .HasForeignKey<int>(b => b.Id_EmpContractStatuutType);
+
+
+            //dit is een 1 op 0 of 1 relatie
+            modelBuilder.Entity<Employee>()
+                .HasOptional(x => x.EmpAppAccount)
+                .WithRequired(a => a.Employee);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            ////maakt een 0 of 1 op veel relatie
+            //modelBuilder.Entity<Employee>()
+            //    .HasOptional<Address>(b => b.Address)
+            //    .WithMany(a => a.Employees)
+            //    .HasForeignKey<int?>(b => b.Id_Address);
+
+
+
             //---------------------------------------------------------------
             //een adres kan 1 of meer Personen hebben
             //een Persoon kan 0 of 1 Adress hebben

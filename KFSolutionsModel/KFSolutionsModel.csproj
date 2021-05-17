@@ -51,18 +51,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
+    <Compile Include="NotMapped\Address.cs" />
     <Compile Include="Administrators.cs" />
     <Compile Include="Client.cs" />
-    <Compile Include="DBentity.cs" />
-    <Compile Include="Department.cs" />
-    <Compile Include="Employee.cs" />
+    <Compile Include="CompanyInfo.cs" />
+    <Compile Include="NotMapped\DBentity.cs" />
+    <Compile Include="NotMapped\TypeTable.cs" />
+    <Compile Include="OK_employeeRelated\EmpAppAccount.cs" />
+    <Compile Include="OK_employeeRelated\EmpContract.cs" />
+    <Compile Include="OK_employeeRelated\EmpContractStatuutType.cs" />
+    <Compile Include="OK_employeeRelated\EmpContractType.cs" />
+    <Compile Include="OK_employeeRelated\EmpDepartment.cs" />
+    <Compile Include="Actors\Employee.cs" />
+    <Compile Include="IBAN.cs" />
+    <Compile Include="NotMapped\Person.cs" />
+    <Compile Include="OK_employeeRelated\EmpAddress.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLine.cs" />
     <Compile Include="OrderStatus.cs" />
+    <Compile Include="NotMapped\PersonMin.cs" />
     <Compile Include="zzzTestClasses.cs" />
     <Compile Include="PermissionEnum.cs" />
-    <Compile Include="Person.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Supplier.cs" />
@@ -71,6 +80,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
