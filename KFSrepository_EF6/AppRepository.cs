@@ -20,6 +20,8 @@ namespace KFSrepository_EF6
         public readonly ICmpSiteContactPersonRepository CmpSiteContactPerson;
         public readonly ICmpSiteRepository CmpSite;
         public readonly ICmpSiteAddressRepository CmpSiteAddress;
+        public readonly ICmpIBANRepository CmpIBAN;
+        public readonly ICmpManagerRepository CmpManager;
 
 
 
@@ -39,6 +41,8 @@ namespace KFSrepository_EF6
             CmpSiteContactPerson = new CmpSiteContactPersonRepository(aConnectionString);
             CmpSite = new CmpSiteRepository(aConnectionString);
             CmpSiteAddress = new CmpSiteAddressRepository(aConnectionString);
+            CmpIBAN = new CmpIBANRepository(aConnectionString);
+            CmpManager = new CmpManagerRepository(aConnectionString);
 
         }
     }

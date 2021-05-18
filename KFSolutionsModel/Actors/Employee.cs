@@ -13,7 +13,7 @@ namespace KFSolutionsModel
     public class Employee : NotMapped.Person //, ISetInactiveInsteadOfRemove
     {
         [Required]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
 
 

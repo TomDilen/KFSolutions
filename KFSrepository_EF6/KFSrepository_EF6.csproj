@@ -57,7 +57,6 @@
     <Compile Include="cmp_related\CmpSiteAddressRepository.cs" />
     <Compile Include="cmp_related\CmpSiteContactPersonRepository.cs" />
     <Compile Include="cmp_related\CmpSiteRepository.cs" />
-    <Compile Include="cmp_related\CompanyRepository.cs" />
     <Compile Include="emp_related\EmpDepartmentRepository.cs" />
     <Compile Include="emp_related\EmpContractTypeRepository.cs" />
     <Compile Include="emp_related\EmpContractRepository.cs" />
