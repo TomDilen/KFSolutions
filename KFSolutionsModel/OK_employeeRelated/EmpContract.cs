@@ -17,14 +17,9 @@ namespace KFSolutionsModel
         public DateTime DateOfStart { get; set; }
 
 
-
-        //[Required(ErrorMessage = "TypeOfContract can not empty")]
-        //public EmpContractType TypeOfContract { get; set; }
-
-
-
-        //[Required(ErrorMessage = "TypeOfContract can not empty")]
-        //public EmpContractStatuutType TypeOfContractStatuutType { get; set; }
+        [MaxLength(255)]
+        //[Column(TypeName = "char")]
+        public string ExtraInfo { get; set; }
 
 
 

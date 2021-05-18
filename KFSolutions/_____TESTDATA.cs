@@ -95,9 +95,14 @@ namespace KFSolutions
             #endregion--------------------------------------------------------------------------------------
 
 
+
+
+
             #region------------------------------------------- Add Employees  ------------------------------
 
-            Employee employee_1 = new Employee()
+            #region employee_TomDilen
+
+            Employee employee_TomDilen = new Employee()
             {
                 //-------------------personMin---------
                 FirstName = "Tom",
@@ -128,7 +133,7 @@ namespace KFSolutions
                 PassPortID = "0122222111",
                 IBAN = "12220132145545",
                 JobInfo = "waarken lak een biest",
-                extraInfo = "zag er ne toffe gast uit bij de sollicitatie",
+                ExtraInfo = "zag er ne toffe gast uit bij de sollicitatie",
 
                 //navProps 
                 //id voor departement is genoeg :-)
@@ -152,51 +157,136 @@ namespace KFSolutions
                     IsBlocked = false,
                     InlogAttempts = 0,
                 }
-
-
             };
-            appRespository.Employee.Add(employee_1);
+            appRespository.Employee.Add(employee_TomDilen);
+
+            #endregion
+
+            #region employee_MaggieDeBlock
+
+            Employee employee_MaggieDeBlock = new Employee()
+            {
+                //-------------------personMin---------
+                FirstName = "Maggie",
+                NameAddition = "De",
+                LastName = "Block",
+                Email = "dikkiedik@dik.dik",
+                MobileNumber = "0123 45 67 89",
+                PhoneNumber = "23 23 23 23 23",
+
+                //navprops
 
 
-            //Employee emp1 = new Employee()
-            //{
-            //    //----------------------people---------
-            //    FirstName = "Joske",
-            //    NameAddition = "De",
-            //    LastName = "Keizer",
-            //    Email = "tomtom@tomtom.com",
-            //    IsMale = true,
-            //    DateOfBirth = new DateTime(1920, 12, 8),
-            //    MobileNumber = "20000020000",
-            //    PhoneNumber = null,
+                //-------------------Person------------
+                DateOfBirth = new DateTime(1981, 04, 22),
+                IsMale = true,
+                //nav props
+                EmpAddress = new EmpAddress()
+                {
+                    Street = "vetstraat",
+                    HouseNumber = 55,
+                    //HouseNumberAddition = "nvt",
+                    Zipcode = "1000",
+                    City = "Brussel",
+                    Country = "Belgium"
+                },
 
-            //    //--------------------Employee---------
-            //    PassPortID = "011-111-44",
-            //    IBAN = "BE444444444444",
-            //    Id_Department = 1, // TODO : nog bijweerken
-            //    AppPermissions = UInt64.MaxValue, //TODO
-            //    RecruitedAt = DateTime.Now,
-            //    FiredAt = DateTime.Now,
+                //-------------------Employee----------
+                PassPortID = "01222244444",
+                IBAN = "12220132148888",
+                JobInfo = "mondmaskers verbranden",
+                ExtraInfo = "toffe griet yoh",
 
-            //    IsPaswordUsernameResseted = true,
-            //    Password = "adm",
-            //    UserName = "adm",
+                //navProps 
+                //id voor departement is genoeg :-)
+                Id_EmpDepartment = 3, //1=Administrator, 2=Verkoop, 3=Magazijn
 
-            //    //-------------------Adress------------
+                EmpContract = new EmpContract()
+                {
+                    MonthSalary = 1400.22f,
+                    DateOfStart = new DateTime(1950, 11, 22),
+                    Id_EmpContractStatuutType = 2,   // 1=Arbeider, 2=Bediende, 3=Ambtenaar
+                    Id_EmpContractType = 2   // 1=Onbepaalde duur, 2=Jobstudent, 3=Interim
+                },
 
-            //    Address = new Address()
-            //    {
-            //        Street = "E34",
-            //        HouseNumber = 15,
-            //        HouseNumberAddition = "bus 1",
-            //        Zipcode = "2000",
-            //        City = "Antwaarpe",
-            //        Country = "Belgium",
-            //    }
-            //    //Address = null,
-            //};
+                EmpAppAccount = new EmpAppAccount
+                {
+                    AppPermissions = Int64.MaxValue,
+                    Password = "Maggie",
+                    UserName = "Maggie",
+                    IsPaswordResseted = true,
+                    LastResetted = DateTime.Now,
+                    IsBlocked = false,
+                    InlogAttempts = 0,
+                }
+            };
+            appRespository.Employee.Add(employee_MaggieDeBlock);
 
-            //appRespository.Employee.Add(emp1);
+            #endregion
+
+
+            #region employee_AlexanderDeCroo
+
+            Employee employee_AlexanderDeCroo = new Employee()
+            {
+                //-------------------personMin---------
+                FirstName = "Alexander",
+                NameAddition = "De",
+                LastName = "Kraai",
+                Email = "Graaier@graai.graai",
+                MobileNumber = "0123 45 67 40",
+                PhoneNumber = "23 23 23 23 98",
+
+                //navprops
+
+
+                //-------------------Person------------
+                DateOfBirth = new DateTime(1982, 04, 1),
+                IsMale = true,
+                //nav props
+                EmpAddress = new EmpAddress()
+                {
+                    Street = "wetstraat",
+                    HouseNumber = 55,
+                    //HouseNumberAddition = "nvt",
+                    Zipcode = "1040",
+                    City = "Vettigem",
+                    Country = "Duitsland"
+                },
+
+                //-------------------Employee----------
+                PassPortID = "5555555555",
+                IBAN = "121212121212",
+                JobInfo = "Graaien in de vetpot",
+                ExtraInfo = "nen echte fille de papa",
+
+                //navProps 
+                //id voor departement is genoeg :-)
+                Id_EmpDepartment = 2, //1=Administrator, 2=Verkoop, 3=Magazijn
+
+                EmpContract = new EmpContract()
+                {
+                    MonthSalary = 1200.22f,
+                    DateOfStart = new DateTime(1970, 11, 22),
+                    Id_EmpContractStatuutType = 3,   // 1=Arbeider, 2=Bediende, 3=Ambtenaar
+                    Id_EmpContractType = 3   // 1=Onbepaalde duur, 2=Jobstudent, 3=Interim
+                },
+
+                EmpAppAccount = new EmpAppAccount
+                {
+                    AppPermissions = Int64.MaxValue,
+                    Password = "Alexander",
+                    UserName = "Alexander",
+                    IsPaswordResseted = true,
+                    LastResetted = DateTime.Now,
+                    IsBlocked = false,
+                    InlogAttempts = 0,
+                }
+            };
+            appRespository.Employee.Add(employee_AlexanderDeCroo);
+
+            #endregion
+
 
 
 
@@ -210,6 +300,9 @@ namespace KFSolutions
 
 
             #endregion--------------------------------------------------------------------------------------
+
+
+
 
 
 

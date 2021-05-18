@@ -10,8 +10,13 @@ using System.Threading.Tasks;
 namespace KFSolutionsModel
 {
 
-    public class Employee : NotMapped.Person
+    public class Employee : NotMapped.Person //, ISetInactiveInsteadOfRemove
     {
+        [Required]
+        public bool IsActive { get; set; }
+
+
+
         [Required]
         [MaxLength(15)]
         [Column(TypeName = "char")]
@@ -34,7 +39,7 @@ namespace KFSolutionsModel
 
         [MaxLength(255)]
         //[Column(TypeName = "char")]
-        public string extraInfo { get; set; }
+        public string ExtraInfo { get; set; }
 
 
 

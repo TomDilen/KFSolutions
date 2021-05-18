@@ -52,6 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppRepository.cs" />
+    <Compile Include="cmp_related\CmpManagerRepository.cs" />
+    <Compile Include="cmp_related\CmpIBANRepository.cs" />
+    <Compile Include="cmp_related\CmpSiteAddressRepository.cs" />
+    <Compile Include="cmp_related\CmpSiteContactPersonRepository.cs" />
+    <Compile Include="cmp_related\CmpSiteRepository.cs" />
+    <Compile Include="cmp_related\CompanyRepository.cs" />
     <Compile Include="emp_related\EmpDepartmentRepository.cs" />
     <Compile Include="emp_related\EmpContractTypeRepository.cs" />
     <Compile Include="emp_related\EmpContractRepository.cs" />
@@ -62,6 +68,7 @@
     <Compile Include="KfsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TDS\ICreateUpdateDateTime.cs" />
+    <Compile Include="TDS\ISetInactiveInsteadOfRemove.cs" />
     <Compile Include="TDS\ITDSrepository.cs" />
     <Compile Include="TDS\TDSrepository.cs" />
   </ItemGroup>

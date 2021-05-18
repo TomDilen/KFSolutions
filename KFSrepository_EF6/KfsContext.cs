@@ -18,7 +18,13 @@ namespace KFSrepository_EF6
         public DbSet<EmpDepartment> EmpDepartments { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
-
+        //--------------------------------------------------------------------------
+        public DbSet<CmpSiteContactPerson> CmpSiteContactPersons { get; set; }
+        public DbSet<CmpSite> CmpSites { get; set; }
+        public DbSet<CmpSiteAddress> CmpSiteAddresss { get; set; }
+        public DbSet<CmpIBAN> CmpIBANs { get; set; }
+        public DbSet<CmpManager> CmpManagers { get; set; }
+        public DbSet<Company> Companys { get; set; }
 
         //============================================================================================
         public KfsContext(string aNameOrConnectionString) : base(aNameOrConnectionString)
@@ -34,6 +40,7 @@ namespace KFSrepository_EF6
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
+            #region employee related
 
             //maakt een 1 op veel relatie
             modelBuilder.Entity<Employee>()
@@ -46,7 +53,6 @@ namespace KFSrepository_EF6
             modelBuilder.Entity<EmpAddress>()
                 .HasOptional(x => x.Employee)
                 .WithRequired(a => a.EmpAddress);
-
 
 
             //dit is een 1 op 1 relatie
@@ -72,13 +78,52 @@ namespace KFSrepository_EF6
                 .HasOptional(x => x.EmpAppAccount)
                 .WithRequired(a => a.Employee);
 
+            #endregion
 
 
 
+            #region Company related
 
+            // <Company>  0* -------  0* <CmpManager>
+            modelBuilder.Entity<Company>()
+                .HasMany(t => t.CmpManagers)
+                .WithMany(t => t.Companys)
+            .Map(m =>
+            {
+                m.ToTable("Companys_CmpManagers");
+                m.MapLeftKey("Id_Company");
+                m.MapRightKey("Id_CmpManager");
+            });
 
+            // <Company>  0* -------  0* <CmpIBAN>
+            modelBuilder.Entity<Company>()
+                .HasMany(t => t.CmpIBANs)
+                .WithMany(t => t.Companys)
+            .Map(m =>
+            {
+                m.ToTable("Companys_CmpIBANs");
+                m.MapLeftKey("Id_Company");
+                m.MapRightKey("Id_CmpIBAN");
+            });
 
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<CmpSite>()
+                .HasRequired<Company>(b => b.Company)
+                .WithMany(a => a.CmpSites)
+                .HasForeignKey<int>(b => b.Id_Company);
 
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<CmpSiteContactPerson>()
+                .HasRequired<CmpSite>(b => b.CmpSite)
+                .WithMany(a => a.CmpSiteContactPersons)
+                .HasForeignKey<int>(b => b.Id_CmpSite);
+
+            //dit is een 1 op 1 relatie
+            modelBuilder.Entity<CmpSiteAddress>()
+                .HasOptional(x => x.CmpSite)
+                .WithRequired(a => a.CmpSiteAddress);
+
+            #endregion
 
 
 
