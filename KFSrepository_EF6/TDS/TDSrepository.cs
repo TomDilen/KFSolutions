@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
@@ -79,8 +80,24 @@ namespace KFSrepository_EF6
 
             using (KfsContext ctx = new KfsContext(_constring))
             {
-                ctx.Set<TDSentity>().Add(aEntity);
-                ctx.SaveChanges();
+                try
+                {
+                    ctx.Set<TDSentity>().Add(aEntity);
+                    ctx.SaveChanges();
+                }
+                //catch (System.Data.Entity.Infrastructure.DbUpdateException uex)
+                //{
+                //    if(uex.InnerException.InnerException.HResult == -2146232060)
+                //    {
+                //        throw new EvaluateException("bestaat");
+                //    }	
+                //}
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    throw new EvaluateException("FATAL ERROR: fout tijdens het wegschrijven naar DB\n" +
+                        $"{ex.EntityValidationErrors.ToList()[0].ValidationErrors.ToList()[0].ErrorMessage}");
+                    //System.Windows.Forms.MessageBox.Show(ex.EntityValidationErrors.ToList()[0].ValidationErrors.ToList()[0].ErrorMessage);
+                }
             }
             return aEntity;
         }

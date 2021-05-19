@@ -9,16 +9,9 @@ namespace KFSolutionsModel
 {
     public class Supplier : Company
     {
+
         [Required]
         public bool IsActive { get; set; }
-
-
-        //[MaxLength(255)]
-        //public string ExtraInfo { get; set; }
-
-
-
-        //company
 
 
     }

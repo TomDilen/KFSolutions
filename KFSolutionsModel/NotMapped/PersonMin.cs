@@ -24,6 +24,7 @@ namespace KFSolutionsModel.NotMapped
 
         [Required(ErrorMessage = "Email can not empty")]
         [Index(IsUnique = true)] //TODO email check
+        //[Unique(ErrorMessage = "This already exist !!")]
         [MaxLength(80)]
         public string Email { get; set; }
 

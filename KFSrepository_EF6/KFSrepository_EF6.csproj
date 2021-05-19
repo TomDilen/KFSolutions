@@ -66,6 +66,7 @@
     <Compile Include="emp_related\EmployeeRepository.cs" />
     <Compile Include="KfsContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="cmp_related\SupplierRepository.cs" />
     <Compile Include="TDS\ICreateUpdateDateTime.cs" />
     <Compile Include="TDS\ISetInactiveInsteadOfRemove.cs" />
     <Compile Include="TDS\ITDSrepository.cs" />

@@ -17,12 +17,13 @@ namespace KFSrepository_EF6
         public readonly IEmpContractTypeRepository EmpContractType;
         public readonly IEmpDepartmentRepository EmpDepartment;
 
+
+        public readonly ISupplierRepository Supplier;
+        public readonly ICmpManagerRepository CmpManagers;
+        public readonly ICmpIBANRepository CmpIBANs;
         public readonly ICmpSiteContactPersonRepository CmpSiteContactPerson;
         public readonly ICmpSiteRepository CmpSite;
         public readonly ICmpSiteAddressRepository CmpSiteAddress;
-        public readonly ICmpIBANRepository CmpIBAN;
-        public readonly ICmpManagerRepository CmpManager;
-
 
 
         //=======================================================================
@@ -38,11 +39,12 @@ namespace KFSrepository_EF6
             EmpContractType = new EmpContractTypeRepository(aConnectionString);
             EmpDepartment = new EmpDepartmentRepository(aConnectionString);
 
+            Supplier = new SupplierRepository(aConnectionString);
+            CmpManagers = new CmpManagerRepository(aConnectionString);
+            CmpIBANs = new CmpIBANRepository(aConnectionString);
             CmpSiteContactPerson = new CmpSiteContactPersonRepository(aConnectionString);
             CmpSite = new CmpSiteRepository(aConnectionString);
             CmpSiteAddress = new CmpSiteAddressRepository(aConnectionString);
-            CmpIBAN = new CmpIBANRepository(aConnectionString);
-            CmpManager = new CmpManagerRepository(aConnectionString);
 
         }
     }

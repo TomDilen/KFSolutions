@@ -22,12 +22,17 @@ namespace KFSolutionsModel
 
         //[Required(ErrorMessage = "Website can not empty")]
         [Index(IsUnique = true)]
-        [MaxLength(150)]
+        [MaxLength(150, ErrorMessage ="Length of Website is max 150 char")]
         public string Website { get; set; }
 
         [Required(ErrorMessage = "BTW can not empty")]
         [MaxLength(20)]
         public string BtwNumber { get; set; }
+
+        [MaxLength(80)]
+        [Required(ErrorMessage = "BTW can not empty")]
+        [Column(TypeName = "char")]
+        public string Email { get; set; }
 
 
         [MaxLength(255)]
@@ -44,3 +49,5 @@ namespace KFSolutionsModel
         //IBAN[]
     }
 }
+
+

@@ -13,7 +13,7 @@ namespace KFSolutionsModel.NotMapped
 
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(20,ErrorMessage ="PhoneNumber")]
         [Column(TypeName = "char")]
         public string Fax { get; set; }
 
@@ -33,7 +33,7 @@ namespace KFSolutionsModel.NotMapped
         [Column(TypeName = "char")]
         public string MobileNumber { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(80)]
         [Column(TypeName = "char")]
         public string Email { get; set; }
 
