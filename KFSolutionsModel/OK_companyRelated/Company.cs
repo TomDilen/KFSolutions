@@ -44,9 +44,8 @@ namespace KFSolutionsModel
         public virtual ICollection<CmpManager> CmpManagers { get; set; }
         public virtual ICollection<CmpIBAN> CmpIBANs { get; set; }
         public virtual ICollection<CmpSite> CmpSites { get; set; }
-        //Site[]
-        //Manager
-        //IBAN[]
+
+        public virtual CmpWebCredentials CmpWebCredentials { get; set; }
     }
 }
 

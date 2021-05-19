@@ -478,25 +478,7 @@ namespace KFSolutions
                         },
                         Fax = "222222222",
                         PhoneNumber = "0478670924",
-                        //PhoneNumber_2 = "555220",
-                        //MobileNumber = "014556699",
-                        //Email = "supPConderdelen@tototototm.com",
-                        //ExtraInfo = "extra info over hoofdsite van supPConderdelen Turnhout",
-                        //CmpSiteContactPersons = new List<CmpSiteContactPerson>()
-                        //{
-                        //    new CmpSiteContactPerson()
-                        //    {
-                        //        FirstName = "TomsupPConderdelenContact",
-                        //        //NameAddition = "van",
-                        //        LastName = "DilenContact",
-                        //        Email = "onderdelen@cola.com",
-                        //        MobileNumber = "0111111111121",
-                        //        PhoneNumber = "2222222222",
 
-                        //        IsDefault = true,
-                        //        ExtraInfo = "geen extra info over dez contactpersoon van supPConderdelen"
-                        //    }
-                        //},
                     },
                 },
             };
@@ -508,8 +490,99 @@ namespace KFSolutions
 
 
 
-            #region------------------------------------------- Add Departments------------------------------
+            #region------------------------------------------- Add Clients ---------------------------------
+
+            Client client_TimAudenaarde = new Client
+            {
+                IsActive = true,
+                CltWebCredentials = new CltWebCredentials()
+                {
+                    Password = "Tim__123",
+                    UserName = "Tim__123",
+                    InlogAttempts = 0,
+                    IsBlocked = false,
+                    IsPaswordResseted = false,
+                    LastResetted = DateTime.Now,
+                },
+                FirstName = "Tim",
+                //NameAddition ,
+
+                LastName = "Audenaarde",
+                Email = "tim.audenaert@hotmail.be",
+                MobileNumber = "0123456",
+                PhoneNumber = "",
+                DateOfBirth = new DateTime(1980,04,01),
+                IsMale = true,
+
+                CltAddresss = new List<CltAddress>()
+                {
+                    new CltAddress()
+                    {
+                        Street = "TimseSteenweg",
+                        HouseNumber = 33,
+                        HouseNumberAddition = "b3",
+                        Country = "Belgie",
+                        Zipcode = "1000",
+                        City = "Bornem"
+                    }
+                },
+            };
+            appRespository.Client.Add(client_TimAudenaarde);
+
+
+            //==================================================================================
+
+
+            Client client_KennyBruwier = new Client
+            {
+                IsActive = true,
+                CltWebCredentials = new CltWebCredentials()
+                {
+                    Password = "Kenny__123",
+                    UserName = "Kenny__123",
+                    InlogAttempts = 0,
+                    IsBlocked = false,
+                    IsPaswordResseted = false,
+                    LastResetted = DateTime.Now,
+                },
+                FirstName = "Kenny",
+                //NameAddition ,
+
+                LastName = "Bruwier",
+                Email = "kweetnognie",
+                MobileNumber = "2222222",
+                PhoneNumber = "014555555",
+                DateOfBirth = new DateTime(1975, 04, 01),
+                IsMale = true,
+
+                CltAddresss = new List<CltAddress>()
+                {
+                    new CltAddress()
+                    {
+                        Street = "Avenue le Kennedy",
+                        HouseNumber =66,
+                        //HouseNumberAddition = "b3",
+                        Country = "Belgie",
+                        Zipcode = "1000",
+                        City = "RupelMonde"
+                    }
+                },
+            };
+            appRespository.Client.Add(client_KennyBruwier);
+            
+
+
             #endregion--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
             #region------------------------------------------- Add Departments------------------------------
             #endregion--------------------------------------------------------------------------------------
             #region------------------------------------------- Add Departments------------------------------

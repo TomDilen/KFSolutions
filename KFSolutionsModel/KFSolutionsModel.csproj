@@ -53,12 +53,14 @@
   <ItemGroup>
     <Compile Include="Actors\Supplier.cs" />
     <Compile Include="NotMapped\Address.cs" />
-    <Compile Include="Administrators.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="CompanyInfo.cs" />
+    <Compile Include="Actors\Client.cs" />
+    <Compile Include="NotMapped\Credentials.cs" />
     <Compile Include="NotMapped\DBentity.cs" />
     <Compile Include="NotMapped\IBAN.cs" />
     <Compile Include="NotMapped\TypeTable.cs" />
+    <Compile Include="OK_clientRelated\CltAddress.cs" />
+    <Compile Include="OK_clientRelated\CltWebCredentials.cs" />
+    <Compile Include="OK_companyRelated\CmpWebCredentials.cs" />
     <Compile Include="OK_companyRelated\CmpIBAN.cs" />
     <Compile Include="OK_companyRelated\CmpManager.cs" />
     <Compile Include="OK_companyRelated\CmpSiteAddress.cs" />

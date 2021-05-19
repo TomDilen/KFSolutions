@@ -23,8 +23,14 @@ namespace KFSrepository_EF6
         public readonly ICmpIBANRepository CmpIBANs;
         public readonly ICmpSiteContactPersonRepository CmpSiteContactPerson;
         public readonly ICmpSiteRepository CmpSite;
+        public readonly ICmpWebCredentialsRepository CmpCredentials;
         public readonly ICmpSiteAddressRepository CmpSiteAddress;
 
+
+        public readonly IClientRepository Client;
+        public readonly ICltAddressRepository CltAddress;
+        public readonly ICltWebCredentialsRepository CltWebCredentials;
+        
 
         //=======================================================================
 
@@ -39,12 +45,19 @@ namespace KFSrepository_EF6
             EmpContractType = new EmpContractTypeRepository(aConnectionString);
             EmpDepartment = new EmpDepartmentRepository(aConnectionString);
 
+
             Supplier = new SupplierRepository(aConnectionString);
             CmpManagers = new CmpManagerRepository(aConnectionString);
             CmpIBANs = new CmpIBANRepository(aConnectionString);
             CmpSiteContactPerson = new CmpSiteContactPersonRepository(aConnectionString);
             CmpSite = new CmpSiteRepository(aConnectionString);
+            CmpCredentials = new CmpWebCredentialsRepository(aConnectionString);
             CmpSiteAddress = new CmpSiteAddressRepository(aConnectionString);
+
+
+            Client = new ClientRepository(aConnectionString);
+            CltAddress = new CltAddressRepository(aConnectionString);
+            CltWebCredentials = new CltWebCredentialsRepository(aConnectionString);
 
         }
     }

@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppRepository.cs" />
+    <Compile Include="ClientRepository.cs" />
+    <Compile Include="CltAddressRepository.cs" />
+    <Compile Include="CltWebCredentialsRepository.cs" />
+    <Compile Include="CmpWebCredentialsRepository.cs" />
     <Compile Include="cmp_related\CmpManagerRepository.cs" />
     <Compile Include="cmp_related\CmpIBANRepository.cs" />
     <Compile Include="cmp_related\CmpSiteAddressRepository.cs" />
@@ -81,6 +85,9 @@
       <Project>{09d742fe-fdf1-4d39-a2c5-e1d8b63363da}</Project>
       <Name>KFSolutionsModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="clt_related\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
