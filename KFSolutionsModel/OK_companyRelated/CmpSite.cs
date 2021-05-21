@@ -24,7 +24,7 @@ namespace KFSolutionsModel
 
 
         public int Id_Company { get; set; }
-        public virtual Company Company { get; set; }
+        public virtual Supplier Supplier { get; set; }
 
         public virtual ICollection<CmpSiteContactPerson> CmpSiteContactPersons { get; set; }
 

@@ -13,6 +13,6 @@ namespace KFSolutionsModel
 
         //--------------navigation propertys------------//
 
-        public virtual Company Company { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

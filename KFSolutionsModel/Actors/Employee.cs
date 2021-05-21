@@ -65,5 +65,18 @@ namespace KFSolutionsModel
         public virtual EmpAppAccount EmpAppAccount { get; set; }
 
 
+        public virtual ICollection<ProductQuotation> ProductQuotations { get; set; }
+
+
+        public virtual ICollection<OrderIn> OrderIns_OrderedBy { get; set; }
+
+        public virtual ICollection<OrderIn> OrderIns_HandledBy { get; set; }
+
+
+        public virtual ICollection<OrderOut> OrderOuts_SoldBy { get; set; }
+
+        public virtual ICollection<OrderOut> OrderOuts_PreparedBy { get; set; }
+
+        public virtual ICollection<OrderOut> OrderOuts_InvoiceCreatedBy { get; set; }
     }
 }

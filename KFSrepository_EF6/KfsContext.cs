@@ -31,6 +31,21 @@ namespace KFSrepository_EF6
         public DbSet<Client> Clients { get; set; }
         public DbSet<CltAddress> CltAddresss { get; set; }
         public DbSet<CltWebCredentials> CltWebCredentialss { get; set; }
+
+        //--------------------------------------------------------------------------
+
+        public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<ProductQuotation> ProductQuotations { get; set; }
+
+        //--------------------------------------------------------------------------
+        public DbSet<OrderLineIn> OrderLineIns { get; set; }
+        public DbSet<OrderIn> OrderIns { get; set; }
+
+        //--------------------------------------------------------------------------
+
+        public DbSet<OrderOut> OrderOuts { get; set; }
+        public DbSet<OrderLineOut> OrderLineOuts { get; set; }
+
         //============================================================================================
         public KfsContext(string aNameOrConnectionString) : base(aNameOrConnectionString)
         {
@@ -85,14 +100,15 @@ namespace KFSrepository_EF6
 
             #endregion
 
-         
+
 
             #region Company related
 
+
             // <Company>  0* -------  0* <CmpManager>
-            modelBuilder.Entity<Company>()
+            modelBuilder.Entity<Supplier>()
                 .HasMany(t => t.CmpManagers)
-                .WithMany(t => t.Companys)
+                .WithMany(t => t.Suppliers)
             .Map(m =>
             {
                 m.ToTable("Companys_CmpManagers");
@@ -101,9 +117,9 @@ namespace KFSrepository_EF6
             });
 
             // <Company>  0* -------  0* <CmpIBAN>
-            modelBuilder.Entity<Company>()
+            modelBuilder.Entity<Supplier>()
                 .HasMany(t => t.CmpIBANs)
-                .WithMany(t => t.Companys)
+                .WithMany(t => t.Suppliers)
             .Map(m =>
             {
                 m.ToTable("Companys_CmpIBANs");
@@ -113,7 +129,7 @@ namespace KFSrepository_EF6
 
             //maakt een 1 op veel relatie
             modelBuilder.Entity<CmpSite>()
-                .HasRequired<Company>(b => b.Company)
+                .HasRequired<Supplier>(b => b.Supplier)
                 .WithMany(a => a.CmpSites)
                 .HasForeignKey<int>(b => b.Id_Company);
 
@@ -129,11 +145,11 @@ namespace KFSrepository_EF6
                 .WithRequired(a => a.CmpSiteAddress);
 
             //dit is een 1 op 0 of 1 relatie
-            modelBuilder.Entity<Company>()
+            modelBuilder.Entity<Supplier>()
                 .HasOptional(x => x.CmpWebCredentials)
-                .WithRequired(a => a.Company);
+                .WithRequired(a => a.Supplier);
 
-            base.OnModelCreating(modelBuilder);
+
 
 
             #endregion
@@ -158,6 +174,134 @@ namespace KFSrepository_EF6
 
 
 
+            #region product related
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<Product>()
+                .HasRequired<ProductType>(b => b.ProductType)
+                .WithMany(a => a.Products)
+                .HasForeignKey<int>(b => b.Id_ProductType);
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<ProductQuotation>()
+                .HasRequired<Product>(b => b.Product)
+                .WithMany(a => a.ProductQuotations)
+                .HasForeignKey<int>(b => b.Id_Product);
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<ProductQuotation>()
+                .HasRequired<Supplier>(b => b.Supplier)
+                .WithMany(a => a.ProductQuotations)
+                .HasForeignKey<int>(b => b.Id_Supplier);
+
+
+            //maakt een 0 of 1 op veel relatie
+            modelBuilder.Entity<ProductQuotation>()
+                .HasOptional<Employee>(b => b.EmployeeRegistered)
+                .WithMany(a => a.ProductQuotations)
+                .HasForeignKey<int?>(b => b.Id_EmployeeRegistered);
+
+
+            #endregion
+
+
+
+
+            #region order IN related
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<OrderLineIn>()
+                .HasRequired<Product>(b => b.Product)
+                .WithMany(a => a.OrderLineIns)
+                .HasForeignKey<int>(b => b.Id_Product);
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<OrderIn>()
+                .HasRequired<Supplier>(b => b.Supplier)
+                .WithMany(a => a.OrderIns)
+                .HasForeignKey<int>(b => b.Id_Supplier);
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<OrderIn>()
+                .HasRequired<Employee>(b => b.OrderedBy)
+                .WithMany(a => a.OrderIns_OrderedBy)
+                .HasForeignKey<int>(b => b.Id_OrderedBy);
+
+            //maakt een 0 of 1 op veel relatie
+            modelBuilder.Entity<OrderIn>()
+                .HasOptional<Employee>(b => b.HandledBy)
+                .WithMany(a => a.OrderIns_HandledBy)
+                .HasForeignKey<int?>(b => b.Id_HandledBy);
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<OrderLineIn>()
+                .HasRequired<OrderIn>(b => b.OrderIn)
+                .WithMany(a => a.OrderLineIns)
+                .HasForeignKey<int>(b => b.Id_OrderIn);
+
+
+            #endregion
+
+
+
+
+            #region order OUT Related
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<OrderLineOut>()
+                .HasRequired<Product>(b => b.Product)
+                .WithMany(a => a.OrderLineOuts)
+                .HasForeignKey<int>(b => b.Id_Product);
+
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<OrderOut>()
+                .HasRequired<Client>(b => b.Client)
+                .WithMany(a => a.OrderOuts)
+                .HasForeignKey<int>(b => b.Id_Client);
+
+
+            //maakt een 0 of 1 op veel relatie
+            modelBuilder.Entity<OrderOut>()
+                .HasOptional<Employee>(b => b.SoldBy)
+                .WithMany(a => a.OrderOuts_SoldBy)
+                .HasForeignKey<int?>(b => b.Id_SoldBy);
+
+
+            //maakt een 0 of 1 op veel relatie
+            modelBuilder.Entity<OrderOut>()
+                .HasOptional<Employee>(b => b.PreparedBy)
+                .WithMany(a => a.OrderOuts_PreparedBy)
+                .HasForeignKey<int?>(b => b.Id_PreparedBy);
+
+
+            //maakt een 0 of 1 op veel relatie
+            modelBuilder.Entity<OrderOut>()
+                .HasOptional<Employee>(b => b.InvoiceCreatedBy)
+                .WithMany(a => a.OrderOuts_InvoiceCreatedBy)
+                .HasForeignKey<int?>(b => b.Id_InvoiceCreatedBy);
+
+
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<OrderLineOut>()
+                .HasRequired<OrderOut>(b => b.OrderOut)
+                .WithMany(a => a.OrderLineOuts)
+                .HasForeignKey<int>(b => b.Id_OrderOut);
+
+
+            #endregion
+
+
+
+
+
+            base.OnModelCreating(modelBuilder);
 
         }
 

@@ -52,25 +52,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppRepository.cs" />
-    <Compile Include="ClientRepository.cs" />
-    <Compile Include="CltAddressRepository.cs" />
-    <Compile Include="CltWebCredentialsRepository.cs" />
-    <Compile Include="CmpWebCredentialsRepository.cs" />
-    <Compile Include="cmp_related\CmpManagerRepository.cs" />
-    <Compile Include="cmp_related\CmpIBANRepository.cs" />
-    <Compile Include="cmp_related\CmpSiteAddressRepository.cs" />
-    <Compile Include="cmp_related\CmpSiteContactPersonRepository.cs" />
-    <Compile Include="cmp_related\CmpSiteRepository.cs" />
-    <Compile Include="emp_related\EmpDepartmentRepository.cs" />
-    <Compile Include="emp_related\EmpContractTypeRepository.cs" />
-    <Compile Include="emp_related\EmpContractRepository.cs" />
-    <Compile Include="emp_related\EmpContractStatuutTypeRepository.cs" />
-    <Compile Include="emp_related\EmpAppAccountRepository.cs" />
-    <Compile Include="emp_related\EmpAddressRepository.cs" />
-    <Compile Include="emp_related\EmployeeRepository.cs" />
+    <Compile Include="client_related\ClientRepository.cs" />
+    <Compile Include="client_related\CltAddressRepository.cs" />
+    <Compile Include="client_related\CltWebCredentialsRepository.cs" />
+    <Compile Include="company_related\CmpWebCredentialsRepository.cs" />
+    <Compile Include="company_related\CmpManagerRepository.cs" />
+    <Compile Include="company_related\CmpIBANRepository.cs" />
+    <Compile Include="company_related\CmpSiteAddressRepository.cs" />
+    <Compile Include="company_related\CmpSiteContactPersonRepository.cs" />
+    <Compile Include="company_related\CmpSiteRepository.cs" />
+    <Compile Include="employee_related\EmpDepartmentRepository.cs" />
+    <Compile Include="employee_related\EmpContractTypeRepository.cs" />
+    <Compile Include="employee_related\EmpContractRepository.cs" />
+    <Compile Include="employee_related\EmpContractStatuutTypeRepository.cs" />
+    <Compile Include="employee_related\EmpAppAccountRepository.cs" />
+    <Compile Include="employee_related\EmpAddressRepository.cs" />
+    <Compile Include="employee_related\EmployeeRepository.cs" />
     <Compile Include="KfsContext.cs" />
+    <Compile Include="order_product_related\OrderInRepository.cs" />
+    <Compile Include="order_product_related\OrderLineInRepository.cs" />
+    <Compile Include="order_product_related\OrderLineOutRepository.cs" />
+    <Compile Include="order_product_related\OrderOutRepository.cs" />
+    <Compile Include="order_product_related\ProductQuotationRepository.cs" />
+    <Compile Include="order_product_related\ProductTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="cmp_related\SupplierRepository.cs" />
+    <Compile Include="company_related\SupplierRepository.cs" />
     <Compile Include="TDS\ICreateUpdateDateTime.cs" />
     <Compile Include="TDS\ISetInactiveInsteadOfRemove.cs" />
     <Compile Include="TDS\ITDSrepository.cs" />
@@ -86,9 +92,7 @@
       <Name>KFSolutionsModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="clt_related\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

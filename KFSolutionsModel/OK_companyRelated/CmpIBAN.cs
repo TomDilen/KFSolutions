@@ -16,6 +16,6 @@ namespace KFSolutionsModel
 
 
         //--------------navigation propertys------------//
-        public virtual ICollection<Company> Companys { get; set; }
+        public virtual ICollection<Supplier> Suppliers { get; set; }
     }
 }

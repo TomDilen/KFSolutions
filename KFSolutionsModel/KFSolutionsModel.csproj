@@ -51,12 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors\Supplier.cs" />
+    <Compile Include="Actors\OrderIn.cs" />
+    <Compile Include="Actors\OrderOut.cs" />
+    <Compile Include="Actors\Product.cs" />
     <Compile Include="NotMapped\Address.cs" />
     <Compile Include="Actors\Client.cs" />
     <Compile Include="NotMapped\Credentials.cs" />
     <Compile Include="NotMapped\DBentity.cs" />
     <Compile Include="NotMapped\IBAN.cs" />
+    <Compile Include="NotMapped\OrderLine.cs" />
     <Compile Include="NotMapped\TypeTable.cs" />
     <Compile Include="OK_clientRelated\CltAddress.cs" />
     <Compile Include="OK_clientRelated\CltWebCredentials.cs" />
@@ -66,7 +69,7 @@
     <Compile Include="OK_companyRelated\CmpSiteAddress.cs" />
     <Compile Include="OK_companyRelated\CmpSiteContactPerson.cs" />
     <Compile Include="OK_companyRelated\CmpSite.cs" />
-    <Compile Include="OK_companyRelated\Company.cs" />
+    <Compile Include="Actors\Supplier.cs" />
     <Compile Include="OK_employeeRelated\EmpAppAccount.cs" />
     <Compile Include="OK_employeeRelated\EmpContract.cs" />
     <Compile Include="OK_employeeRelated\EmpContractStatuutType.cs" />
@@ -75,14 +78,13 @@
     <Compile Include="Actors\Employee.cs" />
     <Compile Include="NotMapped\Person.cs" />
     <Compile Include="OK_employeeRelated\EmpAddress.cs" />
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderLine.cs" />
-    <Compile Include="OrderStatus.cs" />
+    <Compile Include="OK_Product_order_related\OrderLineIn.cs" />
+    <Compile Include="OK_Product_order_related\OrderLineOut.cs" />
+    <Compile Include="OK_Product_order_related\ProductType.cs" />
     <Compile Include="NotMapped\PersonMin.cs" />
     <Compile Include="NotMapped\Site.cs" />
+    <Compile Include="OK_Product_order_related\ProductQuotation.cs" />
     <Compile Include="zzzTestClasses.cs" />
-    <Compile Include="PermissionEnum.cs" />
-    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

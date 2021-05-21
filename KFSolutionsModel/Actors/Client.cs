@@ -26,5 +26,8 @@ namespace KFSolutionsModel
  
         public virtual CltWebCredentials CltWebCredentials { get; set; }
 
+
+        public virtual ICollection<OrderOut> OrderOuts { get; set; }
+
     }
 }

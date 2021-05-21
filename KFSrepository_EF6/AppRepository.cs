@@ -30,7 +30,18 @@ namespace KFSrepository_EF6
         public readonly IClientRepository Client;
         public readonly ICltAddressRepository CltAddress;
         public readonly ICltWebCredentialsRepository CltWebCredentials;
-        
+
+
+
+        public readonly IProductTypeRepository ProductType;
+        public readonly IProductQuotationRepository ProductQuotation;
+
+
+        public readonly IOrderInRepository OrderIn;
+        public readonly IOrderLineInRepository OrderLineIn;
+
+        public readonly IOrderOutRepository OrderOut;
+        public readonly IOrderLineOutRepository OrderLineOut;
 
         //=======================================================================
 
@@ -58,6 +69,18 @@ namespace KFSrepository_EF6
             Client = new ClientRepository(aConnectionString);
             CltAddress = new CltAddressRepository(aConnectionString);
             CltWebCredentials = new CltWebCredentialsRepository(aConnectionString);
+
+
+            ProductType = new ProductTypeRepository(aConnectionString);
+            ProductQuotation = new ProductQuotationRepository(aConnectionString);
+
+
+            OrderIn = new OrderInRepository(aConnectionString);
+            OrderLineIn = new OrderLineInRepository(aConnectionString);
+
+
+            OrderOut = new OrderOutRepository(aConnectionString);
+            OrderLineOut = new OrderLineOutRepository(aConnectionString);
 
         }
     }
