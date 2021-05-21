@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,8 +30,8 @@ namespace KFSolutionsModel
         //--------------navigation propertys-----------//
 
 
-        public int Id_Product { get; set; }
-        public virtual Product Product { get; set; }
+
+
 
 
         public int Id_Supplier { get; set; }
@@ -41,7 +42,13 @@ namespace KFSolutionsModel
         public virtual Employee EmployeeRegistered { get; set; }
 
 
+        //----------------------------deze relatie weggehaald-------
+        ////[NotMapped]
+        [Required]
+        public string EAN_Product { get; set; }
 
+        //[NotMapped]
+        //public virtual Product Product { get; set; }
 
     }
 }

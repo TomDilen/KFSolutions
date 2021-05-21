@@ -74,9 +74,11 @@
     <Compile Include="order_product_related\OrderLineOutRepository.cs" />
     <Compile Include="order_product_related\OrderOutRepository.cs" />
     <Compile Include="order_product_related\ProductQuotationRepository.cs" />
+    <Compile Include="order_product_related\ProductRepository.cs" />
     <Compile Include="order_product_related\ProductTypeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="company_related\SupplierRepository.cs" />
+    <Compile Include="Supplier_Product_PriceRepository.cs" />
     <Compile Include="TDS\ICreateUpdateDateTime.cs" />
     <Compile Include="TDS\ISetInactiveInsteadOfRemove.cs" />
     <Compile Include="TDS\ITDSrepository.cs" />

@@ -9,7 +9,7 @@ namespace KFSolutionsModel.NotMapped
     public class OrderLine : DBentity
     {
         public int NumberOfProducts { get; set; }
-        public int UnitPrice { get; set; }
+        public float UnitPrice { get; set; }
 
 
     }

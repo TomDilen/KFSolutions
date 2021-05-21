@@ -36,6 +36,8 @@ namespace KFSrepository_EF6
 
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductQuotation> ProductQuotations { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Supplier_Product_Price> Supplier_Product_Prices { get; set; }
 
         //--------------------------------------------------------------------------
         public DbSet<OrderLineIn> OrderLineIns { get; set; }
@@ -182,12 +184,23 @@ namespace KFSrepository_EF6
                 .WithMany(a => a.Products)
                 .HasForeignKey<int>(b => b.Id_ProductType);
 
+            //maakt een 1 op veel relatie
+            modelBuilder.Entity<Supplier_Product_Price>()
+                .HasRequired<Supplier>(b => b.Supplier)
+                .WithMany(a => a.Supplier_Product_Prices)
+                .HasForeignKey<int>(b => b.Id_Supplier);
+
+
 
             //maakt een 1 op veel relatie
-            modelBuilder.Entity<ProductQuotation>()
+            modelBuilder.Entity<Supplier_Product_Price>()
                 .HasRequired<Product>(b => b.Product)
-                .WithMany(a => a.ProductQuotations)
-                .HasForeignKey<int>(b => b.Id_Product);
+                .WithMany(a => a.Supplier_Product_Prices)
+                .HasForeignKey<string>(b => b.EAN_Product);
+
+
+
+
 
             //maakt een 1 op veel relatie
             modelBuilder.Entity<ProductQuotation>()
@@ -196,11 +209,8 @@ namespace KFSrepository_EF6
                 .HasForeignKey<int>(b => b.Id_Supplier);
 
 
-            //maakt een 0 of 1 op veel relatie
-            modelBuilder.Entity<ProductQuotation>()
-                .HasOptional<Employee>(b => b.EmployeeRegistered)
-                .WithMany(a => a.ProductQuotations)
-                .HasForeignKey<int?>(b => b.Id_EmployeeRegistered);
+
+
 
 
             #endregion
@@ -214,7 +224,7 @@ namespace KFSrepository_EF6
             modelBuilder.Entity<OrderLineIn>()
                 .HasRequired<Product>(b => b.Product)
                 .WithMany(a => a.OrderLineIns)
-                .HasForeignKey<int>(b => b.Id_Product);
+                .HasForeignKey<string>(b => b.EAN_Product);
 
 
             //maakt een 1 op veel relatie
@@ -256,7 +266,7 @@ namespace KFSrepository_EF6
             modelBuilder.Entity<OrderLineOut>()
                 .HasRequired<Product>(b => b.Product)
                 .WithMany(a => a.OrderLineOuts)
-                .HasForeignKey<int>(b => b.Id_Product);
+                .HasForeignKey<string>(b => b.EAN_Product);
 
 
 

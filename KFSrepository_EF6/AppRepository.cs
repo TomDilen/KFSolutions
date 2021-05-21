@@ -35,6 +35,10 @@ namespace KFSrepository_EF6
 
         public readonly IProductTypeRepository ProductType;
         public readonly IProductQuotationRepository ProductQuotation;
+        public readonly IProductRepository Product;
+        public readonly ISupplier_Product_PriceRepository Supplier_Product_Price;
+        
+        
 
 
         public readonly IOrderInRepository OrderIn;
@@ -70,9 +74,10 @@ namespace KFSrepository_EF6
             CltAddress = new CltAddressRepository(aConnectionString);
             CltWebCredentials = new CltWebCredentialsRepository(aConnectionString);
 
-
+            Product = new ProductRepository(aConnectionString);
             ProductType = new ProductTypeRepository(aConnectionString);
             ProductQuotation = new ProductQuotationRepository(aConnectionString);
+            Supplier_Product_Price = new Supplier_Product_PriceRepository(aConnectionString);
 
 
             OrderIn = new OrderInRepository(aConnectionString);

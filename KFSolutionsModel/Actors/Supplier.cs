@@ -53,10 +53,15 @@ namespace KFSolutionsModel
         public virtual CmpWebCredentials CmpWebCredentials { get; set; }
 
 
-        public virtual ICollection<ProductQuotation> ProductQuotations { get; set; }
 
 
         public virtual ICollection<OrderIn> OrderIns { get; set; }
+
+
+        public virtual ICollection<Supplier_Product_Price> Supplier_Product_Prices { get; set; }
+
+
+        public virtual ICollection<ProductQuotation> ProductQuotations { get; set; }
 
     }
 }

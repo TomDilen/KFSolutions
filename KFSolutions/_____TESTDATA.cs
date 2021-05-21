@@ -95,17 +95,44 @@ namespace KFSolutions
                 appRespository.EmpContractStatuutType.Add(empContrStatuutType_Ambtenaar);
 
 
-                #endregion--------------------------------------------------------------------------------------
+            #endregion--------------------------------------------------------------------------------------
 
 
 
+            #region------------------------------------------- Add ProductType------------------------------
+            ProductType productType_Dranken = new ProductType()
+            {
+                DescriptionNL = "Dranken",
+                DescriptionEN = "Drinks"
+            };
+            appRespository.ProductType.Add(productType_Dranken);
+            ProductType productType_Speelgoed = new ProductType()
+            {
+                DescriptionNL = "Speelgoed",
+                DescriptionEN = "Toys"
+            };
+            appRespository.ProductType.Add(productType_Speelgoed);
+            ProductType productType_Voedingswaren = new ProductType()
+            {
+                DescriptionNL = "Voedingswaren",
+                DescriptionEN = "Foodstuffs"
+            };
+            appRespository.ProductType.Add(productType_Voedingswaren);
+            ProductType productType_AutoOnderdelen = new ProductType()
+            {
+                DescriptionNL = "Auto onderdelen",
+                DescriptionEN = "Car parts"
+            };
+            appRespository.ProductType.Add(productType_AutoOnderdelen);
+            #endregion--------------------------------------------------------------------------------------
 
+            
 
-                #region------------------------------------------- Add Employees  ------------------------------
+            #region------------------------------------------- Add Employees  ------------------------------
 
-                #region employee_TomDilen
+            #region employee_TomDilen
 
-                Employee employee_TomDilen = new Employee()
+            Employee employee_TomDilen = new Employee()
                 {
                     //-------------------personMin---------
                     FirstName = "Tom",
@@ -569,7 +596,7 @@ namespace KFSolutions
                 },
             };
             appRespository.Client.Add(client_KennyBruwier);
-            
+
 
 
             #endregion--------------------------------------------------------------------------------------
@@ -581,14 +608,172 @@ namespace KFSolutions
 
 
 
+            #region------------------------------------------- Add Products---------------------------------
+            Product product_Spaghetti = new Product()
+            {
+                //---------   id = EAN (geen oplopend nummer)
+                EAN = "1111111111",
+
+                ProductTitle = "Spaghetti Bolognaise",
+                //ExtraInfo = "",
+
+                SellingPriceRecommended = 5.22f,
+                CountInStock = 0,
+                MinCountInStock = 100,
+                MaxCountInStock = 500,
+                WareHouseLocation = "H44,01",
+                BTWpercentage = 6,
+                Id_ProductType = 2 , //producType 1=Speelgoed, 2=Voedingswaren 3=Autoonderdelen
+                //Image 
 
 
-            #region------------------------------------------- Add Departments------------------------------
+            };
+            appRespository.Product.Add(product_Spaghetti);
+
+
+            Product product_Ballenbad = new Product()
+            {
+                //---------   id = EAN (geen oplopend nummer)
+                EAN = "222222222",
+
+                ProductTitle = "Ballen bad",
+                //ExtraInfo = "",
+
+                SellingPriceRecommended = 105.22f,
+                CountInStock = 0,
+                MinCountInStock = 5,
+                MaxCountInStock = 10,
+                WareHouseLocation = "H44,02",
+                BTWpercentage = 21,
+                Id_ProductType = 1, //producType 1=Speelgoed, 2=Voedingswaren 3=Autoonderdelen
+                //Image 
+
+            };
+            appRespository.Product.Add(product_Ballenbad);
+
+
+            Product product_DoosLego = new Product()
+            {
+                //---------   id = EAN (geen oplopend nummer)
+                EAN = "33333333",
+
+                ProductTitle = "Lego StormMinds",
+                //ExtraInfo = "",
+
+                SellingPriceRecommended = 205.22f,
+                CountInStock = 0,
+                MinCountInStock = 6,
+                MaxCountInStock = 20,
+                WareHouseLocation = "H20,01",
+                BTWpercentage = 21,
+                Id_ProductType = 1, //producType 1=Speelgoed, 2=Voedingswaren 3=Autoonderdelen
+                //Image 
+                Supplier_Product_Prices  = new List<Supplier_Product_Price>()
+                {
+                    new Supplier_Product_Price()
+                    {
+                        UnitPrice = 44.44f,
+                        Id_Supplier = 1,
+                        EAN_Product= "222222222"
+                    }
+                }
+
+            };
+            appRespository.Product.Add(product_DoosLego);
+
+
+            Product product_NummerPlatenAuto = new Product()
+            {
+                //---------   id = EAN (geen oplopend nummer)
+                EAN = "444444444",
+
+                ProductTitle = "Nummerplaat",
+                //ExtraInfo = "",
+
+                SellingPriceRecommended = 15.99f,
+                CountInStock = 0,
+                MinCountInStock = 20,
+                MaxCountInStock = 80,
+                WareHouseLocation = "H47,02",
+                BTWpercentage = 21,
+                Id_ProductType = 3, //producType 1=Speelgoed, 2=Voedingswaren 3=Autoonderdelen
+                //Image 
+
+            };
+            appRespository.Product.Add(product_NummerPlatenAuto);
+
+
             #endregion--------------------------------------------------------------------------------------
-            #region------------------------------------------- Add Departments------------------------------
+
+
+
+            #region------------------------------------------- Add OrdersIn --------------------------------
+
+            OrderIn bestellengOut_1 = new OrderIn()
+            {
+                Id_OrderedBy = 1,
+                Id_Supplier = 1,
+                OrderedAt = DateTime.Now,
+                OrderLineIns = new List<OrderLineIn>()
+                {
+                    new OrderLineIn(){ EAN_Product = "222222222", UnitPrice = 22.2f, NumberOfProducts=5},
+                    new OrderLineIn(){ EAN_Product = "444444444", UnitPrice = 33.2f, NumberOfProducts=5}
+                }
+            };
+            appRespository.OrderIn.Add(bestellengOut_1);
             #endregion--------------------------------------------------------------------------------------
-            #region------------------------------------------- Add Departments------------------------------
+
+
+
+            OrderOut bestelling_In1 = new OrderOut()
+            {
+                Id_Client = 1 ,
+                OrderLineOuts = new List<OrderLineOut>()
+                {
+                    new OrderLineOut(){EAN_Product = "222222222" , UnitPrice = 22.33f ,NumberOfProducts=4 },
+                    new OrderLineOut(){EAN_Product = "444444444" , UnitPrice = 22.33f ,NumberOfProducts=4 }
+                }
+            };
+            appRespository.OrderOut.Add(bestelling_In1);
+
+
+
+
+
+
+            #region------------------------------------------- Add Quatations-------------------------------
+            ProductQuotation quotation1 = new ProductQuotation()
+            {
+                UnitPrice = 10.20f,
+                DateQuatation = DateTime.Now,
+                ExtraInfo = "goei materiaal",
+                EAN_Product = "8888888",
+                Id_Supplier=1
+
+            };
+            appRespository.ProductQuotation.Add(quotation1);
+
+            //ProductQuotation quotation2 = new ProductQuotation()
+            //{
+            //    UnitPrice = 10.20f,
+            //    DateQuatation = DateTime.Now,
+            //    //DateRegistered = 
+            //    ExtraInfo = "",
+            //    Id_Product = 2
+
+            //};
+            //appRespository.ProductQuotation.Add(quotation2);
+
             #endregion--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
             #region------------------------------------------- Add Departments------------------------------
             #endregion--------------------------------------------------------------------------------------
             #region------------------------------------------- Add Departments------------------------------

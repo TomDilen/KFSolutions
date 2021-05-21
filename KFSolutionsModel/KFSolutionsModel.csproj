@@ -84,6 +84,7 @@
     <Compile Include="NotMapped\PersonMin.cs" />
     <Compile Include="NotMapped\Site.cs" />
     <Compile Include="OK_Product_order_related\ProductQuotation.cs" />
+    <Compile Include="OK_Product_order_related\Supplier_Product_Price.cs" />
     <Compile Include="zzzTestClasses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
