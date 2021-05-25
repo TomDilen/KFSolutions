@@ -161,22 +161,22 @@ namespace TDSencryption
                     );
             }
             //=====================================================validation dat je kan overriden
-            if (!IsValidStringToEncrypt(aStringToDecrypt))
-            {
-                throw new TDSencryptionException(
-                    $"The value: {aStringToDecrypt} is not a valid value to decrypt",
-                    $"De waarde: {aStringToDecrypt} is geen acceptabele waarde om te decrypten",
-                    aStringToDecrypt, aKey
-                    );
-            }
-            if (!IsValidKeyToEncrypt(aKey))
-            {
-                throw new TDSencryptionException(
-                    $"The Key: {aStringToDecrypt} is not a valid Key to decrypt",
-                    $"De sleutel: {aStringToDecrypt} is geen acceptabele sleutel om te decrypten",
-                    aStringToDecrypt, aKey
-                    );
-            }
+            //if (!IsValidStringToEncrypt(aStringToDecrypt))
+            //{
+            //    throw new TDSencryptionException(
+            //        $"The value: {aStringToDecrypt} is not a valid value to decrypt",
+            //        $"De waarde: {aStringToDecrypt} is geen acceptabele waarde om te decrypten",
+            //        aStringToDecrypt, aKey
+            //        );
+            //}
+            //if (!IsValidKeyToEncrypt(aKey))
+            //{
+            //    throw new TDSencryptionException(
+            //        $"The Key: {aStringToDecrypt} is not a valid Key to decrypt",
+            //        $"De sleutel: {aStringToDecrypt} is geen acceptabele sleutel om te decrypten",
+            //        aStringToDecrypt, aKey
+            //        );
+            //}
             //===============================================================
 
 

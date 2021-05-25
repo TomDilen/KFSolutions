@@ -25,7 +25,7 @@ namespace KFSolutions.UnitTestBusiness
             string kleineLetters = "abcdefghijklmnopqrstuvwxyz";
             string groteLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string cijfers = "0123456789";
-            string toegelatenPaswoord = "!@#$%^&*()_+=[{]};:<>|./?,-";
+            string toegelatenPaswoord = "_";//"!@#$%^&*()_+=[{]};:<>|./?,-"
             string toegelatenGebruikersnaam = "_" + "";
 
 

@@ -45,7 +45,7 @@ namespace KFSrepository_EF6
         //    return terug;
         //}
         ////---------------------------------------------------------------------------------- 
-        public virtual IEnumerable<TDSentity> GetAll()
+        protected virtual IEnumerable<TDSentity> GetAll()
         {
             IEnumerable<TDSentity> terug = null;
             using (var ctx = new KfsContext(_constring))

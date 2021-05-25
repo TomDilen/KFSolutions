@@ -12,7 +12,9 @@ namespace KFSolutionsModel
     {
 
         [Required(ErrorMessage = "AppPermissions can not empty")]
-        public UInt64 AppPermissions { get; set; } = 0;
+        public long AppPermissions { get; set; }
+
+
 
 
         //[Required(ErrorMessage = "Password  can not empty")]

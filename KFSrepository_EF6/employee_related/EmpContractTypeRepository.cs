@@ -12,7 +12,7 @@ namespace KFSrepository_EF6
 
     public interface IEmpContractTypeRepository : ITDSrepository<EmpContractType>
     {
-
+        
     }
 
     public class EmpContractTypeRepository : TDSrepository<EmpContractType>, IEmpContractTypeRepository
@@ -21,6 +21,15 @@ namespace KFSrepository_EF6
         {
 
         }
+
+
+        //=========================================================================================
+        //public  EmpContractType Add(EmpContractType aEntity)
+        //{
+        //    return base.Add(aEntity);
+        //}
+
+
     }
 
 }

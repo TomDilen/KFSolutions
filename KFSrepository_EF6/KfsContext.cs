@@ -54,8 +54,8 @@ namespace KFSrepository_EF6
             //this.Configuration.LazyLoadingEnabled = false;
 
             //Database.SetInitializer(new CreateDatabaseIfNotExists<KfsContext>()); //deze als dbOk is, is ook de standaard
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<KfsContext>());
-            Database.SetInitializer(new DropCreateDatabaseAlways<KfsContext>()); //bij het testen
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<KfsContext>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<KfsContext>()); //bij het testen
 
         }
 

@@ -5,18 +5,21 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0297878B-1AE5-4F3C-A349-5BB1942A9633}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KFSrepository_EF6</RootNamespace>
-    <AssemblyName>KFSrepository_EF6</AssemblyName>
+    <ProjectGuid>{FB441F31-1AC7-4AEC-B638-A95646AEA7A7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>KFSolutionsWPF</RootNamespace>
+    <AssemblyName>KFSolutionsWPF</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,6 +29,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,63 +46,104 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppRepository.cs" />
-    <Compile Include="client_related\ClientRepository.cs" />
-    <Compile Include="client_related\CltAddressRepository.cs" />
-    <Compile Include="client_related\CltWebCredentialsRepository.cs" />
-    <Compile Include="company_related\CmpWebCredentialsRepository.cs" />
-    <Compile Include="company_related\CmpManagerRepository.cs" />
-    <Compile Include="company_related\CmpIBANRepository.cs" />
-    <Compile Include="company_related\CmpSiteAddressRepository.cs" />
-    <Compile Include="company_related\CmpSiteContactPersonRepository.cs" />
-    <Compile Include="company_related\CmpSiteRepository.cs" />
-    <Compile Include="employee_related\EmpDepartmentRepository.cs" />
-    <Compile Include="employee_related\EmpContractTypeRepository.cs" />
-    <Compile Include="employee_related\EmpContractRepository.cs" />
-    <Compile Include="employee_related\EmpContractStatuutTypeRepository.cs" />
-    <Compile Include="employee_related\EmpAppAccountRepository.cs" />
-    <Compile Include="employee_related\EmpAddressRepository.cs" />
-    <Compile Include="employee_related\EmployeeRepository.cs" />
-    <Compile Include="KfsContext.cs" />
-    <Compile Include="order_product_related\OrderInRepository.cs" />
-    <Compile Include="order_product_related\OrderLineInRepository.cs" />
-    <Compile Include="order_product_related\OrderLineOutRepository.cs" />
-    <Compile Include="order_product_related\OrderOutRepository.cs" />
-    <Compile Include="order_product_related\ProductQuotationRepository.cs" />
-    <Compile Include="order_product_related\ProductRepository.cs" />
-    <Compile Include="order_product_related\ProductTypeRepository.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="company_related\SupplierRepository.cs" />
-    <Compile Include="Supplier_Product_PriceRepository.cs" />
-    <Compile Include="TDS\ICreateUpdateDateTime.cs" />
-    <Compile Include="TDS\ISetInactiveInsteadOfRemove.cs" />
-    <Compile Include="TDS\ITDSrepository.cs" />
-    <Compile Include="TDS\TDSrepository.cs" />
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="UserControls\TDStransactionControl.xaml.cs">
+      <DependentUpon>TDStransactionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\InloggenViewModel.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="Views\InloggenView.xaml.cs">
+      <DependentUpon>InloggenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UserControls\TDStransactionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InloggenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Untitled2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\KenfieldLogo1.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KFSolutionsModel\KFSolutionsModel.csproj">
       <Project>{09d742fe-fdf1-4d39-a2c5-e1d8b63363da}</Project>
       <Name>KFSolutionsModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TDSencryption\TDSencryption.csproj">
-      <Project>{99fe4c6b-f920-4c8c-aa98-44300dd2d2d0}</Project>
-      <Name>TDSencryption</Name>
+    <ProjectReference Include="..\KFSrepository_EF6\KFSrepository_EF6.csproj">
+      <Project>{0297878b-1ae5-4f3c-a349-5bb1942a9633}</Project>
+      <Name>KFSrepository_EF6</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

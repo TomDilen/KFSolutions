@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="KFSolutionsWPF.Views.MainMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KFSolutionsWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="1" Grid.Column="1" >
+            <Button Margin="5" x:Name="knop1" Height="50"></Button>
+            <Button Margin="5" x:Name="knop2" Height="50"></Button>
+            <Button Margin="5" x:Name="knop3" Height="50"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="3" >
+            <Button Margin="5" x:Name="knop11" Height="50"></Button>
+            <Button Margin="5" x:Name="knop12" Height="50"></Button>
+            <Button Margin="5" x:Name="knop13" Height="50"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="5" >
+            <Button Margin="5" x:Name="knop21" Height="50"></Button>
+            <Button Margin="5" x:Name="knop22" Height="50"></Button>
+            <Button Margin="5" x:Name="knop33" Height="50"></Button>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

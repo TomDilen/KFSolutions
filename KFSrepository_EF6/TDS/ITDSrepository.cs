@@ -15,6 +15,7 @@ namespace KFSrepository_EF6
         //TDSentity SingleOrDefault(Expression<Func<TDSentity, bool>> aPredicate);
 
         TDSentity Add(TDSentity aEntity);
+
         //void AddRange(IEnumerable<TDSentity> aEntities);
 
         //void Remove(TDSentity aEntity);

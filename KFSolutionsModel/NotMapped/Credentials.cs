@@ -17,7 +17,7 @@ namespace KFSolutionsModel.NotMapped
 
 
         [Required(ErrorMessage = "Username can not empty")]
-        [MaxLength(20, ErrorMessage = "Gebruikersnaam kan niet langer zijn dan 20 karakters")]  //,ErrorMessage="Name cannot be greater than 50")
+        [MaxLength(20, ErrorMessage = "Gebruikersnaam kan niet langer zijn dan 20 karakters")]  
         [MinLength(5)]
         [Index(IsUnique = true)]
         public string UserName { get; set; }
