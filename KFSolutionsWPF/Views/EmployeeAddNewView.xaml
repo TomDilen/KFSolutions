@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KFSolutionsWPF.Views"
+             xmlns:local="clr-namespace:KFSolutionsWPF.Views" xmlns:converters="clr-namespace:KFSolutionsWPF.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="800">
 
@@ -24,6 +24,7 @@
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="TextAlignment" Value="Center"></Setter>
         </Style>
+        <!--====================================================================-->
         <Style TargetType="TextBlock" x:Key="labelData">
             <Setter Property="Background" Value="Red"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
@@ -31,24 +32,50 @@
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="TextAlignment" Value="Right"></Setter>
         </Style>
+        
+        <!--====================================================================-->
         <Style TargetType="ComboBox" x:Key="comboData">
             <Setter Property="Background" Value="LightBlue"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="Foreground" Value="DarkBlue"></Setter>
             <Setter Property="Margin" Value="5"></Setter>
         </Style>
+        <Style TargetType="RadioButton" x:Key="radiobtnData">
+            <Setter Property="Background" Value="LightBlue"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Height" Value="20"></Setter>
+            <Setter Property="Foreground" Value="DarkBlue"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+
+        </Style>
+
+
         <Style TargetType="TextBox" x:Key="textboxData">
             <Setter Property="Background" Value="LightBlue"></Setter>
             <Setter Property="FontSize" Value="20"></Setter>
             <Setter Property="Foreground" Value="DarkBlue"></Setter>
             <Setter Property="Margin" Value="5"></Setter>
         </Style>
+
+        <Style BasedOn="{StaticResource textboxData}" TargetType="TextBox" x:Key="infoTextboxData">
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="AcceptsReturn" Value="True"></Setter>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"></Setter>
+            <Setter Property="Height" Value="80"></Setter>
+        </Style>
+
+
+
         <Style TargetType="DatePicker" x:Key="DateboxData">
             <Setter Property="Background" Value="LightBlue"></Setter>
             <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="Foreground" Value="DarkBlue"></Setter>
             <Setter Property="Margin" Value="5"></Setter>
         </Style>
+
+        <converters:BoolRadioConverter x:Key="BoolRadioConverter" />
+        <converters:BoolRadioConverter x:Key="InverseBoolRadioConverter" Inverse="True" />
+
     </UserControl.Resources>
 
 
@@ -110,51 +137,90 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
+        <!--====================== persoonlijke gegevens ==============================-->
         <TextBlock Text="Persoonlijke gegevens" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
-        <TextBlock Text="Voornaam, Achternaam" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <TextBox Text="{Binding Firstname}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-        <TextBox Text="{Binding NameAddition}" Grid.Row="1" Grid.ColumnSpan="2"  Grid.Column="7" Style="{StaticResource textboxData}"></TextBox>
-        <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
 
+        <TextBlock Text="Voornaam, Achternaam" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+        <TextBox Text="{Binding NewEmployee.FirstName}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.NameAddition}" Grid.Row="1" Grid.ColumnSpan="2"  Grid.Column="7" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.LastName}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
 
         <TextBlock Text="Email" Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <TextBox Text="{Binding Firstname}" Grid.Row="2" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.Email}" Grid.Row="2" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
 
         <TextBlock Text="Gsm, Telefoon" Grid.Row="3"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <TextBox Text="{Binding MobileNumber}" Grid.Row="3" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-        <TextBox Text="{Binding PhoneNumber}" Grid.Row="3" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.MobileNumber}" Grid.Row="3" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.PhoneNumber}" Grid.Row="3" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
 
         <TextBlock Text="Geboortedatum" Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <DatePicker Text="{Binding DateOfBirth}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource DateboxData}"></DatePicker>
+        <DatePicker SelectedDate="{Binding NewEmployee.DateOfBirth}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource DateboxData}"></DatePicker>
 
         <TextBlock Text="Geslacht" Grid.Row="5"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <ComboBox Text="{Binding IsMale}" Grid.Row="5" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource comboData}"></ComboBox>
+        <!--<ComboBox Text="{Binding IsMale}" Grid.Row="5" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource comboData}"></ComboBox>-->
+        <RadioButton GroupName="sex" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" 
+                     Content="Man" Style="{StaticResource radiobtnData}"
+                    IsChecked="{Binding NewEmployee.IsMale, Converter={StaticResource BoolRadioConverter}}">
+        </RadioButton>
+        <RadioButton GroupName="sex" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="4" 
+                     Content="Vrouw" Style="{StaticResource radiobtnData}"
+                    IsChecked="{Binding NewEmployee.IsMale, Converter={StaticResource InverseBoolRadioConverter}}">
+        </RadioButton>
 
+
+
+        <!--====================== Adres gegevens ==============================-->
 
         <TextBlock Text="Adres gegevens" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
        
         <TextBlock Text="Straat, nummer, bus" Grid.Row="7"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <TextBox Text="{Binding Street}" Grid.Row="7" Grid.ColumnSpan="6"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-        <TextBox Text="{Binding HouseNumber}" Grid.Row="7" Grid.ColumnSpan="6"  Grid.Column="7" Style="{StaticResource textboxData}"></TextBox>
-        <TextBox Text="{Binding HouseNumberAddition}" Grid.Row="7" Grid.ColumnSpan="2"  Grid.Column="13" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.EmpAddress.Street}" Grid.Row="7" Grid.ColumnSpan="6"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.EmpAddress.HouseNumber}" Grid.Row="7" Grid.ColumnSpan="6"  Grid.Column="7" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.EmpAddress.HouseNumberAddition}" Grid.Row="7" Grid.ColumnSpan="2"  Grid.Column="13" Style="{StaticResource textboxData}"></TextBox>
 
         <TextBlock Text="Postcode, gemeente" Grid.Row="8"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <TextBox Text="{Binding Zipcode}" Grid.Row="8" Grid.ColumnSpan="4"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-        <TextBox Text="{Binding City}" Grid.Row="8" Grid.ColumnSpan="10"  Grid.Column="5" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.EmpAddress.Zipcode}" Grid.Row="8" Grid.ColumnSpan="4"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.EmpAddress.Country}" Grid.Row="8" Grid.ColumnSpan="10"  Grid.Column="5" Style="{StaticResource textboxData}"></TextBox>
 
+
+
+        <!--====================== administratieve gegevens ==============================-->
         
         <TextBlock Text="Administratieve gegevens" Grid.Row="9"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
         
         <TextBlock Text="Rijksregegister:" Grid.Row="10"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <TextBox Text="{Binding PassPortID}" Grid.Row="10" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.PassPortID}" Grid.Row="10" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
 
         <TextBlock Text="IBAN:" Grid.Row="11"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-        <TextBox Text="{Binding IBAN}" Grid.Row="11" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+        <TextBox Text="{Binding NewEmployee.IBAN}" Grid.Row="11" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+
+        <TextBlock Text="Department:" Grid.Row="12"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+        <ComboBox ItemsSource="{Binding DepartmentsAvailable}" 
+                  SelectedValue="{Binding NewEmployee.Id_EmpDepartment}"
+                  DisplayMemberPath="DescriptionNL" 
+                  Grid.Row="12" Grid.ColumnSpan="14"  Grid.Column="1" 
+                  Style="{StaticResource comboData}"></ComboBox>
 
         
+        
+        
+        
+        
+        <TextBlock Text="Extra info:" Grid.Row="14"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+        <TextBox Text="{Binding NewEmployee.ExtraInfo}" Grid.Row="14" Grid.ColumnSpan="14"  Grid.Column="1"  
+                 Style="{StaticResource infoTextboxData}"></TextBox>
+
+
+
+        <Button Command="{Binding Command_AddEmployee}" Grid.Row="17" Height="40"></Button>
 
 
 <!--JobInfo

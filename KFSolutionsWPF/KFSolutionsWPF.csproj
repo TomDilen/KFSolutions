@@ -76,6 +76,7 @@
     <Compile Include="Commands\NavigateMainMenuCommand.cs" />
     <Compile Include="Commands\NavigateReadUserCommand.cs" />
     <Compile Include="Commands\base\RelayCommand.cs" />
+    <Compile Include="Converters\BoolRadioConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
     <Compile Include="UserControls\test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>

@@ -13,7 +13,7 @@ namespace KFSolutionsModel.NotMapped
 
 
         [Required(ErrorMessage = "gender can not empty")]
-        public bool IsMale { get; set; }
+        public bool IsMale { get; set; } = true;
 
 
         //Adress is verhuisd naar Employee en naar Client, 
