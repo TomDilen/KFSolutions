@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using KFSolutionsModel;
-
+//using static KFSrepository_EF6.AppRepository<T>;
 
 namespace KFSrepository_EF6
 {
@@ -13,26 +11,42 @@ namespace KFSrepository_EF6
 
     public interface IEmployeeRepository : ITDSrepository<Employee>
     {
+
+        EmployeeRepository.EmployeeLoggedInDTO InloggedEmployee { get; }
+
         EmployeeRepository.EmployeeLoggedInDTO LogIn(string aUsername, string aPassword);
+        EmployeeRepository.EmployeeLoggedInDTO LogOut();
 
     }
     //==========================================================================================
 
     public class EmployeeRepository : TDSrepository<Employee>, IEmployeeRepository
     {
+        EmployeeLoggedInDTO _inloggedEmployee = null;
 
         UITcustomEncrypter encrypter = new UITcustomEncrypter();
+
+        EmployeeLoggedInDTO IEmployeeRepository.InloggedEmployee => _inloggedEmployee;
+
         //=====================================================================================
 
         public class EmployeeLoggedInDTO
         {
+            public enum Permissions
+            {
+                EmployeeAddNew = 61,
+                EmployeeUpdate = 62,
+                EmployeeRemove = 63,
+            }
+
             public int Id { get; set; }
             public string FirstName { get; set; }
             public string NameAddition { get; set; }
             public string LastName { get; set; }
 
-            public List<int> AppPermissions;
-            public string UserName;
+            //public List<int> AppPermissions;
+            public List<Permissions> AppPermissions { get; set; }
+            public string UserName { get; set; }
         }
 
         //=====================================================================================
@@ -58,8 +72,8 @@ namespace KFSrepository_EF6
         //=====================================================================================
         public EmployeeLoggedInDTO LogIn(string aUsername, string aPassword)
         {
-            EmployeeLoggedInDTO terug = null;
-
+            //EmployeeLoggedInDTO terug = null;
+            Console.WriteLine(aUsername + "   " + aPassword);
 
             EmpAppAccount gevonden = null;
             using (KfsContext ctx = new KfsContext(_constring))
@@ -75,7 +89,11 @@ namespace KFSrepository_EF6
 
                 //kijken of pw overeen komt, zoniet null returnen
                 string decryptydPw = encrypter.DecriptString(gevonden.Password, aUsername);
-                if (decryptydPw != aPassword) return null;
+                if (decryptydPw != aPassword)
+                {
+                    _inloggedEmployee = null;
+                    return null;
+                }
 
                 //permissies inladen
                 //------------------
@@ -90,6 +108,27 @@ namespace KFSrepository_EF6
                         tmpPersmisses.Add(i+1); 
                     }
                 }
+
+                List<EmployeeLoggedInDTO.Permissions> tmptest = new List<EmployeeLoggedInDTO.Permissions>();
+                for (int i = 0; i < 64; i++)
+                {
+                    if (((gevonden.AppPermissions >> i) & 1) != 0)
+                    {
+                        Console.WriteLine(i + 1);
+                        if (Enum.IsDefined(typeof(EmployeeLoggedInDTO.Permissions), (i + 1)))
+                        {
+                            
+                            //tmptest.Add(i + 1);
+                            tmptest.Add((EmployeeLoggedInDTO.Permissions)Enum.ToObject(typeof(EmployeeLoggedInDTO.Permissions), i + 1));
+                        }
+                    }
+                }
+
+                foreach (var item in tmptest)
+                {
+                    Console.WriteLine(item);
+                }
+
                 //bool IsBitSet(byte b, int pos)
                 //{
                 //    return ((b >> pos) & 1) != 0;
@@ -101,8 +140,8 @@ namespace KFSrepository_EF6
                 }
                 Console.WriteLine("========================" + tmpPersmisses.Count +"======" + gevonden.AppPermissions) ;
 
-                return new EmployeeLoggedInDTO() {
-                    AppPermissions = null,
+                _inloggedEmployee = new EmployeeLoggedInDTO() {
+                    AppPermissions = tmptest,
                     FirstName = gevonden.Employee.FirstName,
                     NameAddition = gevonden.Employee.NameAddition,
                     LastName = gevonden.Employee.LastName,
@@ -110,9 +149,24 @@ namespace KFSrepository_EF6
                     UserName = gevonden.UserName,
                 };
             }
+            else
+            {
+                _inloggedEmployee = null;
+            }
 
-            return terug;
+            return _inloggedEmployee;
         }
+
+
+        //=====================================================================================
+        public EmployeeLoggedInDTO LogOut()
+        {
+            this._inloggedEmployee = null;
+            return null;
+        }
+
+
+
 
 
 

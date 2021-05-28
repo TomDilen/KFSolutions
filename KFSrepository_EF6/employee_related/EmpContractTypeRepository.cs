@@ -24,10 +24,20 @@ namespace KFSrepository_EF6
 
 
         //=========================================================================================
-        //public  EmpContractType Add(EmpContractType aEntity)
-        //{
-        //    return base.Add(aEntity);
-        //}
+
+        private IEnumerable<EmpContractType> _memoryList;
+        public override IEnumerable<EmpContractType> GetAll()
+        {
+
+            if (_memoryList == null)
+            {
+                _memoryList = base.GetAll();
+            }
+
+            return _memoryList;
+
+            //return base.GetAll();
+        }
 
 
     }

@@ -55,15 +55,16 @@
                 <StackPanel VerticalAlignment="Top" Margin="15,20,15,0">
 
                     <Label Padding="0"  Margin="0,10,0,0">Gebruikersnaam:</Label>
-                    <TextBox x:Name="txtUsername"  Margin="0,0"  FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                    <TextBox x:Name="txtUsername" Text="{Binding Username }" Margin="0,0"  FontFamily="Champagne &amp; Limousines" FontSize="18"/>
 
                     <Label Padding="0" Margin="0,10,0,0">Paswoord:</Label>
-                    <PasswordBox x:Name="txtPassword"  Margin="0,0"  FontFamily="Champagne &amp; Limousines" FontSize="18"/>
-
+                    <PasswordBox x:Name="txtPassword" Password="Tom_0123" Margin="0,0"  FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                    <!--<TextBlock Text="klzlz" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Foreground="#FF004600" Cursor="Hand"/>-->
                 </StackPanel>
             </Grid>
 
-            <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,85" Content="LOG IN" Foreground="White" Click="Button_Click" >
+            <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                    Margin="0,85" Content="LOG IN" Foreground="White" Command="{Binding Command_Inloggen}" >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF7BA045" Offset="0.029"/>
@@ -73,6 +74,7 @@
             </Button>
 
             <TextBlock Text="TDS applications, Turnhout" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Foreground="#FF004600" Cursor="Hand"/>
+            <TextBlock Text="{Binding StatusMessage}" FontSize="20" HorizontalAlignment="center" VerticalAlignment="Bottom" Margin="60" Foreground="#FFCB5441" Cursor="Hand"/>
         </Grid>
 
     </Grid>

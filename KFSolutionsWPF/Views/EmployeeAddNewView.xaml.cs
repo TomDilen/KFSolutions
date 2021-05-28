@@ -1,6 +1,4 @@
-﻿
-using KFSrepository_EF6;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,16 +16,13 @@ using System.Windows.Shapes;
 namespace KFSolutionsWPF.Views
 {
     /// <summary>
-    /// Interaction logic for InloggenView.xaml
+    /// Interaction logic for EmployeeAddNewView.xaml
     /// </summary>
-    public partial class InloggenView : UserControl
+    public partial class EmployeeAddNewView : UserControl
     {
-
-        public InloggenView()
+        public EmployeeAddNewView()
         {
-            InitializeComponent(); 
-
+            InitializeComponent();
         }
-
     }
 }

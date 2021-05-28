@@ -1,4 +1,4 @@
-﻿using KFSolutionsWPF.UserControls;
+﻿
 using KFSrepository_EF6;
 using System;
 using System.Collections.Generic;
@@ -23,15 +23,14 @@ namespace KFSolutionsWPF.Views
     public partial class MainMenuView : UserControl
     {
 
-        private TDStransactionControl _transactionControl;
-
-        private AppRepository<KfsContext> _appDbRespository;
-
-        public MainMenuView(TDStransactionControl aTDStransactionControl, AppRepository<KfsContext> aAppDbRespository)
+        public MainMenuView()
         {
             InitializeComponent();
-            _transactionControl = aTDStransactionControl;
-            _appDbRespository = aAppDbRespository;
+        }
+
+        private void knop1_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

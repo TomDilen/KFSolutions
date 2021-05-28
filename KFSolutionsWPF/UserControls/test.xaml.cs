@@ -1,6 +1,4 @@
-﻿
-using KFSrepository_EF6;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace KFSolutionsWPF.Views
+namespace KFSolutionsWPF.UserControls
 {
     /// <summary>
-    /// Interaction logic for InloggenView.xaml
+    /// Interaction logic for test.xaml
     /// </summary>
-    public partial class InloggenView : UserControl
+    public partial class test : UserControl
     {
-
-        public InloggenView()
+        public test()
         {
-            InitializeComponent(); 
-
+            InitializeComponent();
         }
-
     }
 }

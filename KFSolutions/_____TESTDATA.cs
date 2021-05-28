@@ -13,8 +13,10 @@ namespace KFSolutions
         public static void LoadTestData(AppRepository<KfsContext> appRespository)
         {
 
-            //try
-            //{
+            //als deze gebruiker bestaat, returnen, data moet niet opnieuw opgeslagen worden
+            EmployeeRepository.EmployeeLoggedInDTO tmpTest = appRespository.Employee.LogIn("Tom_0123", "Tom_0123");
+            if (tmpTest != null) return;
+           
 
 
             #region =============================== MIN APPLICATIE VEREISTE ====================================
@@ -24,7 +26,7 @@ namespace KFSolutions
 
             EmpDepartment newDep_admin = new EmpDepartment()
             {
-                DefaultPermissions = 0b1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111,
+                DefaultPermissions = 0b0111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111,
                 DescriptionNL = "Administrator",
                 DescriptionEN = "Administrator"
             };

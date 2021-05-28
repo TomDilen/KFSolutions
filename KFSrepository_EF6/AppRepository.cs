@@ -87,6 +87,14 @@ namespace KFSrepository_EF6
             OrderOut = new OrderOutRepository(aConnectionString);
             OrderLineOut = new OrderLineOutRepository(aConnectionString);
 
+
+            
         }
+
+
+
+        
+
+
     }
 }

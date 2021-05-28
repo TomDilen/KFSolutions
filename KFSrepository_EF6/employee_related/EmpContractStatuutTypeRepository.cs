@@ -17,10 +17,30 @@ namespace KFSrepository_EF6
 
     public class EmpContractStatuutTypeRepository : TDSrepository<EmpContractStatuutType>, IEmpContractStatuutTypeRepository
     {
+        
+
+        //================================================================================================
         public EmpContractStatuutTypeRepository(string aConnectionstring) : base(aConnectionstring)
         {
 
         }
+
+
+        private IEnumerable<EmpContractStatuutType> _memoryList;
+        public override IEnumerable<EmpContractStatuutType> GetAll()
+        {
+
+            if (_memoryList == null)
+            {
+                _memoryList = base.GetAll();
+            }
+
+            return _memoryList;
+
+            //return base.GetAll();
+        }
     }
+
+    
 
 }

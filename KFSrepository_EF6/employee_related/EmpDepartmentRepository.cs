@@ -23,7 +23,19 @@ namespace KFSrepository_EF6
         }
 
         //========================================================================================================
+        private IEnumerable<EmpDepartment> _memoryList;
+        public override IEnumerable<EmpDepartment> GetAll()
+        {
 
+            if (_memoryList == null)
+            {
+                _memoryList = base.GetAll();
+            }
+
+            return _memoryList;
+
+            //return base.GetAll();
+        }
 
     }
 

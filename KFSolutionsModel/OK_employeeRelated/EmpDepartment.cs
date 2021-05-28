@@ -11,7 +11,7 @@ namespace KFSolutionsModel
 {
     public class EmpDepartment : TypeTable
     {
-        public UInt64 DefaultPermissions { get; set; } = 0;
+        public Int64 DefaultPermissions { get; set; } = 0;
 
         //--------------navigation propertys-----------//
         public virtual ICollection<Employee> Employees { get; set; }

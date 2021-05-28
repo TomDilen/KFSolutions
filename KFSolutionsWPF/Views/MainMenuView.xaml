@@ -10,13 +10,15 @@
 
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -26,23 +28,40 @@
         </Grid.RowDefinitions>
 
 
-        <StackPanel Grid.Row="1" Grid.Column="1" >
-            <Button Margin="5" x:Name="knop1" Height="50"></Button>
-            <Button Margin="5" x:Name="knop2" Height="50"></Button>
-            <Button Margin="5" x:Name="knop3" Height="50"></Button>
+        <!--<Rectangle Fill="Green" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Opacity="0.8"></Rectangle>-->
+
+        <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Opacity="0.95"
+            CornerRadius="10" BorderBrush="Black">
+            <Border.Effect>
+                <DropShadowEffect Color="#FF072C0A" BlurRadius="20"/>
+            </Border.Effect>
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF030A00" Offset="0.099"/>
+                    <GradientStop Color="#FF182314" Offset="0.946"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+
+        <StackPanel Grid.Row="1" Grid.Column="2" >
+            <Button Margin="5" x:Name="knop1" Height="50" Click="knop1_Click">Werknemer</Button>
+            <Button Margin="5" x:Name="knop2" Height="50">ik ben 2</Button>
+            <Button Margin="5" x:Name="knop3" Height="50">ik ben 3</Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="3" >
-            <Button Margin="5" x:Name="knop11" Height="50"></Button>
-            <Button Margin="5" x:Name="knop12" Height="50"></Button>
-            <Button Margin="5" x:Name="knop13" Height="50"></Button>
+        <StackPanel Grid.Row="1" Grid.Column="4" >
+            <Button Margin="5" x:Name="knop11" Height="50">ik ben 11</Button>
+            <Button Margin="5" x:Name="knop12" Height="50" Visibility="Collapsed">ik ben 12</Button>
+            <Button Margin="5" x:Name="knop13" Height="50">ik ben 13</Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="5" >
-            <Button Margin="5" x:Name="knop21" Height="50"></Button>
-            <Button Margin="5" x:Name="knop22" Height="50"></Button>
-            <Button Margin="5" x:Name="knop33" Height="50"></Button>
+        <StackPanel Grid.Row="1" Grid.Column="6" >
+            <Button Margin="5" x:Name="knop21" Height="50">ik ben 21</Button>
+            <Button Margin="5" x:Name="knop22" Height="50">ik ben 22</Button>
+            <Button Margin="5" x:Name="knop33" Height="50">ik ben 23</Button>
         </StackPanel>
+
 
     </Grid>
 </UserControl>

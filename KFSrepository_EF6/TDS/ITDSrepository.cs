@@ -10,7 +10,7 @@ namespace KFSrepository_EF6
         //public interface ITDSrepository<TEntity> where TEntity : new()
     {
         //TDSentity GetById(int aId);
-        //IEnumerable<TDSentity> GetAll();
+        IEnumerable<TDSentity> GetAll();
         //IEnumerable<TDSentity> Find(Expression<Func<TDSentity, bool>> aPredicate);
         //TDSentity SingleOrDefault(Expression<Func<TDSentity, bool>> aPredicate);
 
