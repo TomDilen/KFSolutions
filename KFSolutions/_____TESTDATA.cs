@@ -43,7 +43,7 @@ namespace KFSolutions
 
             EmpDepartment newDep_Warehouse = new EmpDepartment()
             {
-                DefaultPermissions = 0b0000_0000_0000_0000_0000_0000_1111_1111_1111_1111_1111_0000_0000_0000_0000_0000,
+                DefaultPermissions = 0b0000_0000_0000_0000_1111_1111_1111_1111_1111_1111_0000_0000_0000_0000_0000_0000,
                 DescriptionEN = "Ware House",
                 DescriptionNL = "Magazijn"
             };
@@ -129,7 +129,7 @@ namespace KFSolutions
                 DescriptionEN = "Car parts"
             };
             appRespository.ProductType.Add(productType_AutoOnderdelen);
-        #endregion--------------------------------------------------------------------------------------
+            #endregion--------------------------------------------------------------------------------------
 
 
 
@@ -182,7 +182,8 @@ namespace KFSolutions
 
                 EmpAppAccount = new EmpAppAccount
                 {
-                    AppPermissions = 0b0100_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_1111_1111_1111_1111_1111,
+                    //AppPermissions = 0b0100_0000_0000_0000_0000_0000_0000_0000_0000_0000_0000_1111_1111_1111_1111_1111,
+                    AppPermissions = 0b0111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111,
                     Password = "Tom_0123",
                     UserName = "Tom_0123",
                     IsPaswordResseted = true,
@@ -268,17 +269,17 @@ namespace KFSolutions
                         Id_EmpContractType = 2   // 1=Onbepaalde duur, 2=Jobstudent, 3=Interim
                     },
 
-                    //EmpAppAccount = new EmpAppAccount
-                    //{
-                    //    AppPermissions = Int64.MaxValue,
-                    //    Password = "Maggie",
-                    //    UserName = "Maggie",
-                    //    IsPaswordResseted = true,
-                    //    LastResetted = DateTime.Now,
-                    //    IsBlocked = false,
-                    //    InlogAttempts = 0,
-                    //}
-                };
+                //EmpAppAccount = new EmpAppAccount
+                //{
+                //    AppPermissions = Int64.MaxValue,
+                //    Password = "Maggie_0123",
+                //    UserName = "Maggie_0123",
+                //    IsPaswordResseted = true,
+                //    LastResetted = DateTime.Now,
+                //    IsBlocked = false,
+                //    InlogAttempts = 0,
+                //}
+            };
                 appRespository.Employee.Add(employee_MaggieDeBlock);
 
                 #endregion

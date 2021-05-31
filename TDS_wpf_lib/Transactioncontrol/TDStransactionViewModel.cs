@@ -10,10 +10,10 @@ namespace TDS_wpf_lib.Transactioncontrol
 //namespace KFSolutionsWPF.TDSnavigationViewModel
 {
     //public class TDSnavigationViewModel<Tview> : INotifyPropertyChanged where Tview : UserControl, new()
-    public class TDStransactionViewModel : INotifyPropertyChanged
+    public class TDStransactionViewModel //: INotifyPropertyChanged
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
+       //public event PropertyChangedEventHandler PropertyChanged;
 
         public UserControl _myView;
 
@@ -29,10 +29,10 @@ namespace TDS_wpf_lib.Transactioncontrol
 
         }
 
-        protected void OnPropertyChanged(string aPropertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(aPropertyName));
-        }
+        //protected void OnPropertyChanged(string aPropertyName = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(aPropertyName));
+        //}
 
     }
 }

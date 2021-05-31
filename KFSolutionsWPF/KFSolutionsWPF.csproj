@@ -76,21 +76,27 @@
     <Compile Include="Commands\NavigateMainMenuCommand.cs" />
     <Compile Include="Commands\NavigateReadUserCommand.cs" />
     <Compile Include="Commands\base\RelayCommand.cs" />
+    <Compile Include="Components\AppLayout1.xaml.cs">
+      <DependentUpon>AppLayout1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolRadioConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
     <Compile Include="UserControls\test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ClientAddNewViewModel.cs" />
     <Compile Include="ViewModels\EmployeeAddNewViewModel.cs" />
-    <Compile Include="ViewModels\EmployeeReadViewModel.cs" />
     <Compile Include="ViewModels\InloggenViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\ProductAddNewViewModel.cs" />
+    <Compile Include="ViewModels\QuatationsViewModel.cs" />
+    <Compile Include="ViewModels\SupplierAddNewViewModel.cs" />
     <Compile Include="ViewModels\_appViewModel.cs" />
+    <Compile Include="Views\ClientAddNewView.xaml.cs">
+      <DependentUpon>ClientAddNewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EmployeeAddNewView.xaml.cs">
       <DependentUpon>EmployeeAddNewView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EmployeeReadView.xaml.cs">
-      <DependentUpon>EmployeeReadView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InloggenView.xaml.cs">
       <DependentUpon>InloggenView.xaml</DependentUpon>
@@ -98,6 +104,19 @@
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductAddNewView.xaml.cs">
+      <DependentUpon>ProductAddNewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuatationsView.xaml.cs">
+      <DependentUpon>QuatationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SupplierAddNewView.xaml.cs">
+      <DependentUpon>SupplierAddNewView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Components\AppLayout1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,11 +133,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeeAddNewView.xaml">
+    <Page Include="Views\ClientAddNewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeeReadView.xaml">
+    <Page Include="Views\EmployeeAddNewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,6 +146,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductAddNewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuatationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplierAddNewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -25,7 +25,7 @@ namespace KFSolutionsModel
         public string Name { get; set; }
 
         //[Required(ErrorMessage = "Website can not empty")]
-        [Index(IsUnique = true)]
+        //[Index(IsUnique = true)]
         [MaxLength(150, ErrorMessage ="Length of Website is max 150 char")]
         public string Website { get; set; }
 
@@ -34,7 +34,7 @@ namespace KFSolutionsModel
         public string BtwNumber { get; set; }
 
         [MaxLength(80)]
-        [Required(ErrorMessage = "BTW can not empty")]
+        [Required(ErrorMessage = "email can not empty")]
         [Column(TypeName = "char")]
         public string Email { get; set; }
 

@@ -23,13 +23,13 @@ namespace KFSolutionsModel.NotMapped
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email can not empty")]
-        [Index(IsUnique = true)] //TODO email check
+        //[Index(IsUnique = true)] //TODO email check
         //[Unique(ErrorMessage = "This already exist !!")]
         [MaxLength(80)]
         public string Email { get; set; }
 
 
-        [Index(IsUnique = true)]
+        //[Index(IsUnique = true)]
         [MaxLength(20)]
         public string MobileNumber { get; set; }
 

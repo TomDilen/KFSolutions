@@ -13,7 +13,7 @@ using TDS_wpf_lib.Transactioncontrol;
 namespace KFSolutionsWPF.ViewModels
 {
     //public class _appViewModel<Tview> : TDSnavigationViewModel<Tview> where Tview : UserControl, new()
-    public class _appViewModel : TDStransactionViewModel
+    public abstract class _appViewModel : TDStransactionViewModel 
     {
 
         protected AppRepository<KfsContext> _appDbRespository;

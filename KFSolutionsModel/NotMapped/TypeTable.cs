@@ -12,12 +12,12 @@ namespace KFSolutionsModel.NotMapped
     {
         [Required(ErrorMessage = "Name of DescriptionNL can not empty")]
         [MaxLength(15)]
-        [Index(IsUnique = true)]
+        //[Index(IsUnique = true)]
         public string DescriptionNL  {get;set; }
 
         [Required(ErrorMessage = "Name of DescriptionEN can not empty")]
         [MaxLength(15)]
-        [Index(IsUnique = true)]
+        //[Index(IsUnique = true)]
         public string DescriptionEN { get; set; }
     }
 }

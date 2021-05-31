@@ -12,6 +12,11 @@ namespace KFSolutionsModel
     public class ProductQuotation : DBentity
     {
 
+        [Required]
+        [MinLength(5)]
+        [MaxLength(20)]
+        public string EAN_Product { get; set; }
+
         public float UnitPrice { get; set; }
 
 
@@ -31,9 +36,6 @@ namespace KFSolutionsModel
 
 
 
-
-
-
         public int Id_Supplier { get; set; }
         public virtual Supplier Supplier { get; set; }
 
@@ -44,8 +46,7 @@ namespace KFSolutionsModel
 
         //----------------------------deze relatie weggehaald-------
         ////[NotMapped]
-        [Required]
-        public string EAN_Product { get; set; }
+
 
         //[NotMapped]
         //public virtual Product Product { get; set; }

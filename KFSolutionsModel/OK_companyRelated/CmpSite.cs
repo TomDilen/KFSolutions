@@ -14,7 +14,7 @@ namespace KFSolutionsModel
 
 
         [Required]
-        public bool IsDefault { get; set; } = false;
+        public bool IsDefault { get; set; } = true;
 
 
 

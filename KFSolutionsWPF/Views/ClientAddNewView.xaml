@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="KFSolutionsWPF.Views.ClientAddNewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KFSolutionsWPF.Views" 
+             xmlns:components="clr-namespace:KFSolutionsWPF.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="950" d:DesignWidth="800">
+    <components:AppLayout1>
+        <ScrollViewer Style="{StaticResource CustomScrollViewer}"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <!--labels-->
+                    <ColumnDefinition Width="auto"/>
+                    <!--1-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--2-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--3-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--4-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--5-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--6-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--7-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--8-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--9-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--10-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--11-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--12-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--13-->
+                    <ColumnDefinition Width="1*"/>
+                    <!--14-->
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+
+                </Grid.RowDefinitions>
+
+
+                <!--====================== persoonlijke gegevens ==============================-->
+                <TextBlock Text="Persoonlijke gegevens" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+
+                <TextBlock Text="Voornaam, Achternaam" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <TextBox Text="{Binding NewClient.FirstName}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding NewClient.NameAddition}" Grid.Row="1" Grid.ColumnSpan="2"  Grid.Column="7" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding NewClient.LastName}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
+
+                <TextBlock Text="Email" Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <TextBox Text="{Binding NewClient.Email}" Grid.Row="2" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+
+                <TextBlock Text="Gsm, Telefoon" Grid.Row="3"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <TextBox Text="{Binding NewClient.MobileNumber}" Grid.Row="3" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding NewClient.PhoneNumber}" Grid.Row="3" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
+
+                <TextBlock Text="Geboortedatum" Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <DatePicker SelectedDate="{Binding NewClient.DateOfBirth}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource DateboxData}"></DatePicker>
+
+                <TextBlock Text="Geslacht" Grid.Row="5"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <!--<ComboBox Text="{Binding IsMale}" Grid.Row="5" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource comboData}"></ComboBox>-->
+                <RadioButton GroupName="sex" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" 
+                     Content="Man" Style="{StaticResource radiobtnData}"
+                    IsChecked="{Binding NewClient.IsMale, Converter={StaticResource BoolRadioConverter}}">
+                </RadioButton>
+                <RadioButton GroupName="sex" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="4" 
+                     Content="Vrouw" Style="{StaticResource radiobtnData}"
+                    IsChecked="{Binding NewClient.IsMale, Converter={StaticResource InverseBoolRadioConverter}}">
+                </RadioButton>
+
+
+                <!--====================== Adres gegevens ==============================-->
+
+                <TextBlock Text="Adres gegevens" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                <TextBlock Text="Straat, nummer, bus" Grid.Row="7"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].Street}" Grid.Row="7" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].HouseNumber}"  Grid.Row="7" Grid.ColumnSpan="4"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].HouseNumberAddition}" Grid.Row="7" Grid.ColumnSpan="2"  Grid.Column="13" Style="{StaticResource textboxData}"></TextBox>
+
+                <TextBlock Text="Postcode, gemeente,land" Grid.Row="8"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].Zipcode}" Grid.Row="8" Grid.ColumnSpan="4"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].City}" Grid.Row="8" Grid.ColumnSpan="5"  Grid.Column="5" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].Country}" Grid.Row="8" Grid.ColumnSpan="5"  Grid.Column="10" Style="{StaticResource textboxData}"></TextBox>
+
+                <!--====================== web credentials Informatie ==============================-->
+                <TextBlock Text="WebSite inloggegevens " Grid.Row="13"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                <TextBlock Text="Username, paswoord" Grid.Row="14"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                <TextBox Text="{Binding NewClient.CltWebCredentials.UserName}" Grid.Row="14" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox Text="{Binding NewClient.CltWebCredentials.Password}" Grid.Row="14" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
+
+
+                <!--====================== ADDbutton ==============================-->
+                <Button Command="{Binding Command_AddClient}" Grid.Row="19" Height="40"></Button>
+
+
+
+            </Grid>
+        </ScrollViewer>
+
+    </components:AppLayout1>
+
+</UserControl>

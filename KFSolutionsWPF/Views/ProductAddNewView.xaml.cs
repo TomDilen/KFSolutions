@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace KFSolutionsWPF.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeeReadView.xaml
+    /// Interaction logic for ProductAddNewView.xaml
     /// </summary>
-    public partial class EmployeeReadView : UserControl
+    public partial class ProductAddNewView : UserControl
     {
-        public EmployeeReadView()
+        public ProductAddNewView()
         {
             InitializeComponent();
         }

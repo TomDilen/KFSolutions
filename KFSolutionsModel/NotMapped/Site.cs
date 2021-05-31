@@ -12,14 +12,14 @@ namespace KFSolutionsModel.NotMapped
     {
 
 
-        [Required]
-        [MaxLength(20,ErrorMessage ="PhoneNumber")]
+        //[Required]
+        [MaxLength(20,ErrorMessage ="fax max 20")]
         [Column(TypeName = "char")]
         public string Fax { get; set; }
 
 
 
-        [Required]
+        [Required] 
         [MaxLength(20)]
         [Column(TypeName = "char")]
         public string PhoneNumber { get; set; }

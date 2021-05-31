@@ -24,7 +24,7 @@ namespace KFSolutionsModel
 
 
 
-        [Required(ErrorMessage = "Street can not empty")]
+        [Required(ErrorMessage = "product title can not empty")]
         [MaxLength(30)]
         public string ProductTitle { get; set; }
 

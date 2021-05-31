@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
 using KFSolutionsModel;
@@ -58,6 +59,23 @@ namespace KFSrepository_EF6
         //=====================================================================================
         public override Employee Add(Employee aEntity)
         {
+            EmpAppAccount gevonden = null;
+
+            if (aEntity.EmpAppAccount != null)
+            {
+                using (KfsContext ctx = new KfsContext(_constring))
+                {
+                    gevonden = ctx.Set<EmpAppAccount>()
+                        .FirstOrDefault(u => u.UserName == aEntity.EmpAppAccount.UserName);
+                }
+            }
+
+            if(gevonden != null)
+            {
+                throw new DuplicateNameException($"user with {aEntity.EmpAppAccount.UserName} already exist");
+            }
+
+
             if (aEntity.EmpAppAccount != null)
             {
                 //Console.WriteLine(aEntity.EmpAppAccount.Password + " " + aEntity.EmpAppAccount.UserName);

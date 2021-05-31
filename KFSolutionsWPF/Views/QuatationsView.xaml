@@ -1,0 +1,141 @@
+﻿<UserControl x:Class="KFSolutionsWPF.Views.QuatationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KFSolutionsWPF.Views" xmlns:components="clr-namespace:KFSolutionsWPF.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="800">
+    <components:AppLayout1>
+        <ScrollViewer Style="{StaticResource CustomScrollViewer}"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!--sjabloon-->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+
+                    <!--grid-->
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+
+                    <!--selected offerte-->
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+            
+                <!--======== new sjabloon creeeren ==========-->
+                <TextBlock Text="Maak nieuw sjabloon" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Leverancier:" Grid.Row="0"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                    <ComboBox ItemsSource="{Binding SuppliersAll}" 
+                      
+                            DisplayMemberPath="Name" 
+                            Grid.Column="1"
+                            Style="{StaticResource comboData}" MinWidth="200">
+                    </ComboBox>
+                    <Button Command="{Binding Command_MakeJson}" Content="Maak nieuw" Grid.Column="2" Padding="15,0" Margin="5"></Button>
+                </Grid>
+                <!--SelectedValuePath="Id"
+                SelectedValue="{Binding NewProduct.Id_ProductType}"-->
+            
+            
+            
+            
+            
+                <!--================ datagrid ===============-->
+                <TextBlock Text="Nieuwe offertes" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                <DataGrid MinHeight="500" Grid.Row="7" Margin="5" Background="#FF012E01" Opacity="0.9">
+            
+                </DataGrid>
+
+            
+            
+            
+            
+            
+            
+            
+                <!--================ selected offertes ===============-->
+
+                <Grid Grid.Row="15" >
+                    <Grid.ColumnDefinitions>
+                        <!--labels-->
+                        <ColumnDefinition Width="auto"/>
+                        <!--1-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--2-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--3-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--4-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--5-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--6-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--7-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--8-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--9-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--10-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--11-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--12-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--13-->
+                        <ColumnDefinition Width="1*"/>
+                        <!--14-->
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="geselecteerde offerte" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+                
+                    <TextBlock Text="Produktnaam, EAN" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                    <TextBox Text="{Binding x}" Grid.Row="1" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding x}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
+
+                    <TextBlock Text="Produktnaam, EAN" Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                    <TextBox Text="{Binding x}" Grid.Row="2" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding x}" Grid.Row="2" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
+
+                    <TextBlock Text="Produktnaam, EAN" Grid.Row="3"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                    <TextBox Text="{Binding x}" Grid.Row="3" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding x}" Grid.Row="3" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
+
+                </Grid>
+
+        
+
+
+
+
+            </Grid>
+        </ScrollViewer>
+
+    </components:AppLayout1>
+
+</UserControl>
