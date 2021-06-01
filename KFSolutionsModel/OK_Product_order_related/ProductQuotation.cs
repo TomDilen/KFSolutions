@@ -38,6 +38,10 @@ namespace KFSolutionsModel
         public string ExtraInfo { get; set; }
 
 
+        [JsonIgnore]
+        [NotMapped]
+        public string bestandsPath { get; set; }
+
         //--------------navigation propertys-----------//
 
 

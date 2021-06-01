@@ -31,7 +31,7 @@ namespace KFSolutionsWPF.ViewModels
         public List<Supplier> SuppliersAll { get; set; }
         public Supplier SelectedSuplier { get; set; }
 
-        public List<ProductQuotation> QuatationsAll { get; set; }
+        public ObservableCollection<ProductQuotation> QuatationsAll { get; set; }
         public ProductQuotation SelectedQutation { get; set; }
 
 
@@ -56,7 +56,7 @@ namespace KFSolutionsWPF.ViewModels
             watcher.EnableRaisingEvents = true;
 
 
-            Command_MakeJson = new RelayCommand(MakeJson,CanMakeJson);
+            Command_MakeJson = new RelayCommand(MakeJsonSjabloon,CanMakeJsonSjabloon);
             Command_NewProduct = new RelayCommand(AddNewProduct, CanAddNewProduct);
             Command_ConfirmQuatation = new RelayCommand(ConfirmQuatation, CanConfirmQuatation);
 
@@ -79,7 +79,52 @@ namespace KFSolutionsWPF.ViewModels
 
         private void ConfirmQuatation(object obj)
         {
-            Console.WriteLine("confirm");
+            //Console.WriteLine("confirm");
+            Supplier_Product_Price toAdd = new Supplier_Product_Price()
+            {
+                UnitPrice = SelectedQutation.UnitPrice,
+                Id_Supplier = SelectedQutation.Supplier.Id,
+                EAN_Product = SelectedQutation.EAN_Product
+            };
+            //Console.WriteLine(toAdd.Id_Supplier);
+            try
+            {
+                _appDbRespository.Supplier_Product_Price.Add(toAdd);
+                //MessageBox.Show("Produkt met succes toegevoegd");
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.InnerException);
+                return;
+            }
+
+            MoveJsonfileWithInloggedEmployeeId(PATH_ADDED);
+
+        }
+        private void MoveJsonfileWithInloggedEmployeeId(string aDirectory)
+        {
+            //verplaatsen van jsonfile
+            string json = JsonConvert.SerializeObject(SelectedQutation, Formatting.Indented);
+
+            string path = aDirectory + "/";
+            string bestandsnaam = string.Format("{0:yy-MM-dd_HH-mm-ss}", DateTime.Now) + "_" +
+                _appDbRespository.Employee.InloggedEmployee.Id.ToString("D4") + ".json";
+
+            try
+            {
+                File.WriteAllText(path + bestandsnaam, json);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("er is een fout opgetreden bij schrijven van het bestand\n" +
+                    "raadpleeg de leverancier als deze fout zich blijft voordoen\n\n" +
+                    ex.Message);
+                return;
+            }
+
+            //verwijderen van bestand
+            File.Delete(SelectedQutation.bestandsPath);
         }
 
         private bool CanAddNewProduct(object obj)
@@ -101,23 +146,20 @@ namespace KFSolutionsWPF.ViewModels
                 ProductTitle = SelectedQutation.ProductTitle,
 
             };
-            _transactionControl.SlideNewContent(new ProductAddNewViewModel(_appDbRespository, _transactionControl,toAdd),
+            _transactionControl.SlideNewContent(
+                new ProductAddNewViewModel(_appDbRespository, _transactionControl,ProductAddNewViewModel.ViewType.NewFromQuatations,toAdd),
                 TDStransactionControl.TransactionDirection.Left,500);
         }
-//"EAN_Product": null,
-//"UnitPrice": 0.0,
-//"ProductTitle": null,
-//"DateQuatation": "0001-01-01T00:00:00",
-//          "ExtraInfo": null,
 
 
-        private bool CanMakeJson(object obj)
+
+        private bool CanMakeJsonSjabloon(object obj)
         {
             if (SelectedSuplier == null) return false;
             return true;
         }
 
-        private void MakeJson(object obj)
+        private void MakeJsonSjabloon(object obj)
         {
             //Console.WriteLine(SelectedSuplier.Name);
 
@@ -158,7 +200,7 @@ namespace KFSolutionsWPF.ViewModels
         {
             List<string> EANs = new List<string>();
 
-            List<ProductQuotation> terug = new List<ProductQuotation>();
+            ObservableCollection<ProductQuotation> terug = new ObservableCollection<ProductQuotation>();
 
             foreach (string bestandsnaam in Directory.EnumerateFiles(Directory.GetCurrentDirectory() + "/" + PATH_PENDING, "*.json"))
             {
@@ -176,6 +218,7 @@ namespace KFSolutionsWPF.ViewModels
                 //Console.WriteLine(json);
 
                 discoveredJson.Supplier = SuppliersAll.FirstOrDefault(X => X.Id == idLeverancier);
+                discoveredJson.bestandsPath = bestandsnaam;
                 
                 terug.Add(discoveredJson);
                 EANs.Add(discoveredJson.EAN_Product);
@@ -197,6 +240,7 @@ namespace KFSolutionsWPF.ViewModels
         private void OnPendingFilesChanged(object sender, FileSystemEventArgs e)
         {
             Console.WriteLine("filesysteem veranderd");
+            LoadPendingJsonFiles();
         }
     }
 }

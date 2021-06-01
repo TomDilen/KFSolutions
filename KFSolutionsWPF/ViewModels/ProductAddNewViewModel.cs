@@ -16,6 +16,13 @@ namespace KFSolutionsWPF.ViewModels
 {
     class ProductAddNewViewModel : _appViewModel
     {
+        public enum ViewType
+        {
+            ReadOnly,
+            Edit, 
+            New,
+            NewFromQuatations
+        }
 
         //==============================================================================
         public ICommand Command_AddProduct { get; set; }
@@ -23,17 +30,22 @@ namespace KFSolutionsWPF.ViewModels
 
         public List<ProductType> ProductTypesAvailable { get; set; }
         public ObservableCollection<Single> BtwAvailable { get; set; } = new ObservableCollection<Single>() { 6, 12, 21 };
+
+        private ViewType _viewtype;
         //==============================================================================
 
 
         public ProductAddNewViewModel(
+            
             AppRepository<KfsContext> aAppDbRepository, 
             TDStransactionControl aTDStransactionControl,
+            ViewType aviewType,
             Product aInitProduct = null)
                 : base(aAppDbRepository, aTDStransactionControl)
         {
             _myView = new ProductAddNewView();
             _myView.DataContext = this;
+            _viewtype = aviewType;
 
 
             Command_AddProduct = new RelayCommand(SaveProduct);
@@ -41,14 +53,28 @@ namespace KFSolutionsWPF.ViewModels
             //needed for add
             ProductTypesAvailable = _appDbRespository.ProductType.GetAll().ToList();
 
-            if (aInitProduct == null)
+            NewProduct = new Product() { CountInStock = 0, BTWpercentage = 21, MinCountInStock = 10, MaxCountInStock = 100 };
+
+            switch (_viewtype)
             {
-                NewProduct = new Product() { CountInStock = 0, BTWpercentage = 21 , MinCountInStock = 10, MaxCountInStock=100 };
+                case ViewType.ReadOnly:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.Edit:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.New:
+                    break;
+                case ViewType.NewFromQuatations:
+                    if(aInitProduct==null) throw new NotImplementedException("ainitproduct mag niet null zijn");
+                    NewProduct = aInitProduct;
+                    break;
+                default:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
             }
-            else
-            {
-                NewProduct = aInitProduct;
-            }
+
+
 
         }
 
@@ -81,17 +107,60 @@ namespace KFSolutionsWPF.ViewModels
             ////TODO:
             //Console.WriteLine(NewProduct.Image);
 
-            try
-            {
-                _appDbRespository.Product.Add(NewProduct);
-                MessageBox.Show("Produkt met succes toegevoegd");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + ex.InnerException);
-            }
 
+            switch (_viewtype)
+            {
+                case ViewType.ReadOnly:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.Edit:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.New:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.NewFromQuatations:
+                    try
+                    {
+                        _appDbRespository.Product.Add(NewProduct);
+                        MessageBox.Show("Produkt met succes toegevoegd");
+                        NavigateBack();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message + ex.InnerException);
+                        return;
+                    }
+                    break;
+                default:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+            }
         }
+        public void NavigateBack()
+        {
+            switch (_viewtype)
+            {
+                case ViewType.ReadOnly:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.Edit:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.New:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+                case ViewType.NewFromQuatations:
+                    _transactionControl.SlideNewContent(new QuatationsViewModel(_appDbRespository, _transactionControl),
+                        TDStransactionControl.TransactionDirection.Right, 500);
+                    break;
+                default:
+                    throw new NotImplementedException("niet geimplementeerd");
+                    break;
+            }
+        }
+
+
     }
 }
 

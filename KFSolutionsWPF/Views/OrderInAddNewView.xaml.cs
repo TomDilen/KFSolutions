@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace KFSolutionsWPF.Views
 {
     /// <summary>
-    /// Interaction logic for QuatationsView.xaml
+    /// Interaction logic for OrderInAddNewView.xaml
     /// </summary>
-    public partial class QuatationsView : UserControl
+    public partial class OrderInAddNewView : UserControl
     {
-        public QuatationsView()
+        public OrderInAddNewView()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-         
         }
     }
 }

@@ -13,7 +13,7 @@ using TDS_wpf_extentions2.Transactioncontrol;
 namespace KFSolutionsWPF.ViewModels
 {
     //public class _appViewModel<Tview> : TDSnavigationViewModel<Tview> where Tview : UserControl, new()
-    public abstract class _appViewModel : TDStransactionViewModel 
+    public abstract class _appViewModel : TDStransactionViewModel , INotifyPropertyChanged
     {
 
         protected AppRepository<KfsContext> _appDbRespository;
@@ -26,8 +26,6 @@ namespace KFSolutionsWPF.ViewModels
             _appDbRespository = aAppDbRepository;
         }
 
-
-
-
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

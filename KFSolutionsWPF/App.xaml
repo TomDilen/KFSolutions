@@ -102,7 +102,7 @@
         <!--hoe gebruiken-->
         <!--Template="{StaticResource tplFlatButton}"-->
 
-        <ControlTemplate x:Key="tplFlatButton" TargetType="{x:Type Button}">
+        <!--<ControlTemplate x:Key="tplFlatButton" TargetType="{x:Type Button}">
             <Border Width="{TemplateBinding Width}"
             Height="{TemplateBinding Height}"
             Background="{TemplateBinding Background}"
@@ -122,10 +122,36 @@
             <Setter Property="BorderBrush" Value="{x:Null}" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Template" Value="{StaticResource tplFlatButton}" />
+        </Style>-->
+
+
+
+
+        <Style TargetType="Button" x:Key="MyButton2">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Background" Value="Green" />
+            <!--<Setter Property="Foreground" Value="MediumBlue" />-->
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" 
+                                          Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <!--<Setter Property="Foreground" Value="DeepPink"/>-->
+                </Trigger>
+            </Style.Triggers>
         </Style>
-
-
-
 
 
 

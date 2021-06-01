@@ -94,6 +94,16 @@ namespace KFSolutionsWPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //inloggen
+            EmployeeRepository.EmployeeLoggedInDTO IngelogdGebruiker = _appDbRespository.Employee.LogIn("Tom_0123", "Tom_0123");
+            if (_appDbRespository.Employee.InloggedEmployee == null)
+            {
+                MessageBox.Show("niet ingelogd tijdens test");
+            }
+            Console.WriteLine("ingelogd tijdens test: " + _appDbRespository.Employee.InloggedEmployee.FirstName);
+
+
+
 
             //_transactionControl.SlideNewContent(new InloggenViewModel(_appDbRespository, _transactionControl));
             //_transactionControl.SlideNewContent(new EmployeeAddNewViewModel(_appDbRespository, _transactionControl));

@@ -60,14 +60,15 @@
                 <TextBlock Text="Nieuwe offertes" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
                 <DataGrid MinHeight="150" IsReadOnly="True" Grid.Row="7" Margin="5" Background="#FF012E01" Opacity="0.9"
+                          SelectionMode="Single"
                             ItemsSource="{Binding QuatationsAll}"
                             SelectedItem="{Binding Path=SelectedQutation}"
-                            AutoGenerateColumns="false">
+                            AutoGenerateColumns="false" SelectionChanged="DataGrid_SelectionChanged">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="EAN" Binding="{Binding EAN_Product}" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Produkt" Binding="{Binding ProductTitle}" ></DataGridTextColumn>
                         <DataGridTextColumn Header="Prijs" Binding="{Binding UnitPrice}" ></DataGridTextColumn> 
-                        <DataGridTextColumn Header="Leverancier" Binding="{Binding Supplier.Name}" ></DataGridTextColumn> 
+                        <DataGridTextColumn Header="Leverancier" Width="*" Binding="{Binding Supplier.Name}" ></DataGridTextColumn> 
                     </DataGrid.Columns>
                    
             
@@ -147,24 +148,24 @@
                         </Grid.RowDefinitions>
 
 
-                        <Button Command="{Binding Command_NewProduct}" Height="60" Background="Green" Margin="5" Grid.Row="1">
+                        <Button Command="{Binding Command_NewProduct}" Height="60"  Margin="5" Grid.Row="1" Style="{StaticResource MyButton2}">
                             <Grid Margin="5 2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
                                     <!--<RowDefinition Height="auto" />-->
                                 </Grid.RowDefinitions>
-                                <tds_wpf_extentions2:TDSAutoDisableImage Height="50"  Source="/img/Untitled2.png" HorizontalAlignment="Center" />
+                                <tds_wpf_extentions2:TDSAutoDisableImage Height="50"  Source="/img/addNew_klein.png" HorizontalAlignment="Center" />
                                 <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
                             </Grid>
                         </Button>
 
-                        <Button Command="{Binding Command_ConfirmQuatation}" Height="60" Background="Red" Margin="5" Grid.Row="2">
+                        <Button Command="{Binding Command_ConfirmQuatation}" Height="60" Margin="5" Grid.Row="2"  Style="{StaticResource MyButton2}">
                             <Grid Margin="5 2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-                                <tds_wpf_extentions2:TDSAutoDisableImage Height="50" Source="/img/Untitled2.png"  HorizontalAlignment="Center" />
+                                <tds_wpf_extentions2:TDSAutoDisableImage Height="50" Source="/img/Save_klein.png"  HorizontalAlignment="Center" />
                                 <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
                             </Grid>
                         </Button>
