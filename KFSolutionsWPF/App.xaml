@@ -97,6 +97,40 @@
 
 
 
+        <!--https://stackoverflow.com/questions/3885007/wpf-image-command-binding-->
+
+        <!--hoe gebruiken-->
+        <!--Template="{StaticResource tplFlatButton}"-->
+
+        <ControlTemplate x:Key="tplFlatButton" TargetType="{x:Type Button}">
+            <Border Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                          TextElement.Foreground="{TemplateBinding Foreground}"
+                          TextElement.FontFamily="{TemplateBinding FontFamily}"
+                          TextElement.FontSize="{TemplateBinding FontSize}"
+                          TextElement.FontStretch="{TemplateBinding FontStretch}"
+                          TextElement.FontWeight="{TemplateBinding FontWeight}"/>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="stlFlatButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="{x:Null}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template" Value="{StaticResource tplFlatButton}" />
+        </Style>
+
+
+
+
+
+
+
+
 
 
 

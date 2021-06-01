@@ -22,7 +22,7 @@ namespace KFSolutionsWPF.ViewModels
 
         //==============================================================================
 
-        public ClientAddNewViewModel( AppRepository<KfsContext> aAppDbRepository, TDS_wpf_lib.Transactioncontrol.TDStransactionControl aTDStransactionControl)
+        public ClientAddNewViewModel( AppRepository<KfsContext> aAppDbRepository, TDS_wpf_extentions2.Transactioncontrol.TDStransactionControl aTDStransactionControl)
             : base(aAppDbRepository, aTDStransactionControl)
         {
             _myView = new ClientAddNewView();
@@ -38,27 +38,6 @@ namespace KFSolutionsWPF.ViewModels
 
         private void SaveClient(object obj)
         {
-            //Console.WriteLine(NewClient.FirstName);
-            //Console.WriteLine(NewClient.NameAddition);
-            //Console.WriteLine(NewClient.LastName);
-            //Console.WriteLine(NewClient.Email);
-            //Console.WriteLine(NewClient.MobileNumber);
-            //Console.WriteLine(NewClient.PhoneNumber);
-            //Console.WriteLine(NewClient.DateOfBirth);
-            //Console.WriteLine(NewClient.IsMale);
-
-
-            //Console.WriteLine(NewClient.CltAddresss.ToList()[0].Street);
-            //Console.WriteLine(NewClient.CltAddresss.ToList()[0].HouseNumber);
-            //Console.WriteLine(NewClient.CltAddresss.ToList()[0].HouseNumberAddition);
-            //Console.WriteLine(NewClient.CltAddresss.ToList()[0].Zipcode);
-            //Console.WriteLine(NewClient.CltAddresss.ToList()[0].City);
-            //Console.WriteLine(NewClient.CltAddresss.ToList()[0].Country);
-
-
-            //Console.WriteLine(NewClient.CltWebCredentials.UserName);
-            //Console.WriteLine(NewClient.CltWebCredentials.Password);
-
 
             try
             {
@@ -73,31 +52,77 @@ namespace KFSolutionsWPF.ViewModels
         }
     }
 }
-                                                    //    FirstName = "Tim",
-                                                    //    //NameAddition ,
 
-                                                    //    LastName = "Audenaarde",
-                                                    //    Email = "tim.audenaert@hotmail.be",
-                                                    //    MobileNumber = "0123456",
-                                                    //    PhoneNumber = "",
-                                                    //    DateOfBirth = new DateTime(1980, 04, 01),
-                                                    //    IsMale = true,
 
-                                                    //    IsActive = true,
 
-                                                    //    CltAddresss = new List<CltAddress>()
-                                                    //    {
-                                                    //        new CltAddress()
-                                                    //        {
-                                                    //            Street = "TimseSteenweg",
-                                                    //            HouseNumber = 33,
-                                                    //            HouseNumberAddition = "b3",
-                                                    //            Country = "Belgie",
-                                                    //            Zipcode = "1000",
-                                                    //            City = "Bornem"
-                                                    //        }
-                                                    //    },
-                                                    //};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Console.WriteLine(NewClient.FirstName);
+//Console.WriteLine(NewClient.NameAddition);
+//Console.WriteLine(NewClient.LastName);
+//Console.WriteLine(NewClient.Email);
+//Console.WriteLine(NewClient.MobileNumber);
+//Console.WriteLine(NewClient.PhoneNumber);
+//Console.WriteLine(NewClient.DateOfBirth);
+//Console.WriteLine(NewClient.IsMale);
+
+
+//Console.WriteLine(NewClient.CltAddresss.ToList()[0].Street);
+//Console.WriteLine(NewClient.CltAddresss.ToList()[0].HouseNumber);
+//Console.WriteLine(NewClient.CltAddresss.ToList()[0].HouseNumberAddition);
+//Console.WriteLine(NewClient.CltAddresss.ToList()[0].Zipcode);
+//Console.WriteLine(NewClient.CltAddresss.ToList()[0].City);
+//Console.WriteLine(NewClient.CltAddresss.ToList()[0].Country);
+
+
+//Console.WriteLine(NewClient.CltWebCredentials.UserName);
+//Console.WriteLine(NewClient.CltWebCredentials.Password);
+
+
+
+
+//    FirstName = "Tim",
+//    //NameAddition ,
+
+//    LastName = "Audenaarde",
+//    Email = "tim.audenaert@hotmail.be",
+//    MobileNumber = "0123456",
+//    PhoneNumber = "",
+//    DateOfBirth = new DateTime(1980, 04, 01),
+//    IsMale = true,
+
+//    IsActive = true,
+
+//    CltAddresss = new List<CltAddress>()
+//    {
+//        new CltAddress()
+//        {
+//            Street = "TimseSteenweg",
+//            HouseNumber = 33,
+//            HouseNumberAddition = "b3",
+//            Country = "Belgie",
+//            Zipcode = "1000",
+//            City = "Bornem"
+//        }
+//    },
+//};
 
 //    CltWebCredentials = new CltWebCredentials()
 //    {

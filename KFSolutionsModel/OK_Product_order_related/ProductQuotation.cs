@@ -1,4 +1,5 @@
 ﻿using KFSolutionsModel.NotMapped;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,15 +20,20 @@ namespace KFSolutionsModel
 
         public float UnitPrice { get; set; }
 
+        [Required(ErrorMessage = "ProductTitle can not empty")]
+        [MinLength(4, ErrorMessage = "ProductTitle moet minstens 5 tekens bevatten")]
+        [MaxLength(20,  ErrorMessage = "ProductTitle mag maximum 20 tekens bevatten")]
+        public string  ProductTitle { get; set; }
 
+     
         [Required(ErrorMessage = "DateQuatation can not empty")]
         public DateTime DateQuatation { get; set; }
 
 
-
+        [JsonIgnore]
         public DateTime? DateRegistered { get; set; }
 
-
+     
         [MaxLength(255, ErrorMessage = "max length of ExtraInfo is 255")]
         public string ExtraInfo { get; set; }
 
@@ -35,21 +41,15 @@ namespace KFSolutionsModel
         //--------------navigation propertys-----------//
 
 
-
+        [JsonIgnore]
         public int Id_Supplier { get; set; }
+        [JsonIgnore]
         public virtual Supplier Supplier { get; set; }
 
-
+        [JsonIgnore]
         public int? Id_EmployeeRegistered { get; set; }
+        [JsonIgnore]
         public virtual Employee EmployeeRegistered { get; set; }
-
-
-        //----------------------------deze relatie weggehaald-------
-        ////[NotMapped]
-
-
-        //[NotMapped]
-        //public virtual Product Product { get; set; }
 
     }
 }

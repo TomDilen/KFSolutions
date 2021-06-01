@@ -19,7 +19,7 @@ namespace KFSolutionsWPF.ViewModels
 
         //==============================================================================
 
-        public MainMenuViewModel(AppRepository<KfsContext> aAppDbRepository, TDS_wpf_lib.Transactioncontrol.TDStransactionControl aTDStransactionControl) 
+        public MainMenuViewModel(AppRepository<KfsContext> aAppDbRepository, TDS_wpf_extentions2.Transactioncontrol.TDStransactionControl aTDStransactionControl) 
             : base(aAppDbRepository, aTDStransactionControl)
         {
             _myView = new MainMenuView();

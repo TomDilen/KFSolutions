@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TDS_wpf_lib.Transactioncontrol;
+using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.Commands
 {

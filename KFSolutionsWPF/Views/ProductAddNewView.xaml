@@ -100,7 +100,7 @@
 
                 <TextBlock Text="Locatie, In stock" Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
                 <TextBox Text="{Binding NewProduct.WareHouseLocation}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                <TextBox Text="{Binding NewProduct.CountInStock}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
+                <TextBox IsReadOnly="true" Text="{Binding NewProduct.CountInStock}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
 
                 <TextBlock Text="Stock min, Stock max" Grid.Row="5"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
                 <TextBox Text="{Binding NewProduct.MinCountInStock}" Grid.Row="5" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>

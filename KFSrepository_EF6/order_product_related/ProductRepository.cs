@@ -12,7 +12,7 @@ namespace KFSrepository_EF6
 
     public interface IProductRepository : ITDSrepository<Product>
     {
-
+        List<string> GetExistingEANsFromEanList(List<string> aListEANs);
     }
 
     public class ProductRepository : TDSrepository<Product>, IProductRepository
@@ -21,19 +21,39 @@ namespace KFSrepository_EF6
         {
 
         }
-        private List<Product> _memoryList;
-        public override IEnumerable<Product> GetAll()
+
+        public List<string> GetExistingEANsFromEanList(List<string> aListEANs)
         {
-
-            if (_memoryList == null)
+            List<string> terug = new List<string>();
+            using (KfsContext ctx = new KfsContext(_constring))
             {
-                _memoryList = base.GetAll().ToList();
+                foreach (var item in aListEANs)
+                {
+                    var gevonden = ctx.Set<Product>()
+                        .Select(p => p.EAN)
+                        .FirstOrDefault(pean => pean == item);
+
+                    if (!string.IsNullOrEmpty(gevonden)) terug.Add(gevonden);
+                }
             }
-
-            return _memoryList;
-
-            //return base.GetAll();
+            return terug;
         }
+
+
+
+        //private List<Product> _memoryList;
+        //public override IEnumerable<Product> GetAll()
+        //{
+
+        //    if (_memoryList == null)
+        //    {
+        //        _memoryList = base.GetAll().ToList();
+        //    }
+
+        //    return _memoryList;
+
+        //    //return base.GetAll();
+        //}
     }
 
 }

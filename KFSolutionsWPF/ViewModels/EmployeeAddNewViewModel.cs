@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TDS_wpf_lib.Transactioncontrol;
+using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.ViewModels
 {

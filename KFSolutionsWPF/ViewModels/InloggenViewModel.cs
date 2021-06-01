@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using TDS_wpf_lib.Transactioncontrol;
+using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.ViewModels
 {
@@ -30,7 +30,7 @@ namespace KFSolutionsWPF.ViewModels
         //==============================================================================
 
         public InloggenViewModel(
-            AppRepository<KfsContext> aAppDbRepository, TDS_wpf_lib.Transactioncontrol.TDStransactionControl aTDStransactionControl)
+            AppRepository<KfsContext> aAppDbRepository, TDS_wpf_extentions2.Transactioncontrol.TDStransactionControl aTDStransactionControl)
             : base(aAppDbRepository, aTDStransactionControl)
         {
             _myView = new InloggenView();

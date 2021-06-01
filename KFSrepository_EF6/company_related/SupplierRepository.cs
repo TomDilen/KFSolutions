@@ -21,19 +21,19 @@ namespace KFSrepository_EF6
         {
 
         }
-        private List<Supplier> _memoryList;
-        public override IEnumerable<Supplier> GetAll()
-        {
+        //private List<Supplier> _memoryList;
+        //public override IEnumerable<Supplier> GetAll()
+        //{
 
-            if (_memoryList == null)
-            {
-                _memoryList = base.GetAll().ToList();
-            }
+        //    if (_memoryList == null)
+        //    {
+        //        _memoryList = base.GetAll().ToList();
+        //    }
 
-            return _memoryList;
+        //    return _memoryList;
 
-            //return base.GetAll();
-        }
+        //    //return base.GetAll();
+        //}
     }
 
 }

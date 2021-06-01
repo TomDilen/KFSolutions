@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.ViewModels
 {
@@ -26,7 +27,9 @@ namespace KFSolutionsWPF.ViewModels
 
 
         public ProductAddNewViewModel(
-            AppRepository<KfsContext> aAppDbRepository, TDS_wpf_lib.Transactioncontrol.TDStransactionControl aTDStransactionControl)
+            AppRepository<KfsContext> aAppDbRepository, 
+            TDStransactionControl aTDStransactionControl,
+            Product aInitProduct = null)
                 : base(aAppDbRepository, aTDStransactionControl)
         {
             _myView = new ProductAddNewView();
@@ -37,13 +40,29 @@ namespace KFSolutionsWPF.ViewModels
 
             //needed for add
             ProductTypesAvailable = _appDbRespository.ProductType.GetAll().ToList();
-            
-            NewProduct = new Product(){ CountInStock=0,BTWpercentage =21 };
+
+            if (aInitProduct == null)
+            {
+                NewProduct = new Product() { CountInStock = 0, BTWpercentage = 21 , MinCountInStock = 10, MaxCountInStock=100 };
+            }
+            else
+            {
+                NewProduct = aInitProduct;
+            }
 
         }
 
         private void SaveProduct(object obj)
         {
+            if (NewProduct.MaxCountInStock < NewProduct.MinCountInStock)
+            {
+                MessageBox.Show("max in stock kan niet kleiner zijn dan min in stock");
+            }
+            if (NewProduct.MinCountInStock < 0)
+            {
+                MessageBox.Show("min in stock kan niet kleiner zijn 0");
+            }
+
             Console.WriteLine(NewProduct.ProductTitle);
 
             Console.WriteLine(NewProduct.EAN);

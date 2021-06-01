@@ -17,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TDS_wpf_lib.Transactioncontrol;
+using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF
 {
@@ -26,7 +26,7 @@ namespace KFSolutionsWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private TDS_wpf_lib.Transactioncontrol.TDStransactionControl _transactionControl;
+        private TDS_wpf_extentions2.Transactioncontrol.TDStransactionControl _transactionControl;
 
         private AppRepository<KfsContext> _appDbRespository;
 
@@ -873,7 +873,8 @@ namespace KFSolutionsWPF
             #region------------------------------------------- Add Quatations-------------------------------
             ProductQuotation quotation1 = new ProductQuotation()
             {
-                UnitPrice = 10.20f,
+                ProductTitle = "Fanta blikjes 33cl",
+                UnitPrice = 0.45f,
                 DateQuatation = DateTime.Now,
                 ExtraInfo = "goei materiaal",
                 EAN_Product = "8888888",
