@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KFSolutionsModel;
-
+using static KFSrepository_EF6.ProductRepository;
 
 namespace KFSrepository_EF6
 {
@@ -12,6 +13,7 @@ namespace KFSrepository_EF6
 
     public interface IProductRepository : ITDSrepository<Product>
     {
+        ProductsForStockManagementPackageDTO GetAllForStockManagement();
         List<string> GetExistingEANsFromEanList(List<string> aListEANs);
     }
 
@@ -38,22 +40,124 @@ namespace KFSrepository_EF6
             }
             return terug;
         }
+        public ProductsForStockManagementPackageDTO GetAllForStockManagement()
+        {
+            ProductsForStockManagementPackageDTO terug = new ProductsForStockManagementPackageDTO();
+
+            List<ProductForStockDTO> opgehaald;
+            List<SupplierMinDTO> opgehaaldSupplierMin;
+
+            List<int> tmp = new List<int>();
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                //ophalen van data 
+                //gegroepeerd per EAN en employeeId en hieruit enkel het laatste id nemen, datum ontbrak :-(
+                opgehaald = ctx.Products.Join(ctx.Supplier_Product_Prices,
+                     p => p.EAN,
+                     spp => spp.EAN_Product,
+                     (p, ssp) => new ProductForStockDTO()
+                     {
+                         EAN = p.EAN,
+                         ProductTittle = p.ProductTitle,
+                         CountInStock = p.CountInStock,
+                         MinCountInStock = p.MinCountInStock,
+                         MaxCountInStock = p.MaxCountInStock,
+                         WareHouseLocation = p.WareHouseLocation,
+                         UnitPrice = ssp.UnitPrice,
+                         ID_Supplier = ssp.Id_Supplier,
+                         OploopNummer = ssp.Id,
+                     })
+                    .GroupBy(x => new { x.ID_Supplier, x.EAN }).Select(g => g.OrderByDescending(y => y.OploopNummer).FirstOrDefault())
+                    //.OrderByDescending(x => x).Take(100)
+                    .ToList();
+
+                //id's van de suppliers die betrekking hebben op de gevonden lijst distincten
+                tmp = opgehaald.Select(x => x.ID_Supplier).Distinct().ToList();
+
+
+                opgehaaldSupplierMin = ctx.Suppliers
+                               .Where(t => tmp.Contains(t.Id))
+                                .Select(s => new SupplierMinDTO()
+                                {
+                                    Name = s.Name,
+                                    Id = s.Id
+                                })
+                               .ToList();
+            }
+
+
+            //Console.WriteLine("===================================================");
+
+            //foreach (var item in opgehaaldSupplierMin)
+            //{
+            //    //Console.WriteLine(item.EAN +"," + item.ID_Supplier + "," + item.UnitPrice);
+            //    //Console.WriteLine(item);
+            //    Console.WriteLine(item.Id + ":" + item.Name);
+            //}
+
+            //Console.WriteLine("===================================================");
+
+            terug.OpsCollProductForStockDTO = opgehaald;
+            terug.OpsCollSupplierMinkDTO = opgehaaldSupplierMin;
+
+            return terug;
+        }
 
 
 
-        //private List<Product> _memoryList;
-        //public override IEnumerable<Product> GetAll()
-        //{
 
-        //    if (_memoryList == null)
-        //    {
-        //        _memoryList = base.GetAll().ToList();
-        //    }
 
-        //    return _memoryList;
 
-        //    //return base.GetAll();
-        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public class ProductsForStockManagementPackageDTO : BaseDTO
+        {
+            public List<ProductForStockDTO> OpsCollProductForStockDTO { get; set; } = new List<ProductForStockDTO>();
+            public List<SupplierMinDTO> OpsCollSupplierMinkDTO { get; set; } = new List<SupplierMinDTO>();
+
+        }
+        public class ProductForStockDTO : BaseDTO
+        {
+            public int OploopNummer { get; set; }//om de laatste er uit te krijgen
+            public string EAN { get; set; }
+            public string ProductTittle { get; set; }
+            public float CountInStock { get; set; }
+            public float MinCountInStock { get; set; }
+            public float MaxCountInStock { get; set; }
+            public string WareHouseLocation { get; set; }
+
+
+            public int ID_Supplier { get; set; }
+            public float UnitPrice { get; set; }
+        }
+        public class SupplierMinDTO : BaseDTO
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
     }
 
 }

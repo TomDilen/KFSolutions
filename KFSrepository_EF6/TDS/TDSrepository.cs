@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace KFSrepository_EF6
 {
+
     public class TDSrepository<TDSentity> : ITDSrepository<TDSentity>
         //where TDSxxx : DbContext
         where TDSentity : class 
@@ -124,6 +126,7 @@ namespace KFSrepository_EF6
         //==================================================================================
 
 
+       
 
 
         protected static void DisplayTrackedEntities(DbChangeTracker changeTracker)
@@ -139,5 +142,9 @@ namespace KFSrepository_EF6
             Console.WriteLine("");
             Console.WriteLine("---------------------------------------");
         }
+    }
+    public class BaseDTO : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

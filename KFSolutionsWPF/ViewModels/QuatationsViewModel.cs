@@ -35,11 +35,16 @@ namespace KFSolutionsWPF.ViewModels
         public ProductQuotation SelectedQutation { get; set; }
 
 
+        public ICommand Command_NavigatBack { get; set; }
+        public ICommand Command_ToMainMenu { get; set; }
+
+
         public ICommand Command_MakeJson { get; set; }
-
         public ICommand Command_NewProduct { get; set; }
-
         public ICommand Command_ConfirmQuatation { get; set; }
+
+        //public ICommand Command_test { get; set; }
+        //public string TestString { get; set; } = "kalf";
 
         private List<string> ExistingEANsInDB; 
 
@@ -49,6 +54,12 @@ namespace KFSolutionsWPF.ViewModels
         {
             _myView = new QuatationsView();
             _myView.DataContext = this;
+
+            //(_myView as QuatationsView).haha.DataContext = this;
+
+            Command_NavigatBack = new RelayCommand(NavigateBack);
+            Command_ToMainMenu = new RelayCommand(NavigateToMainMenu);
+
 
             watcher.Path = PATH_PENDING;
             watcher.Created += new FileSystemEventHandler(OnPendingFilesChanged);
@@ -60,12 +71,27 @@ namespace KFSolutionsWPF.ViewModels
             Command_NewProduct = new RelayCommand(AddNewProduct, CanAddNewProduct);
             Command_ConfirmQuatation = new RelayCommand(ConfirmQuatation, CanConfirmQuatation);
 
-            SuppliersAll = aAppDbRepository.Supplier.GetAll().ToList();
+            //SuppliersAll = aAppDbRepository.Supplier.GetAll().ToList();
 
-            
+            //TestString = "joske";
+            //Command_test = new RelayCommand(testcoommand);
 
             LoadPendingJsonFiles();
 
+        }
+
+        private void NavigateToMainMenu(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
+        }
+
+        private void NavigateBack(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
         }
 
         private bool CanConfirmQuatation(object obj)

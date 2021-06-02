@@ -110,7 +110,10 @@ namespace KFSolutionsWPF
             //_transactionControl.SlideNewContent(new SupplierAddNewViewModel(_appDbRespository, _transactionControl));
             //_transactionControl.SlideNewContent(new ClientAddNewViewModel(_appDbRespository, _transactionControl));
             //_transactionControl.SlideNewContent(new ProductAddNewViewModel(_appDbRespository, _transactionControl));
-            _transactionControl.SlideNewContent(new QuatationsViewModel(_appDbRespository, _transactionControl));
+            //_transactionControl.SlideNewContent(new QuatationsViewModel(_appDbRespository, _transactionControl));
+
+            _transactionControl.SlideNewContent(new StockManagementViewModel(_appDbRespository, _transactionControl));
+
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

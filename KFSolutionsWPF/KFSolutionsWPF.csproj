@@ -86,6 +86,9 @@
     <Compile Include="Components\AppLayout1.xaml.cs">
       <DependentUpon>AppLayout1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\NavBar.xaml.cs">
+      <DependentUpon>NavBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolRadioConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
     <Compile Include="UserControls\test.xaml.cs">
@@ -99,6 +102,7 @@
     <Compile Include="ViewModels\OrderOutAddNewViewModel.cs" />
     <Compile Include="ViewModels\ProductAddNewViewModel.cs" />
     <Compile Include="ViewModels\QuatationsViewModel.cs" />
+    <Compile Include="ViewModels\StockManagementViewModel.cs" />
     <Compile Include="ViewModels\SupplierAddNewViewModel.cs" />
     <Compile Include="ViewModels\_appViewModel.cs" />
     <Compile Include="Views\ClientAddNewView.xaml.cs">
@@ -125,10 +129,17 @@
     <Compile Include="Views\QuatationsView.xaml.cs">
       <DependentUpon>QuatationsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StockManagementView.xaml.cs">
+      <DependentUpon>StockManagementView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SupplierAddNewView.xaml.cs">
       <DependentUpon>SupplierAddNewView.xaml</DependentUpon>
     </Compile>
     <Page Include="Components\AppLayout1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\NavBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QuatationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StockManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

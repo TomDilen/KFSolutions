@@ -28,10 +28,22 @@ namespace KFSolutionsWPF.Components
         public static readonly DependencyProperty HeaderProperty =
             DependencyProperty.Register("Header", typeof(string), typeof(AppLayout1), new PropertyMetadata(string.Empty));
 
+
+
         public string Header
         {
             get { return (string)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
+
+
+        
+        //public static DependencyProperty InnerContentProperty = 
+        //    DependencyProperty.Register("InnerContent", typeof(UIElement), typeof(AppLayout1));
+        //public UIElement InnerContent
+        //{
+        //    get { return (UIElement)GetValue(InnerContentProperty); }
+        //    set { SetValue(InnerContentProperty, value); }
+        //}
     }
 }

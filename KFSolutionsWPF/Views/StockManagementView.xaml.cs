@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace KFSolutionsWPF.Views
 {
     /// <summary>
-    /// Interaction logic for QuatationsView.xaml
+    /// Interaction logic for StockManagementView.xaml
     /// </summary>
-    public partial class QuatationsView : UserControl
+    public partial class StockManagementView : UserControl
     {
-        public QuatationsView()
+        public StockManagementView()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-         
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Console.WriteLine("geklikt");
         }
     }
 }

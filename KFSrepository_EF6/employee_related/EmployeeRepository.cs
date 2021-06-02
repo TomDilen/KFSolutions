@@ -142,10 +142,10 @@ namespace KFSrepository_EF6
                     }
                 }
 
-                foreach (var item in tmptest)
-                {
-                    Console.WriteLine(item);
-                }
+                //foreach (var item in tmptest)
+                //{
+                //    //Console.WriteLine(item);
+                //}
 
                 //bool IsBitSet(byte b, int pos)
                 //{

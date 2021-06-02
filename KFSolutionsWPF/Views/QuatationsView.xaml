@@ -4,184 +4,226 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KFSolutionsWPF.Views" 
-             xmlns:components="clr-namespace:KFSolutionsWPF.Components" xmlns:local1="clr-namespace:KFSolutionsWPF" xmlns:tds_wpf_extentions2="clr-namespace:TDS_wpf_extentions2;assembly=TDS_wpf_extentions2"
+             xmlns:local2="clr-namespace:KFSolutionsWPF.ViewModels" 
+             xmlns:components="clr-namespace:KFSolutionsWPF.Components" xmlns:local1="clr-namespace:KFSolutionsWPF" 
+             xmlns:tds_wpf_extentions2="clr-namespace:TDS_wpf_extentions2;assembly=TDS_wpf_extentions2"
              mc:Ignorable="d" 
+             
              d:DesignHeight="900" d:DesignWidth="800">
-    <components:AppLayout1>
-        <ScrollViewer Style="{StaticResource CustomScrollViewer}"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <!--sjabloon-->
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
 
-                    <!--grid-->
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="auto"></RowDefinition>
 
-                    <!--selected offerte-->
-                    <RowDefinition Height="auto"></RowDefinition>
-                </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            
-                <!--======== new sjabloon creeeren ==========-->
-                <TextBlock Text="Maak nieuw sjabloon" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+        <components:NavBar Grid.Row="0">
+            <components:NavBar.InnerContent>
+                <StackPanel Orientation="Horizontal"  Margin="5" Height="auto">
+                    <Button Command="{Binding Command_NavigatBack}" Content="Back" Height="50" Width="50"/>
+                    <Button Command="{Binding Command_ToMainMenu}" Content="Main" Height="50" Width="50"/>
+                    <Button Command="{Binding Command_ConfirmQuatation}" Content="Confirm" Height="50" Width="50"/>
+                    <Button Command="{Binding Command_NewProduct}" Content="new product" Height="50" Width="50"/>
+                </StackPanel>
+            </components:NavBar.InnerContent>
+        </components:NavBar>
 
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Text="Leverancier:" Grid.Row="0"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                    <ComboBox ItemsSource="{Binding SuppliersAll}" 
-                            SelectedValue="{Binding Path=SelectedSuplier}"
-                            DisplayMemberPath="Name" 
-                            Grid.Column="1"
-                            Style="{StaticResource comboData}" MinWidth="200">
-                    </ComboBox>
-                    <Button Command="{Binding Command_MakeJson}" Content="Maak nieuw" Grid.Column="2" Padding="15,0" Margin="5"></Button>
-                </Grid>
-                <!--SelectedValuePath="Id"
-                SelectedValue="{Binding NewProduct.Id_ProductType}"-->
-            
-            
-            
-            
-            
-                <!--================ datagrid ===============-->
-                <TextBlock Text="Nieuwe offertes" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
-                <DataGrid MinHeight="150" IsReadOnly="True" Grid.Row="7" Margin="5" Background="#FF012E01" Opacity="0.9"
-                          SelectionMode="Single"
-                            ItemsSource="{Binding QuatationsAll}"
-                            SelectedItem="{Binding Path=SelectedQutation}"
-                            AutoGenerateColumns="false" SelectionChanged="DataGrid_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="EAN" Binding="{Binding EAN_Product}" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Produkt" Binding="{Binding ProductTitle}" ></DataGridTextColumn>
-                        <DataGridTextColumn Header="Prijs" Binding="{Binding UnitPrice}" ></DataGridTextColumn> 
-                        <DataGridTextColumn Header="Leverancier" Width="*" Binding="{Binding Supplier.Name}" ></DataGridTextColumn> 
-                    </DataGrid.Columns>
-                   
-            
-                </DataGrid>
 
-            
-            
-            
-            
-            
-            
-            
-                <!--================ selected offertes ===============-->
+        <components:AppLayout1 Grid.Row="1" MaxWidth="1300">
 
-                <Grid Grid.Row="15" >
-                    <Grid.ColumnDefinitions>
-                        <!--labels-->
-                        <ColumnDefinition Width="auto"/>
-                        <!--1-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--2-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--3-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--4-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--5-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--6-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--7-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--8-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--9-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--10-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--11-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--12-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--13-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--14-->
-                        <ColumnDefinition Width="1*"/>
-                        <!--rechterknoppen-->
-                        <ColumnDefinition Width="100"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+
+            <!--<components:AppLayout1.InnerContent >
+                <StackPanel Orientation="Horizontal" Margin="0,0" >
+                    <Button  Command="{Binding Path=Command_test, Mode=TwoWay}" 
+                         
+                             Content="{Binding Path=TestString, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=FindAncestor,
+                                                             AncestorType=UserControl, AncestorLevel=3}}"
+                        Height="50" Width="50"/>
+                    <Button Content="Click" Height="50" Width="50"/>
+                    <Button Content="Click" Height="50" Width="50"/>
+                    <Button Content="Click" Height="50" Width="50" Tag="MyButton1"  Click="Button_Click" />
+                </StackPanel>
+            </components:AppLayout1.InnerContent>-->
+            <!--Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Border}, AncestorLevel=2},Path=Name}" Width="200"/>-->
+
+            <ScrollViewer Style="{StaticResource CustomScrollViewer}"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <!--sjabloon-->
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+
+                        <!--grid-->
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+
+                        <!--selected offerte-->
+                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="geselecteerde offerte" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="16" Style="{StaticResource labelHoofdings}"  ></TextBlock>
-                
-                    <TextBlock Text="Produktnaam, EAN" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                    <TextBox IsEnabled="False" Text="{Binding SelectedQutation.ProductTitle}" Grid.Row="1" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                    <TextBox IsEnabled="False" Text="{Binding SelectedQutation.EAN_Product}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
 
-                    <TextBlock Text="Prijs, Leverancier" Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                    <TextBox IsEnabled="False" Text="{Binding SelectedQutation.UnitPrice}" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                    <TextBox IsEnabled="False" Text="{Binding SelectedQutation.Supplier.Name}" Grid.Row="2" Grid.ColumnSpan="10"  Grid.Column="5" Style="{StaticResource textboxData}"></TextBox>
+                    <!--======== new sjabloon creeeren ==========-->
+                    <TextBlock Text="Maak nieuw sjabloon" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
-                    <TextBlock Text="Extra info:" Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                    <TextBox IsEnabled="False" Text="{Binding SelectedQutation.ExtraInfo}" Grid.Row="4" Grid.ColumnSpan="14"  Grid.Column="1"  
-                            Style="{StaticResource infoTextboxData}"></TextBox>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Leverancier:" Grid.Row="0"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                        <ComboBox ItemsSource="{Binding SuppliersAll}" 
+                                    SelectedValue="{Binding Path=SelectedSuplier}"
+                                    DisplayMemberPath="Name" 
+                                    Grid.Column="1"
+                                    Style="{StaticResource comboData}" MinWidth="200">
+                        </ComboBox>
+                        <Button Command="{Binding Command_MakeJson}" Content="Maak nieuw" Grid.Column="2" Padding="15,0" Margin="5"></Button>
+                    </Grid>
+                    <!--SelectedValuePath="Id"
+                        SelectedValue="{Binding NewProduct.Id_ProductType}"-->
 
-                    <Grid Grid.Row="1" Grid.Column="15" Grid.RowSpan="10">
+
+
+
+
+                    <!--================ datagrid ===============-->
+                    <TextBlock Text="Nieuwe offertes" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                    <DataGrid MinHeight="130"  Grid.Row="7" Margin="5" Background="#FF012E01" Opacity="0.9"
+                              AutoGenerateColumns="false"
+                                IsReadOnly="True"  SelectionMode="Single"
+                                    ItemsSource="{Binding QuatationsAll}"
+                                    SelectedItem="{Binding Path=SelectedQutation}"
+                                    >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="EAN" Binding="{Binding EAN_Product}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Produkt" Binding="{Binding ProductTitle}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Prijs" Binding="{Binding UnitPrice}" ></DataGridTextColumn>
+                            <DataGridTextColumn Header="Leverancier"  Binding="{Binding Supplier.Name}" Width="200"></DataGridTextColumn>
+                        </DataGrid.Columns>
+
+
+                    </DataGrid>
+
+
+
+
+
+
+
+                    <!--================ selected offertes ===============-->
+
+                    <Grid Grid.Row="15" >
+                        <Grid.ColumnDefinitions>
+                            <!--labels-->
+                            <ColumnDefinition Width="auto"/>
+                            <!--1-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--2-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--3-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--4-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--5-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--6-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--7-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--8-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--9-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--10-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--11-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--12-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--13-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--14-->
+                            <ColumnDefinition Width="1*"/>
+                            <!--rechterknoppen-->
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
+                        <TextBlock Text="geselecteerde offerte" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="16" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
-                        <Button Command="{Binding Command_NewProduct}" Height="60"  Margin="5" Grid.Row="1" Style="{StaticResource MyButton2}">
-                            <Grid Margin="5 2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <!--<RowDefinition Height="auto" />-->
-                                </Grid.RowDefinitions>
-                                <tds_wpf_extentions2:TDSAutoDisableImage Height="50"  Source="/img/addNew_klein.png" HorizontalAlignment="Center" />
-                                <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
-                            </Grid>
-                        </Button>
+                        <TextBlock Text="Produktnaam, EAN" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                        <TextBox IsEnabled="False" Text="{Binding SelectedQutation.ProductTitle}" Grid.Row="1" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                        <TextBox IsEnabled="False" Text="{Binding SelectedQutation.EAN_Product}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
 
-                        <Button Command="{Binding Command_ConfirmQuatation}" Height="60" Margin="5" Grid.Row="2"  Style="{StaticResource MyButton2}">
-                            <Grid Margin="5 2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
-                                <tds_wpf_extentions2:TDSAutoDisableImage Height="50" Source="/img/Save_klein.png"  HorizontalAlignment="Center" />
-                                <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
-                            </Grid>
-                        </Button>
+                        <TextBlock Text="Prijs, Leverancier" Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                        <TextBox IsEnabled="False" Text="{Binding SelectedQutation.UnitPrice}" Grid.Row="2" Grid.ColumnSpan="4"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                        <TextBox IsEnabled="False" Text="{Binding SelectedQutation.Supplier.Name}" Grid.Row="2" Grid.ColumnSpan="10"  Grid.Column="5" Style="{StaticResource textboxData}"></TextBox>
+
+                        <TextBlock Text="Extra info:" Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                        <TextBox IsEnabled="False" Text="{Binding SelectedQutation.ExtraInfo}" Grid.Row="4" Grid.ColumnSpan="14"  Grid.Column="1"  
+                                    Style="{StaticResource infoTextboxData}"></TextBox>
+
+                        <Grid Grid.Row="1" Grid.Column="15" Grid.RowSpan="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Button Command="{Binding Command_NewProduct}" Height="60"  Margin="5" Grid.Row="1" Style="{StaticResource MyButton2}">
+                                <Grid Margin="5 2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <!--<RowDefinition Height="auto" />-->
+                                    </Grid.RowDefinitions>
+                                    <tds_wpf_extentions2:TDSAutoDisableImage Height="50"  Source="/img/addNew_klein.png" HorizontalAlignment="Center" />
+                                    <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
+                                </Grid>
+                            </Button>
+
+                            <Button Command="{Binding Command_ConfirmQuatation}" Height="60" Margin="5" Grid.Row="2"  Style="{StaticResource MyButton2}">
+                                <Grid Margin="5 2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <tds_wpf_extentions2:TDSAutoDisableImage Height="50" Source="/img/Save_klein.png"  HorizontalAlignment="Center" />
+                                    <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
+                                </Grid>
+                            </Button>
+
+                        </Grid>
 
                     </Grid>
+                    <!--end selected offers-->
+
+
+
 
                 </Grid>
+            </ScrollViewer>
 
-        
+            <!--</StackPanel>-->
+        </components:AppLayout1>
 
-
-
-
-            </Grid>
-        </ScrollViewer>
-
-    </components:AppLayout1>
-
+    </Grid>
 </UserControl>
