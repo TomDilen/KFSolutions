@@ -72,6 +72,25 @@ namespace KFSrepository_EF6
                     //.OrderByDescending(x => x).Take(100)
                     .ToList();
 
+                Console.WriteLine("===================================================================");
+                foreach (var item in opgehaald)
+                {
+                  var xxx=  ctx.OrderIns.Join(ctx.OrderLineIns,
+                        o => o.Id,
+                        ol => ol.Id_OrderIn,
+                        (o, ol) => new {
+                            idAfgehandeld = o.Id_HandledBy,
+                            EAN = ol.EAN_Product,
+                            NumOfProducts = ol.NumberOfProducts,
+                        })
+                        .Where(x => x.EAN == item.EAN && x.idAfgehandeld == null).Select(x => x.NumOfProducts).Sum();
+
+                    item.CountInProgress = xxx;  //.Select(t => t. ?? 0).Sum();
+                }
+                Console.WriteLine("===================================================================");
+
+
+
                 //id's van de suppliers die betrekking hebben op de gevonden lijst distincten
                 tmp = opgehaald.Select(x => x.ID_Supplier).Distinct().ToList();
 
@@ -86,6 +105,10 @@ namespace KFSrepository_EF6
                                .ToList();
             }
 
+            foreach (var item in opgehaald)
+            {
+                item.SuplierName = opgehaaldSupplierMin.Where(x => x.Id == item.ID_Supplier).Select(x=>x.Name).FirstOrDefault();
+            }
 
             //Console.WriteLine("===================================================");
 
@@ -98,8 +121,8 @@ namespace KFSrepository_EF6
 
             //Console.WriteLine("===================================================");
 
-            terug.OpsCollProductForStockDTO = opgehaald;
-            terug.OpsCollSupplierMinkDTO = opgehaaldSupplierMin;
+            terug.ProductForStockDTO = opgehaald;
+            terug.SupplierMinkDTO = opgehaaldSupplierMin;
 
             return terug;
         }
@@ -135,28 +158,34 @@ namespace KFSrepository_EF6
 
         public class ProductsForStockManagementPackageDTO : BaseDTO
         {
-            public List<ProductForStockDTO> OpsCollProductForStockDTO { get; set; } = new List<ProductForStockDTO>();
-            public List<SupplierMinDTO> OpsCollSupplierMinkDTO { get; set; } = new List<SupplierMinDTO>();
+            public List<ProductForStockDTO> ProductForStockDTO { get; set; } = new List<ProductForStockDTO>();
+            public List<SupplierMinDTO> SupplierMinkDTO { get; set; } = new List<SupplierMinDTO>();
 
         }
         public class ProductForStockDTO : BaseDTO
         {
             public int OploopNummer { get; set; }//om de laatste er uit te krijgen
+            public bool IsChecked { get; set; } = false;
             public string EAN { get; set; }
             public string ProductTittle { get; set; }
-            public float CountInStock { get; set; }
-            public float MinCountInStock { get; set; }
-            public float MaxCountInStock { get; set; }
+            public int CountInStock { get; set; }
+            public int MinCountInStock { get; set; }
+            public int CountInProgress { get; set; }
+            public int MaxCountInStock { get; set; }
             public string WareHouseLocation { get; set; }
 
 
             public int ID_Supplier { get; set; }
+            public string SuplierName { get; set; }
             public float UnitPrice { get; set; }
         }
         public class SupplierMinDTO : BaseDTO
         {
             public int Id { get; set; }
             public string Name { get; set; }
+
+
+
         }
     }
 
