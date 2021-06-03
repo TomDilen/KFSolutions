@@ -34,7 +34,7 @@ namespace KFSrepository_EF6
                     var gevonden = ctx.Set<Product>()
                         .Select(p => p.EAN)
                         .FirstOrDefault(pean => pean == item);
-
+                    
                     if (!string.IsNullOrEmpty(gevonden)) terug.Add(gevonden);
                 }
             }
@@ -85,7 +85,7 @@ namespace KFSrepository_EF6
                         })
                         .Where(x => x.EAN == item.EAN && x.idAfgehandeld == null).Select(x => x.NumOfProducts).Sum();
 
-                    item.CountInProgress = xxx;  //.Select(t => t. ?? 0).Sum();
+                    item.CountInProgress = xxx;  
                 }
                 Console.WriteLine("===================================================================");
 
