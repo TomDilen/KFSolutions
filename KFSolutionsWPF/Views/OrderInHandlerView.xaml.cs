@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace KFSolutionsWPF.Views
 {
     /// <summary>
-    /// Interaction logic for OrderInAddNewView.xaml
+    /// Interaction logic for OrderInHandlerView.xaml
     /// </summary>
-    public partial class OrderInAddNewView : UserControl
+    public partial class OrderInHandlerView : UserControl
     {
-        public OrderInAddNewView()
+        public OrderInHandlerView()
         {
             InitializeComponent();
         }

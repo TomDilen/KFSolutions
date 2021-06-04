@@ -12,69 +12,67 @@ using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.ViewModels
 {
-    public class OrderOutAddNewViewModel : _appViewModel
+    public class OrderInHandlerViewModel : _appViewModel
     {
 
         //==============================================================================
+        public List<OrderIn> OrdersIn { get; set; }
+
+
         public ICommand Command_NavigatBack { get; set; }
         public ICommand Command_ToMainMenu { get; set; }
         public ICommand Command_Save { get; set; }
+        public ICommand Command_CheckChange { get; set; }
 
-
-        public List<Product> ProductsAll { get; set; }
-
-        private List<Product> _workingProductList;
+        private List<int> _checkedItems;
         //==============================================================================
 
 
-        public OrderOutAddNewViewModel(
-            AppRepository<KfsContext> aAppDbRepository, TDStransactionControl aTDStransactionControl)
+        public OrderInHandlerViewModel(
+                AppRepository<KfsContext> aAppDbRepository, TDStransactionControl aTDStransactionControl)
             : base(aAppDbRepository, aTDStransactionControl)
         {
-            _myView = new OrderOutAddNewView();
+            _myView = new OrderInHandlerView();
             _myView.DataContext = this;
+
 
             Command_NavigatBack = new RelayCommand(NavigateBack);
             Command_ToMainMenu = new RelayCommand(NavigateToMainMenu);
             Command_Save = new RelayCommand(SaveToDB, CanSaveToDB);
+            Command_CheckChange = new RelayCommand(CheckChange);
 
 
-            RefreshData();
+            RefreschData();
         }
-        //------------------------------------------------------------------------------------------
-        private void RefreshData()
+
+
+        public void RefreschData()
         {
-            _workingProductList = _appDbRespository.Product.GetAllforOrderOut();
-
-            ProductsAll = _workingProductList;
+            OrdersIn = _appDbRespository.OrderIn.GetAll_forOrderInHandling();
+            _checkedItems = new List<int>();
         }
 
+        private void CheckChange(object obj)
+        {
+            _checkedItems = new List<int>();
 
-        //====================================================================================================================
+            foreach (var item in OrdersIn)
+                if (item.IsChecked) _checkedItems.Add(item.Id);
+
+        }
 
         private bool CanSaveToDB(object obj)
         {
-            return true;
+            return _checkedItems.Count > 0;
         }
 
         private void SaveToDB(object obj)
         {
-            Console.WriteLine("save");
 
+            _appDbRespository.OrderIn.HandlelOrders(_checkedItems, _appDbRespository.Employee.InloggedEmployee.Id);
 
-            //OrderOut bestelling_In1 = new OrderOut()
-            //{
-            //    Id_Client = 1,
-            //    OrderLineOuts = new List<OrderLineOut>()
-            //    {
-            //        new OrderLineOut(){EAN_Product = "222222222" , UnitPrice = 22.33f ,NumberOfProducts=4 },
-            //        new OrderLineOut(){EAN_Product = "444444444" , UnitPrice = 22.33f ,NumberOfProducts=4 }
-            //    }
-            //};
-            //appRespository.OrderOut.Add(bestelling_In1);
-
+            RefreschData();
         }
-
         private void NavigateToMainMenu(object obj)
         {
             _transactionControl.SlideNewContent(
@@ -88,6 +86,7 @@ namespace KFSolutionsWPF.ViewModels
                 new MainMenuViewModel(_appDbRespository, _transactionControl),
                 TDStransactionControl.TransactionDirection.Right, 500);
         }
+
+
     }
 }
-

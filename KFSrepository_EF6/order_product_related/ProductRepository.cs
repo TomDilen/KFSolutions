@@ -15,6 +15,8 @@ namespace KFSrepository_EF6
     {
         ProductsForStockManagementPackageDTO GetAllForStockManagement();
         List<string> GetExistingEANsFromEanList(List<string> aListEANs);
+
+        List<Product> GetAllforOrderOut();
     }
 
     public class ProductRepository : TDSrepository<Product>, IProductRepository
@@ -126,6 +128,22 @@ namespace KFSrepository_EF6
 
             return terug;
         }
+
+        public List<Product> GetAllforOrderOut()
+        {
+            List<Product> terug = new List<Product>();
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.Products
+                    .Include(nameof(Product.ProductType))
+                    .ToList();
+            }
+            return terug;
+        }
+
+
+
 
 
 

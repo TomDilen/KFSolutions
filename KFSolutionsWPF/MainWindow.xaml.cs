@@ -112,7 +112,13 @@ namespace KFSolutionsWPF
             //_transactionControl.SlideNewContent(new ProductAddNewViewModel(_appDbRespository, _transactionControl));
             //_transactionControl.SlideNewContent(new QuatationsViewModel(_appDbRespository, _transactionControl));
 
-            _transactionControl.SlideNewContent(new StockManagementViewModel(_appDbRespository, _transactionControl));
+
+            //vanaf hier nieuwe usercontrol AppLayout1 met NavBar
+
+            //_transactionControl.SlideNewContent(new StockManagementViewModel(_appDbRespository, _transactionControl));
+            //_transactionControl.SlideNewContent(new OrderInHandlerViewModel(_appDbRespository, _transactionControl));
+            _transactionControl.SlideNewContent(new OrderOutAddNewViewModel(_appDbRespository, _transactionControl));
+
 
         }
 

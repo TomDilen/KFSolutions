@@ -12,7 +12,7 @@ namespace KFSrepository_EF6
 
     public interface IOrderLineInRepository : ITDSrepository<OrderLineIn>
     {
-
+        
     }
 
     public class OrderLineInRepository : TDSrepository<OrderLineIn>, IOrderLineInRepository

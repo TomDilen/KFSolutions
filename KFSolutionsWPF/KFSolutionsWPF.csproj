@@ -105,7 +105,7 @@
     <Compile Include="ViewModels\EmployeeAddNewViewModel.cs" />
     <Compile Include="ViewModels\InloggenViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
-    <Compile Include="ViewModels\OrderInAddNewViewModel.cs" />
+    <Compile Include="ViewModels\OrderInHandlerViewModel.cs" />
     <Compile Include="ViewModels\OrderOutAddNewViewModel.cs" />
     <Compile Include="ViewModels\ProductAddNewViewModel.cs" />
     <Compile Include="ViewModels\QuatationsViewModel.cs" />
@@ -124,8 +124,8 @@
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrderInAddNewView.xaml.cs">
-      <DependentUpon>OrderInAddNewView.xaml</DependentUpon>
+    <Compile Include="Views\OrderInHandlerView.xaml.cs">
+      <DependentUpon>OrderInHandlerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrderOutAddNewView.xaml.cs">
       <DependentUpon>OrderOutAddNewView.xaml</DependentUpon>
@@ -182,7 +182,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OrderInAddNewView.xaml">
+    <Page Include="Views\OrderInHandlerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,7 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UserControls\_uc\" />
-    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\Save_klein.png" />
