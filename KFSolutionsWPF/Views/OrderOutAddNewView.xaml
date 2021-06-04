@@ -20,6 +20,8 @@
                     <Button Command="{Binding Command_NavigatBack}" Content="Back" Height="50" Width="50"/>
                     <Button Command="{Binding Command_ToMainMenu}" Content="Main" Height="50" Width="50"/>
                     <Button Command="{Binding Command_Save}" Content="Save" Height="50" Width="50"/>
+                    <Button Command="{Binding Command_MakeInvoice}" Content="PDF" Height="50" Width="50"/>
+                    <Button Command="{Binding Command_NewClient}" Content="new client" Height="50" Width="50"/>
                     <!--<Button Command="{Binding Command_ConfirmQuatation}" Content="Confirm" Height="50" Width="50"/>
                     <Button Command="{Binding Command_NewProduct}" Content="new product" Height="50" Width="50"/>-->
                 </StackPanel>
@@ -37,19 +39,20 @@
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <!--grid producten-->
+                        <!--klant selecteren-->
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+
+                        <!--grid producten-->  <!--grid bestelling-->
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
 
-                        <!--grid bestelling-->
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="140"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -58,19 +61,91 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <!--======== grid bestelling==========-->
 
-                    <TextBlock Text="Ons assortiment"  Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="1"
+
+                    <!--======== Klant selecteren ==========-->
+                    <TextBlock Text="Klant"  Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="2"
+                               Style="{StaticResource labelHoofdings}"  ></TextBlock>
+                    
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+
+                        <TextBlock Text="Voornaam, Achternaam:" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                        <TextBox Text="{Binding Path=SelectedClient.FirstName}" Grid.Row="1" Grid.ColumnSpan="1"  Grid.Column="1" Style="{StaticResource textboxData}" IsEnabled="False"></TextBox>
+                        <TextBox Text="{Binding Path=SelectedClient.LastName}" Grid.Row="1" Grid.ColumnSpan="1"  Grid.Column="2" Style="{StaticResource textboxData}" IsEnabled="False"></TextBox>
+                        
+                    </Grid>
+                    <Expander Grid.Column="0" Grid.Row="2" Margin="20,0">
+                        <DataGrid  ItemsSource="{Binding ClientsAll}"
+                               AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                               Margin="5"  Background="#FF012E01" Opacity="0.9" 
+                                   SelectedItem="{Binding Path=SelectedClient}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn IsReadOnly="True" Header="Naam" Binding="{Binding Path=FirstName}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding Path=NameAddition}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="Achternaam" Binding="{Binding Path=LastName}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="Straat" Binding="{Binding Path=CltAddresssAsList[0].Street}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="Nummer" Binding="{Binding Path=CltAddresssAsList[0].HouseNumber}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="Bus" Binding="{Binding Path=CltAddresssAsList[0].HouseNumberAddition}"/>
+                                <DataGridTextColumn IsReadOnly="True" Header="Gemeente" Binding="{Binding Path=CltAddresssAsList[0].City}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Expander>
+
+
+                    <!--======== grid assortiment ==========-->
+
+                    <TextBlock Text="Ons assortiment"  Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="1"
                                Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
 
                     <DataGrid  ItemsSource="{Binding ProductsAll}"
-                               AutoGenerateColumns="True" CanUserAddRows="False" SelectionMode="Single"
-                               Grid.Row="2" Margin="5"  Background="#FF012E01" Opacity="0.9" >
+                               AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                               Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=EAN}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding Path=ProductTitle}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Stock" Binding="{Binding Path=CountInStock}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Locatie" Binding="{Binding Path=WareHouseLocation}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Prijs" Binding="{Binding Path=SellingPriceRecommended}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="BTW" Binding="{Binding Path=BTWpercentage}"/>
 
+                        </DataGrid.Columns>
 
                     </DataGrid>
 
+                    <!--EAN = ID (geen oplopend nummer)
+
+ProductTitle
+ExtraInfo
+
+SellingPriceRecommended
+CountInStock
+MinCountInStock
+MaxCountInStock
+WareHouseLocation
+Image
+BTWpercentage-->
+
+
+                    <!--======== grid bestelling==========-->
+                    <TextBlock Text="bestelling"  Grid.Row="6"  Grid.Column="1" Grid.ColumnSpan="1"
+                               Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+
+                    <DataGrid  ItemsSource="{Binding ProductsAll}"
+                               AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                               Grid.Column="6" Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
+
+
+
+
+                    </DataGrid>
 
 
 
