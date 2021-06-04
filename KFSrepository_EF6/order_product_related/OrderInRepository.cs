@@ -49,14 +49,24 @@ namespace KFSrepository_EF6
             {
                 foreach (var item in aListOrder)
                 {
-                    OrderIn gevonden = ctx.OrderIns.Where(x => x.Id == item).FirstOrDefault();
-                    if (gevonden == null)
+                    OrderIn gevondenOrderIn = ctx.OrderIns
+                        .Include(nameof(OrderIn.OrderLineIns))
+                        .Include(nameof(OrderIn.OrderLineIns) + "." + nameof(OrderLineIn.Product))
+                        .Where(x => x.Id == item).FirstOrDefault();
+                    if (gevondenOrderIn == null)
                     {
                         throw new KeyNotFoundException($"id {item} niet gevonden tijdens het afhandelen van OrderIn");
                     }
+                    foreach (var orderline in gevondenOrderIn.OrderLineIns)
+                    {
+                        //de stock updaten
+                        orderline.Product.CountInStock += orderline.NumberOfProducts;
+                    }
 
-                    gevonden.Id_HandledBy = aEmployeeId;
-                    gevonden.HandledAt = nu;
+                    
+
+                    gevondenOrderIn.Id_HandledBy = aEmployeeId;
+                    gevondenOrderIn.HandledAt = nu;
                 }
 
                 ctx.SaveChanges();

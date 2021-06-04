@@ -66,7 +66,13 @@
                                Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
 
+                    <DataGrid  ItemsSource="{Binding OrdersIn}"
+                               AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                               Grid.Row="2" Margin="5"  Background="#FF012E01" Opacity="0.9" >
 
+
+
+                    </DataGrid>
 
 
 
