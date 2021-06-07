@@ -1,0 +1,47 @@
+﻿<Window x:Class="KFSolutionsWPF.DialogWindows.FrmSetNumberOfProductsByOrdersOut"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KFSolutionsWPF.DialogWindows"
+        mc:Ignorable="d"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        Title="Geef aantal" Height="248.853" Width="409.313"
+        Opacity="0.80" Icon="/KFSolutionsWPF;component/img/KenfieldLogo1.png" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" BorderThickness="4"
+        >
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF027607" Offset="0"/>
+            <GradientStop Color="#FF082B01" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Opacity="0.9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+            <TextBlock x:Name="txtCaption1" FontSize="16" Foreground="White"></TextBlock>
+            <!--<TextBlock x:Name="txtCaption2" ></TextBlock>
+            <TextBlock x:Name="txtCaption3" ></TextBlock>-->
+            <WindowsFormsHost  Margin="50,15" >
+                <wf:NumericUpDown x:Name="numInput" BackColor="#FF112E21" ForeColor="White" Enter="numInput_Enter" Click="numInput_Click"  />
+            </WindowsFormsHost>
+            <!--<TextBox x:Name="numInput" Margin="50,15" FontSize="20"></TextBox>-->
+        </StackPanel>
+
+
+        <Button Content="Annuleer"  FontSize="30" Grid.Column="0" Grid.Row="1" Margin="5" Background="#FF112E21" Foreground="White" Click="Button_Click"></Button>
+        <Button Content="OK"  FontSize="30" IsDefault="True" Grid.Column="1" Grid.Row="1" Margin="5" Background="#FF112E21" Foreground="White" Click="Button_Click_1"></Button>
+
+
+
+
+    </Grid>
+</Window>

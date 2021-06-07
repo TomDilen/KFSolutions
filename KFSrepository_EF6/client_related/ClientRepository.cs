@@ -13,6 +13,8 @@ namespace KFSrepository_EF6
     public interface IClientRepository : ITDSrepository<Client>
     {
         List<Client> GetAllClientsWithAdress();
+
+        List<Client> GetAllForOverview();
     }
 
     public class ClientRepository : TDSrepository<Client>, IClientRepository
@@ -32,6 +34,21 @@ namespace KFSrepository_EF6
                     .Include(nameof(Client.CltAddresss)).ToList()
                     .ToList();
             }
+            return terug;
+        }
+
+        public List<Client> GetAllForOverview()
+        {
+            List<Client> terug = new List<Client>();
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.Set<Client>()
+                    //.Include(nameof(EmpAppAccount.Employee))
+                    .Where(x => x.IsActive)
+                    .ToList();
+            }
+
+           
             return terug;
         }
     }

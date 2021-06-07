@@ -1,6 +1,7 @@
 ﻿using KFSolutionsModel.NotMapped;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace KFSolutionsModel
 {
-    public class Product  
+    public class Product  : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         // ! bij deze is de EAN code Het ID , 
         // het id mag dus geen automatisch oplopend nummer zijn
         // niet 100% tevreden, string voor een ID?
@@ -73,6 +75,8 @@ namespace KFSolutionsModel
 
 
         public virtual ICollection<Supplier_Product_Price> Supplier_Product_Prices { get; set; }
+
+        
 
         //[NotMapped]
         //public virtual ICollection<ProductQuotation> ProductQuotations { get; set; }

@@ -33,6 +33,7 @@ namespace KFSolutionsWPF.ViewModels
 
             //nodig om te adden
             NewSupplier = new Supplier();
+            NewSupplier.IsActive = true;
             NewSupplier.CmpManagers = new List<CmpManager>() { new CmpManager() { IsMain=true} };
             NewSupplier.CmpIBANs = new List<CmpIBAN>() { new CmpIBAN() {IsDefault=true } };
             

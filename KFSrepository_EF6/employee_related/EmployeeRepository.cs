@@ -18,6 +18,8 @@ namespace KFSrepository_EF6
         EmployeeRepository.EmployeeLoggedInDTO LogIn(string aUsername, string aPassword);
         EmployeeRepository.EmployeeLoggedInDTO LogOut();
 
+        List< Employee> GetAllForOverview();
+
     }
     //==========================================================================================
 
@@ -181,6 +183,19 @@ namespace KFSrepository_EF6
         {
             this._inloggedEmployee = null;
             return null;
+        }
+
+        public List< Employee> GetAllForOverview()
+        {
+            List<Employee> terug = new List<Employee>();
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.Set<Employee>()
+                    .Include(nameof(Employee.EmpDepartment))
+                    .Where(x => x.IsActive)
+                    .ToList();
+            }
+            return terug;
         }
 
 

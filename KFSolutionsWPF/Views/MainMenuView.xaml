@@ -4,64 +4,96 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KFSolutionsWPF.Views"
+             xmlns:components="clr-namespace:KFSolutionsWPF.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+
+    
+
+
     <Grid>
-
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
-        <!--<Rectangle Fill="Green" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Opacity="0.8"></Rectangle>-->
-
-        <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Opacity="0.95"
-            CornerRadius="10" BorderBrush="Black">
-            <Border.Effect>
-                <DropShadowEffect Color="#FF072C0A" BlurRadius="20"/>
-            </Border.Effect>
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF030A00" Offset="0.099"/>
-                    <GradientStop Color="#FF182314" Offset="0.946"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
+        <components:NavBar Grid.Row="0">
+            <components:NavBar.InnerContent>
+                <StackPanel Orientation="Horizontal"  Margin="5" Height="auto">
+                    <Button Command="{Binding Command_LogOut}" Style="{StaticResource GreenNavButton}"  ToolTip="Uitloggen">
+                        <Image Height="36"  Source="/img/logout.png" Margin="0,4,0,0" />
+                    </Button>
+                </StackPanel>
+            </components:NavBar.InnerContent>
+        </components:NavBar>
 
 
-        <StackPanel Grid.Row="1" Grid.Column="2" >
-            <Button Margin="5" x:Name="knop1" Height="50" Click="knop1_Click">Werknemer</Button>
-            <Button Margin="5" x:Name="knop2" Height="50">ik ben 2</Button>
-            <Button Margin="5" x:Name="knop3" Height="50">ik ben 3</Button>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.Column="4" >
-            <Button Margin="5" x:Name="knop11" Height="50">ik ben 11</Button>
-            <Button Margin="5" x:Name="knop12" Height="50" Visibility="Collapsed">ik ben 12</Button>
-            <Button Margin="5" x:Name="knop13" Height="50">ik ben 13</Button>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.Column="6" >
-            <Button Margin="5" x:Name="knop21" Height="50">ik ben 21</Button>
-            <Button Margin="5" x:Name="knop22" Height="50">ik ben 22</Button>
-            <Button Margin="5" x:Name="knop33" Height="50">ik ben 23</Button>
-        </StackPanel>
+        <components:AppLayout1 Grid.Row="1" MaxWidth="1300">
+            <ScrollViewer Style="{StaticResource CustomScrollViewer}"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                              ScrollViewer.HorizontalScrollBarVisibility="Auto">
 
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="0*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="0*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="3" Opacity="0.7"
+                            CornerRadius="10" BorderBrush="Black">
+                        <Border.Effect>
+                            <DropShadowEffect Color="#FF072C0A" BlurRadius="20"/>
+                        </Border.Effect>
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF007400" Offset="0.099"/>
+                                <GradientStop Color="#FF024002" Offset="0.946"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <StackPanel Grid.Row="2" Grid.Column="2" >
+                        <Button Command="{Binding Command_EmployeeDetails}" Margin="5"  Height="50" Background="red">Werknemer details</Button>
+                        <Button Command="{Binding Command_ClientDetails}" Margin="5"  Height="50" Background="#FFAA5555">Klant details</Button>
+                        <Button Command="{Binding Command_SupplierDetails}" Margin="5" Height="50" Background="#FFCB9494">Leverancier details</Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="4" >
+                        <Button Command="{Binding Command_Quatations}" Margin="5"  Height="50" Background="Green">quatations</Button>
+                        <Button Margin="5"  Height="50" Visibility="Collapsed">ik ben 12</Button>
+                        <Button Margin="5"  Height="50">ik ben 13</Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="6" >
+                        <Button Command="{Binding Command_NewOrderOut}" Margin="5"  Height="50" Background="Yellow">bedien klant</Button>
+                        <Button Margin="5"  Height="50">ik ben 22</Button>
+                        <Button Margin="5"  Height="50">ik ben 23</Button>
+                    </StackPanel>
+
+                </Grid>
+
+            </ScrollViewer>
+
+        </components:AppLayout1>
     </Grid>
+
+
 </UserControl>

@@ -51,7 +51,7 @@ namespace KFSolutionsWPF.ViewModels
             NewEmployee.EmpAppAccount = new EmpAppAccount();
             NewEmployee.EmpContract.DateOfStart = DateTime.Now;
             NewEmployee.DateOfBirth = new DateTime(2000, 1, 1);
-            //NewEmployee.IsMale = false;
+            NewEmployee.IsActive = true;
             //NewEmployee.FirstName = "snulleke";
         }
 

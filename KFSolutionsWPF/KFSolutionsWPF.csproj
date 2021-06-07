@@ -51,12 +51,20 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=3.3.3.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.3.3.3\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -73,9 +81,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\TDS_wpf_extentions\TDS_wpf_extentions2\bin\Debug\TDS_wpf_extentions2.dll</HintPath>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -97,13 +107,26 @@
     </Compile>
     <Compile Include="Converters\BoolRadioConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
+    <Compile Include="DialogWindows\FrmInvoice.xaml.cs">
+      <DependentUpon>FrmInvoice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogWindows\FrmSetNumberOfProductsByOrdersOut.xaml.cs">
+      <DependentUpon>FrmSetNumberOfProductsByOrdersOut.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DialogWindows\_BaseDialog.xaml.cs">
+      <DependentUpon>_BaseDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PDF\PDFinvoice.cs" />
     <Compile Include="TDS\Extentions.cs" />
     <Compile Include="UserControls\test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ClientAddNewViewModel.cs" />
+    <Compile Include="ViewModels\ClientDetailsViewModel.cs" />
     <Compile Include="ViewModels\EmployeeAddNewViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeDetailsViewModel.cs" />
     <Compile Include="ViewModels\InloggenViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\OrderInHandlerViewModel.cs" />
     <Compile Include="ViewModels\OrderOutAddNewViewModel.cs" />
@@ -111,15 +134,25 @@
     <Compile Include="ViewModels\QuatationsViewModel.cs" />
     <Compile Include="ViewModels\StockManagementViewModel.cs" />
     <Compile Include="ViewModels\SupplierAddNewViewModel.cs" />
+    <Compile Include="ViewModels\SupplierDetailsViewModel.cs" />
     <Compile Include="ViewModels\_appViewModel.cs" />
     <Compile Include="Views\ClientAddNewView.xaml.cs">
       <DependentUpon>ClientAddNewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ClientDetailsView.xaml.cs">
+      <DependentUpon>ClientDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EmployeeAddNewView.xaml.cs">
       <DependentUpon>EmployeeAddNewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EmployeeDetailsView.xaml.cs">
+      <DependentUpon>EmployeeDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InloggenView.xaml.cs">
       <DependentUpon>InloggenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceView.xaml.cs">
+      <DependentUpon>InvoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
@@ -142,11 +175,26 @@
     <Compile Include="Views\SupplierAddNewView.xaml.cs">
       <DependentUpon>SupplierAddNewView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SupplierDetailsView.xaml.cs">
+      <DependentUpon>SupplierDetailsView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Components\AppLayout1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\NavBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogWindows\FrmInvoice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogWindows\FrmSetNumberOfProductsByOrdersOut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DialogWindows\_BaseDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,11 +218,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ClientDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EmployeeAddNewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EmployeeDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InloggenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SupplierAddNewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SupplierDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,6 +322,39 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\addNew_klein.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\diskette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\leftarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Confirm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\addSupplier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\addProduct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\invoice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\addClient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\addEmployee.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

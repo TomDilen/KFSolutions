@@ -44,6 +44,7 @@ namespace KFSolutionsWPF.ViewModels
 
         public ICommand Command_DataGridProductSelectionChanged { get; set; }
 
+
         public ICommand Command_CheckInDatagridSuppliers { get; set; }
         //===========================================================================================================
 
@@ -65,9 +66,12 @@ namespace KFSolutionsWPF.ViewModels
             Command_CheckInDatagridSuppliers = new RelayCommand(CheckInDatagridSuppliers);
 
 
+
             RefreschData();
 
         }
+
+
 
         private bool CanSaveToDB(object obj)
         {
@@ -149,13 +153,14 @@ namespace KFSolutionsWPF.ViewModels
                     try
                     {
                         _appDbRespository.OrderIn.Add(item);
-                        MessageBox.Show("Bestellingen met succes geregistreerd");
+                        
                     }
                     catch(Exception ex)
                     {
                         MessageBox.Show(ex.Message + ex.InnerException);
                         return;
                     }
+                    MessageBox.Show("Bestellingen met succes geregistreerd");
                 }
 
                 RefreschData();

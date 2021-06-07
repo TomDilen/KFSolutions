@@ -10,7 +10,11 @@
              mc:Ignorable="d" 
              
              d:DesignHeight="900" d:DesignWidth="800">
+    
+    <UserControl.Resources>
 
+
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,36 +22,32 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <components:NavBar Grid.Row="0">
+        <components:NavBar Grid.Row="0" >
             <components:NavBar.InnerContent>
                 <StackPanel Orientation="Horizontal"  Margin="5" Height="auto">
-                    <Button Command="{Binding Command_NavigatBack}" Content="Back" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_ToMainMenu}" Content="Main" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_ConfirmQuatation}" Content="Confirm" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_NewProduct}" Content="new product" Height="50" Width="50"/>
+
+                    <Button Command="{Binding Command_NavigatBack}" Style="{StaticResource GreenNavButton}"  ToolTip="Naar vorige">
+                        <Image Height="36"  Source="/img/leftarrow.png" Margin="-3,2,0,0" />
+
+                    </Button>
+                    <Button Command="{Binding Command_ToMainMenu}" Style="{StaticResource GreenNavButton}"  ToolTip="Naar hoofdmenu">
+                        <Image Height="38"  Source="/img/home.png" Margin="0,-4,0,0" />
+                    </Button>
+                    <Button Command="{Binding Command_ConfirmQuatation}" Style="{StaticResource BlueNavButton}"   ToolTip="Bevestig">
+                        <Image Height="36"  Source="/img/Confirm.png" Margin="0,-1,0,0" />
+                    </Button>
+                    <Button Command="{Binding Command_NewProduct}" Style="{StaticResource YellowNavButton}"  ToolTip="Nieuw produkt">
+                        <Image Height="40"  Source="/img/addProduct.png" Margin="0,-1,0,0" />
+                    </Button>
                 </StackPanel>
             </components:NavBar.InnerContent>
         </components:NavBar>
 
 
 
-        <components:AppLayout1 Grid.Row="1" MaxWidth="1300">
+        <components:AppLayout1 Grid.Row="1" MaxWidth="600">
 
-
-            <!--<components:AppLayout1.InnerContent >
-                <StackPanel Orientation="Horizontal" Margin="0,0" >
-                    <Button  Command="{Binding Path=Command_test, Mode=TwoWay}" 
-                         
-                             Content="{Binding Path=TestString, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource Mode=FindAncestor,
-                                                             AncestorType=UserControl, AncestorLevel=3}}"
-                        Height="50" Width="50"/>
-                    <Button Content="Click" Height="50" Width="50"/>
-                    <Button Content="Click" Height="50" Width="50"/>
-                    <Button Content="Click" Height="50" Width="50" Tag="MyButton1"  Click="Button_Click" />
-                </StackPanel>
-            </components:AppLayout1.InnerContent>-->
-            <!--Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Border}, AncestorLevel=2},Path=Name}" Width="200"/>-->
-
+         
             <ScrollViewer Style="{StaticResource CustomScrollViewer}"
                               ScrollViewer.VerticalScrollBarVisibility="Auto" 
                               ScrollViewer.HorizontalScrollBarVisibility="Auto">
@@ -157,7 +157,7 @@
                             <!--14-->
                             <ColumnDefinition Width="1*"/>
                             <!--rechterknoppen-->
-                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <!--<ColumnDefinition Width="100"></ColumnDefinition>-->
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -181,7 +181,7 @@
                         <TextBox IsEnabled="False" Text="{Binding SelectedQutation.ExtraInfo}" Grid.Row="4" Grid.ColumnSpan="14"  Grid.Column="1"  
                                     Style="{StaticResource infoTextboxData}"></TextBox>
 
-                        <Grid Grid.Row="1" Grid.Column="15" Grid.RowSpan="10">
+                        <!--<Grid Grid.Row="1" Grid.Column="15" Grid.RowSpan="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="auto"/>
@@ -193,10 +193,10 @@
                                 <Grid Margin="5 2">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
-                                        <!--<RowDefinition Height="auto" />-->
+                                        --><!--<RowDefinition Height="auto" />--><!--
                                     </Grid.RowDefinitions>
                                     <tds_wpf_extentions2:TDSAutoDisableImage Height="50"  Source="/img/addNew_klein.png" HorizontalAlignment="Center" />
-                                    <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
+                                    --><!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />--><!--
                                 </Grid>
                             </Button>
 
@@ -207,11 +207,11 @@
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
                                     <tds_wpf_extentions2:TDSAutoDisableImage Height="50" Source="/img/Save_klein.png"  HorizontalAlignment="Center" />
-                                    <!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />-->
+                                    --><!--<TextBlock Grid.Row="1" Text="Browse for folder" HorizontalAlignment="Center" />--><!--
                                 </Grid>
                             </Button>
 
-                        </Grid>
+                        </Grid>-->
 
                     </Grid>
                     <!--end selected offers-->

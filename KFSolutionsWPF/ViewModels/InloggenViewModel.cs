@@ -61,11 +61,9 @@ namespace KFSolutionsWPF.ViewModels
             }
             else
             {
-                //_transactionControl.SlideNewContent(new MainMenuViewModel(_appDbRespository, _transactionControl),
-                //    TDStransactionControl.TransactionDirection.FadeIn, 1500);
 
-                _transactionControl.SlideNewContent(new EmployeeAddNewViewModel(_appDbRespository, _transactionControl),
-                    TDStransactionControl.TransactionDirection.Up, 400);
+                _transactionControl.SlideNewContent(new MainMenuViewModel(_appDbRespository, _transactionControl),
+                    TDStransactionControl.TransactionDirection.Down, 400);
             }
             //await Task.Delay(5000);
             

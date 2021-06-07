@@ -17,6 +17,7 @@ namespace KFSrepository_EF6
         List<string> GetExistingEANsFromEanList(List<string> aListEANs);
 
         List<Product> GetAllforOrderOut();
+
     }
 
     public class ProductRepository : TDSrepository<Product>, IProductRepository

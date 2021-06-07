@@ -21,12 +21,13 @@ namespace KFSolutionsWPF.ViewModels
     public class QuatationsViewModel : _appViewModel
     {
         private const string PATH_QUOTATIONS = "productQuotations";
-        private const string PATH_PENDING = PATH_QUOTATIONS+ "/productQuotation_pending";
+        private const string PATH_PENDING = PATH_QUOTATIONS + "/productQuotation_pending";
         private const string PATH_SJABLONS = PATH_QUOTATIONS + "/productQuotation_sjablon";
         private const string PATH_DELETED = PATH_QUOTATIONS + "/productQuotation_deleted";
         private const string PATH_ADDED = PATH_QUOTATIONS + "/productQuotation_added";
         private FileSystemWatcher watcher = new FileSystemWatcher();
 
+        public string Header { get; set; } = "Offerte beheer";
 
         public List<Supplier> SuppliersAll { get; set; }
         public Supplier SelectedSuplier { get; set; }
@@ -71,7 +72,7 @@ namespace KFSolutionsWPF.ViewModels
             Command_NewProduct = new RelayCommand(AddNewProduct, CanAddNewProduct);
             Command_ConfirmQuatation = new RelayCommand(ConfirmQuatation, CanConfirmQuatation);
 
-            //SuppliersAll = aAppDbRepository.Supplier.GetAll().ToList();
+            SuppliersAll = aAppDbRepository.Supplier.GetAll().ToList();
 
             //TestString = "joske";
             //Command_test = new RelayCommand(testcoommand);
@@ -96,6 +97,7 @@ namespace KFSolutionsWPF.ViewModels
 
         private bool CanConfirmQuatation(object obj)
         {
+           
             if (SelectedQutation == null) return false;
 
             if ( ! ExistingEANsInDB.Contains(SelectedQutation.EAN_Product)) return false;
@@ -155,6 +157,7 @@ namespace KFSolutionsWPF.ViewModels
 
         private bool CanAddNewProduct(object obj)
         {
+            
             if (SelectedQutation == null) return false;
 
             if (ExistingEANsInDB.Contains(SelectedQutation.EAN_Product)) return false;

@@ -72,8 +72,37 @@
 
 
 
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn  Header="" >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <CheckBox 
+                                            IsChecked="{Binding IsChecked,UpdateSourceTrigger=PropertyChanged}"
+                                            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType= {x:Type UserControl}},
+                                            Path=DataContext.Command_CheckChange}"
+                                            />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="Leverancier" Binding="{Binding Path=Supplier.Name}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Besteldatum" Binding="{Binding Path=OrderedAt}"/>
 
+                        </DataGrid.Columns>
 
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <DataGrid Margin="20,10" ItemsSource="{Binding OrderLineIns}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Aantal" Binding="{Binding Path=NumberOfProducts}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=Product.EAN}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Produkt" Binding="{Binding Path=Product.ProductTitle}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Locatie" Binding="{Binding Path=Product.WareHouseLocation}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
+
+                    </DataGrid>
 
 
 

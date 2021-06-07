@@ -27,12 +27,23 @@ namespace KFSolutionsWPF.Components
 
         //https://stackoverflow.com/questions/21443397/how-to-add-controls-dynamically-to-a-usercontrol-through-users-xaml
 
-        public static DependencyProperty InnerContentProperty = DependencyProperty.Register("InnerContent", typeof(UIElement), typeof(NavBar));
+        public static DependencyProperty InnerContentProperty = 
+            DependencyProperty.Register("InnerContent", typeof(UIElement), typeof(NavBar));
+        public static readonly DependencyProperty HeaderProperty =
+                DependencyProperty.Register("Header", typeof(string), typeof(NavBar), new PropertyMetadata(string.Empty));
+
+
 
         public UIElement InnerContent
         {
             get { return (UIElement)GetValue(InnerContentProperty); }
             set { SetValue(InnerContentProperty, value); }
+        }
+
+        public string Header
+        {
+            get { return (string)GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace KFSrepository_EF6
 
     public interface IOrderOutRepository : ITDSrepository<OrderOut>
     {
-
+        OrderOut GetForInvoiceById(int aOrderoutId);
     }
 
     public class OrderOutRepository : TDSrepository<OrderOut>, IOrderOutRepository
@@ -21,6 +21,56 @@ namespace KFSrepository_EF6
         {
 
         }
+
+        public override OrderOut Add(OrderOut aEntity)
+        {
+            OrderOut terug = null;
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                //bijwerken stok
+                foreach (var lines in aEntity.OrderLineOuts)
+                {
+                    Product gevondenProdukt = ctx.Products.FirstOrDefault(x => x.EAN == lines.EAN_Product);
+                    if (gevondenProdukt == null)
+                    {
+                        throw new KeyNotFoundException($"EAN {lines.EAN_Product}, niet gevonden bij het bijwerken van de stock");
+                    }
+                    gevondenProdukt.CountInStock -= lines.NumberOfProducts;
+                }
+
+                //als dat gelukt is dan bijwerken OrderOut
+                terug = base.Add(aEntity);
+
+                //uiteindelijk saven
+                ctx.SaveChanges();
+            }
+            return terug;
+        }
+
+        public OrderOut GetForInvoiceById(int aOrderoutId)
+        {
+            OrderOut terug = null;
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.OrderOuts
+                    .Include(nameof( OrderOut.Client))
+                    .Include(nameof(OrderOut.Client) + "." + nameof(Client.CltAddresss))
+                    .Include(nameof( OrderOut.OrderLineOuts))
+                    .Include(nameof(OrderOut.OrderLineOuts) + "." + nameof(OrderLineOut.Product))
+                    .Where(x => x.Id == aOrderoutId)
+                    
+                    .FirstOrDefault();
+            }
+//Een factuur heeft
+//de   naam van   de producten, omschrijving, aantal,
+//prijs, totale prijs zonder btw, btw en prijs inclusief
+//btw.
+
+            return terug;
+        }
+
     }
 
 

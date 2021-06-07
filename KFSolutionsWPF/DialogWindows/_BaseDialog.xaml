@@ -1,0 +1,25 @@
+﻿<Window x:Class="KFSolutionsWPF.DialogWindows._BaseDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KFSolutionsWPF.DialogWindows"
+        mc:Ignorable="d"
+        Title="_BaseDialog" Height="237.249" Width="513.754" 
+        Opacity="0.80" Icon="/KFSolutionsWPF;component/img/KenfieldLogo1.png" ResizeMode="NoResize" 
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Background="#FF6E8785"
+        >
+    <Grid Opacity="0.9">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Content="Annuleer" FontSize="30" Grid.Column="0" Grid.Row="1" Margin="5"></Button>
+        <Button Content="OK" FontSize="30" Grid.Column="1" Grid.Row="1" Margin="5"></Button>
+    </Grid>
+</Window>

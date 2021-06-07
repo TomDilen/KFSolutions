@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KFSolutionsWPF.Views" xmlns:components="clr-namespace:KFSolutionsWPF.Components"
+             
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -17,25 +20,46 @@
         <components:NavBar Grid.Row="0">
             <components:NavBar.InnerContent>
                 <StackPanel Orientation="Horizontal"  Margin="5" Height="auto">
-                    <Button Command="{Binding Command_NavigatBack}" Content="Back" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_ToMainMenu}" Content="Main" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_Save}" Content="Save" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_MakeInvoice}" Content="PDF" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_NewClient}" Content="new client" Height="50" Width="50"/>
-                    <!--<Button Command="{Binding Command_ConfirmQuatation}" Content="Confirm" Height="50" Width="50"/>
-                    <Button Command="{Binding Command_NewProduct}" Content="new product" Height="50" Width="50"/>-->
+                    <!--<Button Command="{Binding Command_NavigatBack}" Content="Back" Height="50" Width="50"/>
+                    <Button Command="{Binding Command_ToMainMenu}" Content="Main" Height="50" Width="50"/>-->
+                    <!--<Button Command="{Binding Command_Save}" Content="Save" Height="50" Width="50"/>-->
+                    <!--<Button Command="{Binding Command_SeeInvoice}" Content="PDF" Height="50" Width="50"/>-->
+                    <!--<Button Command="{Binding Command_NewClient}" Content="new client" Height="50" Width="50"/>-->
+                    <!--<Button Command="{Binding Command_ClearOrder}" Content="clear" Height="50" Width="50"/>-->
+
+                    <Button Command="{Binding Command_NavigatBack}" Style="{StaticResource GreenNavButton}"  ToolTip="Naar vorige">
+                        <Image Height="36"  Source="/img/leftarrow.png" Margin="-3,2,0,0" />
+                    </Button>
+                    <Button Command="{Binding Command_ToMainMenu}" Style="{StaticResource GreenNavButton}"  ToolTip="Naar hoofdmenu">
+                        <Image Height="38"  Source="/img/home.png" Margin="0,-4,0,0" />
+                    </Button>
+                    <Button Command="{Binding Command_Save}" Style="{StaticResource BlueNavButton}"   ToolTip="Opslaan">
+                        <Image Height="30"  Source="/img/diskette.png" Margin="0,0,0,0" />
+                    </Button>
+                    <Button Command="{Binding Command_ClearOrder}" Style="{StaticResource BlueNavButton}"   ToolTip="Opnieuw">
+                        <Image Height="34"  Source="/img/clear.png" Margin="-2,0,0,0" />
+                    </Button>
+
+                    <Button Command="{Binding Command_SeeInvoice}" Style="{StaticResource YellowNavButton}"  ToolTip="Bekijk Factuur">
+                        <Image Height="34"  Source="/img/invoice.png" Margin="0,-1,0,0" />
+                    </Button>
+                    <Button Command="{Binding Command_NewClient}" Style="{StaticResource YellowNavButton}"  ToolTip="Maak nieuwe klant">
+                        <Image Height="34"  Source="/img/addClient.png" Margin="0,3,0,0" />
+                    </Button>
+
+
                 </StackPanel>
             </components:NavBar.InnerContent>
         </components:NavBar>
 
 
-        <components:AppLayout1 Grid.Row="1" MaxWidth="1300">
+        <components:AppLayout1 Grid.Row="1" MaxWidth="1000">
 
 
             <ScrollViewer Style="{StaticResource CustomScrollViewer}"
                               ScrollViewer.VerticalScrollBarVisibility="Auto" 
                               ScrollViewer.HorizontalScrollBarVisibility="Auto">
-
+            <!--<ScrollViewer>-->
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -56,8 +80,8 @@
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="65*" ></ColumnDefinition>
-                        <ColumnDefinition Width="35*" ></ColumnDefinition>
+                        <ColumnDefinition Width="40*" ></ColumnDefinition>
+                        <ColumnDefinition Width="60*" ></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
 
@@ -105,15 +129,28 @@
 
 
                     <DataGrid  ItemsSource="{Binding ProductsAll}"
+                               SelectedItem="{Binding Path=SelectedProductFromAssortiment}"
                                AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
                                Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
+                        
                         <DataGrid.Columns>
                             <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=EAN}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding Path=ProductTitle}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Stock" Binding="{Binding Path=CountInStock}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="Locatie" Binding="{Binding Path=WareHouseLocation}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="Prijs" Binding="{Binding Path=SellingPriceRecommended}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="BTW" Binding="{Binding Path=BTWpercentage}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Stock" Binding="{Binding Path=CountInStock}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Locatie" Binding="{Binding Path=WareHouseLocation}"/>
+
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button 
+                                            Command="{Binding Path=DataContext.Command_DataGridProductsButtonclick,       
+                                                RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"
+                                            Content="+" FontWeight="ExtraBold"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
                         </DataGrid.Columns>
 
@@ -138,11 +175,36 @@ BTWpercentage-->
                                Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
 
-                    <DataGrid  ItemsSource="{Binding ProductsAll}"
+                    <DataGrid  ItemsSource="{Binding ProductsOrdered, Mode=TwoWay}"
+                               SelectedItem="{Binding SelectedProductOrdered}"
                                AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
                                Grid.Column="6" Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=EAN}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding Path=_ProduktTitle}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Aantal" Binding="{Binding Path=Count}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Prijs/s" Binding="{Binding Path=UnitPrice, StringFormat=N2}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Prijs exc" Binding="{Binding Path=_calculatedPriceWithoutBTW, StringFormat=N2}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="BTW" Binding="{Binding Path=_BTWaddition, StringFormat=N2}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="Prijs inc" Binding="{Binding Path=_calculatedPriceWithBtw, StringFormat=N2}"/>
 
-
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button 
+                                            Command="{Binding Path=DataContext.Command_DataGridOrdersButtonclick,       
+                                                RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"
+                                            Content="-" FontWeight="ExtraBold"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                        <!--Count = frm.SelectedCount,
+                    EAN = SelectedProductFromAssortiment.EAN,
+                    UnitPrice = SelectedProductFromAssortiment.SellingPriceRecommended,
+                    _BtwPercentage = SelectedProductFromAssortiment.BTWpercentage,
+                    _calculatedPriceWithoutBTW = prijsZonderBtw,
+                    _calculatedPriceWithBtw = prijsZonderBtw + btwToeslag,-->
 
 
                     </DataGrid>
