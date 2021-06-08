@@ -25,6 +25,10 @@ namespace KFSolutionsWPF.ViewModels
         }
 
         //==============================================================================
+        public string Header { get; set; } = "Nieuw Produkt";
+        public ICommand Command_NavigatBack { get; set; }
+        public ICommand Command_ToMainMenu { get; set; }
+
         public ICommand Command_AddProduct { get; set; }
         public Product NewProduct { get; set; }
 
@@ -47,6 +51,9 @@ namespace KFSolutionsWPF.ViewModels
             _myView.DataContext = this;
             _viewtype = aviewType;
 
+
+            Command_NavigatBack = new RelayCommand(NavigateBack);
+            Command_ToMainMenu = new RelayCommand(NavigateToMainMenu);
 
             Command_AddProduct = new RelayCommand(SaveProduct);
 
@@ -78,6 +85,19 @@ namespace KFSolutionsWPF.ViewModels
 
         }
 
+        private void NavigateToMainMenu(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
+        }
+
+        private void NavigateBack(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
+        }
         private void SaveProduct(object obj)
         {
             if (NewProduct.MaxCountInStock < NewProduct.MinCountInStock)

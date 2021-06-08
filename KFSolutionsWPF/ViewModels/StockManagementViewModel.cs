@@ -19,7 +19,7 @@ namespace KFSolutionsWPF.ViewModels
 {
     public class StockManagementViewModel : _appViewModel
     {
-
+        public string Header { get; set; } = "Stockbeheer";
         //===========================================================================================================
         public List<ProductForStockDTO> ProductsAll { get; set; }
 

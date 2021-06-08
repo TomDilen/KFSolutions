@@ -9,12 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.ViewModels
 {
     public class SupplierAddNewViewModel : _appViewModel
     {
+        public string Header { get; set; } = "Nieuwe leverancier";
         //==============================================================================
+        public ICommand Command_NavigatBack { get; set; }
+        public ICommand Command_ToMainMenu { get; set; }
+
+
 
         public ICommand Command_AddSupplier { get; set; }
 
@@ -31,6 +37,10 @@ namespace KFSolutionsWPF.ViewModels
 
             Command_AddSupplier = new RelayCommand(SaveSupplier);
 
+            Command_NavigatBack = new RelayCommand(NavigateBack);
+            Command_ToMainMenu = new RelayCommand(NavigateToMainMenu);
+            //Command_AddNewEmployee = new RelayCommand(NavigateToNewEmployee);
+
             //nodig om te adden
             NewSupplier = new Supplier();
             NewSupplier.IsActive = true;
@@ -42,7 +52,19 @@ namespace KFSolutionsWPF.ViewModels
             NewSupplier.CmpWebCredentials = new CmpWebCredentials();
 
         }
+        private void NavigateToMainMenu(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
+        }
 
+        private void NavigateBack(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
+        }
         private void SaveSupplier(object obj)
         {
             //============================================================

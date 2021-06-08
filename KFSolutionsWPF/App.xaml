@@ -9,11 +9,7 @@
 
         <converters:BoolRadioConverter x:Key="BoolRadioConverter" />
         <converters:BoolRadioConverter x:Key="InverseBoolRadioConverter" Inverse="True" />
-
-
-
-
-
+        <converters:VisibilityConverter x:Key="VisibilityConverter" />
 
 
         <Style TargetType="TextBlock" x:Key="labelHoofdings">

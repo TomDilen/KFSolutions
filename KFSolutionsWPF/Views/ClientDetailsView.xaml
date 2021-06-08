@@ -28,7 +28,7 @@
                     <!--<Button Command="{Binding Command_ConfirmQuatation}" Style="{StaticResource BlueNavButton}"   ToolTip="Bevestig">
                         <Image Height="36"  Source="/img/Confirm.png" Margin="0,-1,0,0" />
                     </Button>-->
-                    <Button Command="{Binding Command_NewItem}" Style="{StaticResource YellowNavButton}"  ToolTip="Nieuwe klant toevoegen">
+                    <Button Command="{Binding Command_ToNewClient}" Style="{StaticResource YellowNavButton}"  ToolTip="Nieuwe klant toevoegen">
                         <Image Height="40"  Source="/img/addClient.png" Margin="0,-1,0,0" />
                     </Button>
                 </StackPanel>
@@ -36,7 +36,7 @@
         </components:NavBar>
 
 
-        <components:AppLayout1 Grid.Row="1" MaxWidth="600">
+        <components:AppLayout1 Grid.Row="1" MaxWidth="700">
             <ScrollViewer Style="{StaticResource CustomScrollViewer}"
                               ScrollViewer.VerticalScrollBarVisibility="Auto" 
                               ScrollViewer.HorizontalScrollBarVisibility="Auto">
@@ -66,11 +66,20 @@
 
                     <DataGrid  ItemsSource="{Binding ItemsFromDB}"
                                SelectedItem="{Binding Path=SelectedItemFromDB}"
-                               AutoGenerateColumns="True" CanUserAddRows="False" SelectionMode="Single"
+                               AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
                                Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
 
                         <DataGrid.Columns>
 
+
+                            <DataGridTextColumn IsReadOnly="True" Header="Voornaam" Binding="{Binding FirstName}" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding NameAddition}" ></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="Achternaam" Binding="{Binding LastName}" ></DataGridTextColumn>
+
+                            <DataGridTextColumn IsReadOnly="True" Header="Email"  Binding="{Binding Email}"></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="GSM"  Binding="{Binding MobileNumber}"></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="Telefoon"  Binding="{Binding PhoneNumber}"></DataGridTextColumn>
+                            
 
                             <!--bekijken button-->
                             <DataGridTemplateColumn>

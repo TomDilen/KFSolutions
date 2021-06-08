@@ -9,13 +9,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.ViewModels
 {
     public class ClientAddNewViewModel : _appViewModel
     {
+        public string Header { get; set; } = "Nieuwe Klant";
         //==============================================================================
-
+        public ICommand Command_NavigatBack { get; set; }
+        public ICommand Command_ToMainMenu { get; set; }
         public ICommand Command_AddClient { get; set; }
         public Client NewClient { get; set; }
 
@@ -28,12 +31,31 @@ namespace KFSolutionsWPF.ViewModels
             _myView = new ClientAddNewView();
             _myView.DataContext = this;
 
+
+            Command_NavigatBack = new RelayCommand(NavigateBack);
+            Command_ToMainMenu = new RelayCommand(NavigateToMainMenu);
+
             Command_AddClient = new RelayCommand(SaveClient);
 
             NewClient = new Client() { IsActive = true };
             NewClient.CltAddresss = new List<CltAddress>() { new CltAddress()  };
             NewClient.CltWebCredentials = new CltWebCredentials();
 
+        }
+
+
+        private void NavigateToMainMenu(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
+        }
+
+        private void NavigateBack(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
         }
 
         private void SaveClient(object obj)

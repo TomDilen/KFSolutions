@@ -14,7 +14,7 @@ namespace KFSolutionsWPF.ViewModels
 {
     public class OrderInHandlerViewModel : _appViewModel
     {
-
+        public string Header { get; set; } = "Binnengekomen bestellingen";
         //==============================================================================
         public List<OrderIn> OrdersIn { get; set; }
 

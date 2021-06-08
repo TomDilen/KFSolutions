@@ -79,16 +79,9 @@
                             <DataGridTextColumn IsReadOnly="True" Header="GSM"  Binding="{Binding MobileNumber}"></DataGridTextColumn>
                             <DataGridTextColumn IsReadOnly="True" Header="Telefoon"  Binding="{Binding PhoneNumber}"></DataGridTextColumn>
 
-                            <!--//IsMale
-//FirstName
-//LastName
-//NameAddition
-//Email
-//EmpDepartment.DescriptionNL
-//PhoneNumber
-//MobileNumber-->
 
-                            <!--bekijken button-->
+
+                            <!--bekijken button--><!--
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -99,7 +92,7 @@
                                                 Content="?" FontWeight="ExtraBold"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>-->
 
                             <!--bewerken button-->
                             <DataGridTemplateColumn>

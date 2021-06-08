@@ -18,6 +18,7 @@ namespace KFSolutionsWPF.ViewModels
         //==============================================================================
         public ICommand Command_NavigatBack { get; set; }
         public ICommand Command_ToMainMenu { get; set; }
+        public ICommand Command_ToNewClient { get; set; }
 
 
         public ICommand Command_DeleteDBitemButtonInDatagridClick { get; set; }
@@ -43,10 +44,22 @@ namespace KFSolutionsWPF.ViewModels
 
             Command_NavigatBack = new RelayCommand(NavigateBack);
             Command_ToMainMenu = new RelayCommand(NavigateToMainMenu);
+            Command_ToNewClient = new RelayCommand(NavigateToNewClient);
 
             Command_DeleteDBitemButtonInDatagridClick = new RelayCommand(DeleteDBitemButtonInDatagridClick);
             Command_UpdateDBitemButtonInDatagridClick = new RelayCommand(UpdateDBitemButtonInDatagridClick);
             Command_ViewDBitemButtonInDatagridClick = new RelayCommand(ViewDBitemButtonInDatagridClick);
+
+
+            //SelectedItemFromDB.
+
+        }
+
+        private void NavigateToNewClient(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new ClientAddNewViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Left, 500);
         }
 
         private void ViewDBitemButtonInDatagridClick(object obj)

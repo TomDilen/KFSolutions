@@ -20,6 +20,8 @@ namespace KFSrepository_EF6
 
         List< Employee> GetAllForOverview();
 
+        Employee Update(Employee employee);
+
     }
     //==========================================================================================
 
@@ -192,10 +194,45 @@ namespace KFSrepository_EF6
             {
                 terug = ctx.Set<Employee>()
                     .Include(nameof(Employee.EmpDepartment))
+                    .Include(nameof(Employee.EmpAddress))
+                    .Include(nameof(Employee.EmpContract) +"."+nameof(EmpContract.EmpContractStatuutType))
+                    .Include(nameof(Employee.EmpContract) + "." + nameof(EmpContract.EmpContractType))
+                    .Include(nameof(Employee.EmpAppAccount))
                     .Where(x => x.IsActive)
                     .ToList();
             }
             return terug;
+        }
+
+        public Employee Update(Employee aEmployee)
+        {
+            Employee gevonden = null;
+
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                gevonden = ctx.Set<Employee>()
+                    .FirstOrDefault(u => u.Id == aEmployee.Id);
+
+                if (gevonden == null)
+                {
+                    throw new DuplicateNameException($"user with {aEmployee.EmpAppAccount.UserName} not exist");
+                }
+
+                //gevonden = aEmployee;
+
+                Console.WriteLine("999999999999999 " +gevonden.FirstName);
+                ctx.Entry(gevonden).CurrentValues.SetValues(aEmployee);
+                ctx.Entry(gevonden.EmpAddress).CurrentValues.SetValues(aEmployee.EmpAddress);
+                ctx.Entry(gevonden.EmpContract).CurrentValues.SetValues(aEmployee.EmpContract);
+                ctx.SaveChanges();
+
+            }
+
+
+
+
+            return gevonden;
         }
 
 

@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Converters\BoolRadioConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
+    <Compile Include="Converters\VisibilityConverter.cs" />
     <Compile Include="DialogWindows\FrmInvoice.xaml.cs">
       <DependentUpon>FrmInvoice.xaml</DependentUpon>
     </Compile>

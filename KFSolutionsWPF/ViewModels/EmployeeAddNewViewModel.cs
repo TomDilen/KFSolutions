@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using TDS_wpf_extentions2.Transactioncontrol;
 
 namespace KFSolutionsWPF.ViewModels
@@ -21,6 +22,12 @@ namespace KFSolutionsWPF.ViewModels
     public class EmployeeAddNewViewModel : _appViewModel
     {
         //==============================================================================
+
+
+        public string Header { get; set; } = "Nieuwe werknemer";
+        //==============================================================================
+        public ICommand Command_NavigatBack { get; set; }
+        public ICommand Command_ToMainMenu { get; set; }
         public ICommand Command_AddEmployee { get; set; }
 
         public Employee NewEmployee { get; set; }
@@ -30,9 +37,10 @@ namespace KFSolutionsWPF.ViewModels
 
         public List<EmpContractType> ContractTypesAvailable { get; set; }
 
+        public bool IsNewMode { get; set; } = false;
         //==============================================================================
         public EmployeeAddNewViewModel(
-            AppRepository<KfsContext> aAppDbRepository, TDStransactionControl aTDStransactionControl)
+            AppRepository<KfsContext> aAppDbRepository, TDStransactionControl aTDStransactionControl , Employee aEmployee = null)
             : base(aAppDbRepository, aTDStransactionControl)
         {
             _myView = new EmployeeAddNewView();
@@ -43,16 +51,53 @@ namespace KFSolutionsWPF.ViewModels
             ContractTypesAvailable = aAppDbRepository.EmpContractType.GetAll().ToList();
             //string k = DepartmentsAvailable[0].DescriptionNL
 
+            Command_NavigatBack = new RelayCommand(NavigateBack);
+            Command_ToMainMenu = new RelayCommand(NavigateToMainMenu);
+
             Command_AddEmployee = new RelayCommand(SaveEmployee);
 
-            NewEmployee = new Employee();
-            NewEmployee.EmpAddress = new EmpAddress();
-            NewEmployee.EmpContract = new EmpContract();
-            NewEmployee.EmpAppAccount = new EmpAppAccount();
-            NewEmployee.EmpContract.DateOfStart = DateTime.Now;
-            NewEmployee.DateOfBirth = new DateTime(2000, 1, 1);
-            NewEmployee.IsActive = true;
-            //NewEmployee.FirstName = "snulleke";
+
+
+            NewEmployee = aEmployee;
+            if (aEmployee == null)
+            {
+                IsNewMode = true;
+
+                NewEmployee = new Employee();
+                NewEmployee.IsActive = true;
+                NewEmployee.EmpAddress = new EmpAddress();
+                NewEmployee.EmpContract = new EmpContract();
+                NewEmployee.EmpAppAccount = new EmpAppAccount();
+                NewEmployee.EmpContract.DateOfStart = DateTime.Now;
+                NewEmployee.DateOfBirth = new DateTime(2000, 1, 1);
+                NewEmployee.IsActive = true;
+            }
+            else
+            {
+
+            }
+
+
+            if(IsNewMode == false)
+            {
+                Header = "Werknemer bewerken";
+
+            }
+            
+        }
+
+        private void NavigateToMainMenu(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
+        }
+
+        private void NavigateBack(object obj)
+        {
+            _transactionControl.SlideNewContent(
+                new EmployeeDetailsViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Right, 500);
         }
 
         private void SaveEmployee(object obj)
@@ -93,28 +138,48 @@ namespace KFSolutionsWPF.ViewModels
 
 
 
-
-            NewEmployee.EmpAppAccount.AppPermissions = 0b0111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111;
-            NewEmployee.EmpAppAccount.IsPaswordResseted = true;
-            NewEmployee.EmpAppAccount.LastResetted = DateTime.Now;
-            NewEmployee.EmpAppAccount.IsBlocked = false;
-            NewEmployee.EmpAppAccount.InlogAttempts = 0;
-
-            Console.WriteLine(NewEmployee.EmpAppAccount.Password);
-            Console.WriteLine(NewEmployee.EmpAppAccount.UserName);
+            //Console.WriteLine(NewEmployee.EmpAppAccount.Password);
+            //Console.WriteLine(NewEmployee.EmpAppAccount.UserName);
 
 
-            try
+            NewEmployee.EmpAppAccount.AppPermissions = NewEmployee.EmpDepartment.DefaultPermissions;
+            //NewEmployee.EmpAppAccount.AppPermissions = 0b0111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111;
+
+
+            if (IsNewMode)
             {
-                _appDbRespository.Employee.Add(NewEmployee);
-                MessageBox.Show("Werkgever met succes toegevoegd");
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message + ex.InnerException);
-            }
-            
+                try
+                {
+                    
+                    NewEmployee.EmpAppAccount.IsPaswordResseted = true;
+                    NewEmployee.EmpAppAccount.LastResetted = DateTime.Now;
+                    NewEmployee.EmpAppAccount.IsBlocked = false;
+                    NewEmployee.EmpAppAccount.InlogAttempts = 0;
 
+                    _appDbRespository.Employee.Add(NewEmployee);
+                    MessageBox.Show("Werkgever met succes toegevoegd");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + ex.InnerException);
+                }
+            }
+
+            else
+            {
+               
+
+                try
+                {
+                    Console.WriteLine("================" +NewEmployee.FirstName);
+                    _appDbRespository.Employee.Update(NewEmployee);
+                    MessageBox.Show("TODO : Werkgever met succes aangepast");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + ex.InnerException);
+                }
+            }
 
 
         }

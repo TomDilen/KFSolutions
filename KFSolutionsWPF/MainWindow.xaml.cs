@@ -107,7 +107,7 @@ namespace KFSolutionsWPF
 
             //============================================test pdf
 
-            //PDF.PDFinvoice.Create(3 , _appDbRespository);
+            //PDF.PDFinvoice.Create(6, _appDbRespository);
             //Close();
             //return;
             //====================================================
@@ -117,6 +117,9 @@ namespace KFSolutionsWPF
             //_transactionControl.SlideNewContent(new InloggenViewModel(_appDbRespository, _transactionControl));
 
             _transactionControl.SlideNewContent(new MainMenuViewModel(_appDbRespository, _transactionControl));
+
+
+
 
             //_transactionControl.SlideNewContent(new EmployeeAddNewViewModel(_appDbRespository, _transactionControl));
             //_transactionControl.SlideNewContent(new SupplierAddNewViewModel(_appDbRespository, _transactionControl));

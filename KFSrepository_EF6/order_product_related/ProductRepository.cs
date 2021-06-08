@@ -75,22 +75,22 @@ namespace KFSrepository_EF6
                     //.OrderByDescending(x => x).Take(100)
                     .ToList();
 
-                Console.WriteLine("===================================================================");
-                foreach (var item in opgehaald)
-                {
-                  var xxx=  ctx.OrderIns.Join(ctx.OrderLineIns,
-                        o => o.Id,
-                        ol => ol.Id_OrderIn,
-                        (o, ol) => new {
-                            idAfgehandeld = o.Id_HandledBy,
-                            EAN = ol.EAN_Product,
-                            NumOfProducts = ol.NumberOfProducts,
-                        })
-                        .Where(x => x.EAN == item.EAN && x.idAfgehandeld == null).Select(x => x.NumOfProducts).Sum();
+                //Console.WriteLine("===================================================================");
+                //foreach (var item in opgehaald)
+                //{
+                //  var xxx=  ctx.OrderIns.Join(ctx.OrderLineIns,
+                //        o => o.Id,
+                //        ol => ol.Id_OrderIn,
+                //        (o, ol) => new {
+                //            idAfgehandeld = o.Id_HandledBy,
+                //            EAN = ol.EAN_Product,
+                //            NumOfProducts = ol.NumberOfProducts,
+                //        })
+                //        .Where(x => x.EAN == item.EAN && x.idAfgehandeld == null).Select(x => x.NumOfProducts).Sum();
 
-                    item.CountInProgress = xxx;  
-                }
-                Console.WriteLine("===================================================================");
+                //    item.CountInProgress = xxx;  
+                //}
+                //Console.WriteLine("===================================================================");
 
 
 

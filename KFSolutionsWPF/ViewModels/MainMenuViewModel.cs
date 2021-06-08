@@ -42,6 +42,10 @@ namespace KFSolutionsWPF.ViewModels
         public ICommand Command_ClientDetails { get; }
         public ICommand Command_SupplierDetails { get; }
 
+        public ICommand Command_OrderIn { get; }
+
+
+        public ICommand Command_OrderInHandler { get; }
 
 
 
@@ -72,6 +76,22 @@ namespace KFSolutionsWPF.ViewModels
             Command_ClientDetails = new RelayCommand(NavigateToClientDetails);
             Command_SupplierDetails = new RelayCommand(NavigateToSupplierDetails);
 
+            
+            Command_OrderIn = new RelayCommand(NavigateToOrderIn);
+            Command_OrderInHandler = new RelayCommand(NavigateToOrderInHandler);
+        }
+
+        private void NavigateToOrderInHandler(object obj)
+        {
+            
+            _transactionControl.SlideNewContent(new OrderInHandlerViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Left, 500);
+        }
+
+        private void NavigateToOrderIn(object obj)
+        {
+            _transactionControl.SlideNewContent(new StockManagementViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Left, 500);
         }
 
         private void NavigateToSupplierDetails(object obj)

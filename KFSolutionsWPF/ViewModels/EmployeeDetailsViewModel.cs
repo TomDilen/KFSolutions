@@ -23,7 +23,7 @@ namespace KFSolutionsWPF.ViewModels
 
         public ICommand Command_DeleteDBitemButtonInDatagridClick { get; set; }
         public ICommand Command_UpdateDBitemButtonInDatagridClick { get; set; }
-        public ICommand Command_ViewDBitemButtonInDatagridClick { get; set; }
+        //public ICommand Command_ViewDBitemButtonInDatagridClick { get; set; }
 
 
         public List<Employee> ItemsFromDB { get; set; }
@@ -50,7 +50,7 @@ namespace KFSolutionsWPF.ViewModels
 
             Command_DeleteDBitemButtonInDatagridClick = new RelayCommand(DeleteDBitemButtonInDatagridClick);
             Command_UpdateDBitemButtonInDatagridClick = new RelayCommand(UpdateDBitemButtonInDatagridClick);
-            Command_ViewDBitemButtonInDatagridClick = new RelayCommand(ViewDBitemButtonInDatagridClick);
+            //Command_ViewDBitemButtonInDatagridClick = new RelayCommand(ViewDBitemButtonInDatagridClick);
 
          
 
@@ -64,19 +64,24 @@ namespace KFSolutionsWPF.ViewModels
                 TDStransactionControl.TransactionDirection.Left, 500);
         }
 
-        private void ViewDBitemButtonInDatagridClick(object obj)
-        {
-            Console.WriteLine("geklikt op view => " + SelectedItemFromDB.Id);
-        }
+        //private void ViewDBitemButtonInDatagridClick(object obj)
+        //{
+        //    Console.WriteLine("geklikt op view => " + SelectedItemFromDB.Id);
+
+        //}
 
         private void UpdateDBitemButtonInDatagridClick(object obj)
         {
             Console.WriteLine("geklikt op bewerken => " + SelectedItemFromDB.Id);
+            _transactionControl.SlideNewContent(
+                new EmployeeAddNewViewModel(_appDbRespository, _transactionControl, SelectedItemFromDB),
+                TDStransactionControl.TransactionDirection.Left, 500);
         }
 
         private void DeleteDBitemButtonInDatagridClick(object obj)
         {
             Console.WriteLine("geklikt op delete => " +SelectedItemFromDB.Id);
+            Console.WriteLine(SelectedItemFromDB.EmpDepartment.DescriptionNL);
         }
 
         private void NavigateToMainMenu(object obj)

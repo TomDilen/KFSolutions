@@ -78,13 +78,13 @@
 
                     <StackPanel Grid.Row="2" Grid.Column="4" >
                         <Button Command="{Binding Command_Quatations}" Margin="5"  Height="50" Background="Green">quatations</Button>
-                        <Button Margin="5"  Height="50" Visibility="Collapsed">ik ben 12</Button>
+                        <Button Command="{Binding Command_OrderIn}" Margin="5"  Height="50" Background="#FF4FBB4F" >bestel bij leverancier</Button> <!--Visibility="Collapsed"-->
                         <Button Margin="5"  Height="50">ik ben 13</Button>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="6" >
                         <Button Command="{Binding Command_NewOrderOut}" Margin="5"  Height="50" Background="Yellow">bedien klant</Button>
-                        <Button Margin="5"  Height="50">ik ben 22</Button>
+                        <Button Command="{Binding Command_OrderInHandler}" Background="#FF7FE47F" Margin="5"  Height="50">binnengekomen orders</Button> 
                         <Button Margin="5"  Height="50">ik ben 23</Button>
                     </StackPanel>
 
