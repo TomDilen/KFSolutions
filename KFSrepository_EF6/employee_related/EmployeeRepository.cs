@@ -22,6 +22,8 @@ namespace KFSrepository_EF6
 
         Employee Update(Employee employee);
 
+        Employee Delete(Employee aEmployee);
+
     }
     //==========================================================================================
 
@@ -216,24 +218,46 @@ namespace KFSrepository_EF6
 
                 if (gevonden == null)
                 {
-                    throw new DuplicateNameException($"user with {aEmployee.EmpAppAccount.UserName} not exist");
+                    throw new DuplicateNameException($"user with {aEmployee.FirstName} not exist");
                 }
 
-                //gevonden = aEmployee;
-
-                Console.WriteLine("999999999999999 " +gevonden.FirstName);
                 ctx.Entry(gevonden).CurrentValues.SetValues(aEmployee);
                 ctx.Entry(gevonden.EmpAddress).CurrentValues.SetValues(aEmployee.EmpAddress);
                 ctx.Entry(gevonden.EmpContract).CurrentValues.SetValues(aEmployee.EmpContract);
+                ctx.Entry(gevonden.EmpAppAccount).CurrentValues.SetValues(aEmployee.EmpAppAccount);
                 ctx.SaveChanges();
 
             }
 
 
+            return gevonden;
+        }
 
+        public Employee Delete(Employee aEmployee)
+        {
+            Employee gevonden = null;
+
+
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                gevonden = ctx.Set<Employee>()
+                    .FirstOrDefault(u => u.Id == aEmployee.Id);
+
+                if (gevonden == null)
+                {
+                    throw new DuplicateNameException($"user with {aEmployee.EmpAppAccount.UserName} not exist");
+                }
+
+                gevonden.IsActive = false;
+                ctx.SaveChanges();
+
+            }
 
             return gevonden;
         }
+
+
 
 
 

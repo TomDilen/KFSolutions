@@ -29,6 +29,9 @@ namespace KFSolutionsModel
         public virtual ICollection<CmpSiteContactPerson> CmpSiteContactPersons { get; set; }
 
         public virtual CmpSiteAddress CmpSiteAddress { get; set; }
+
+
+
     }
 
 }

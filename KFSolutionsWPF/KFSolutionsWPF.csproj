@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="ViewModels\ClientAddNewViewModel.cs" />
     <Compile Include="ViewModels\ClientDetailsViewModel.cs" />
+    <Compile Include="ViewModels\CompanyBalanceSheetViewModel.cs" />
     <Compile Include="ViewModels\EmployeeAddNewViewModel.cs" />
     <Compile Include="ViewModels\EmployeeDetailsViewModel.cs" />
     <Compile Include="ViewModels\InloggenViewModel.cs" />
@@ -142,6 +143,9 @@
     </Compile>
     <Compile Include="Views\ClientDetailsView.xaml.cs">
       <DependentUpon>ClientDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompanyBalanceSheetView.xaml.cs">
+      <DependentUpon>CompanyBalanceSheetView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeAddNewView.xaml.cs">
       <DependentUpon>EmployeeAddNewView.xaml</DependentUpon>
@@ -220,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ClientDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CompanyBalanceSheetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

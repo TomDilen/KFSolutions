@@ -71,9 +71,7 @@ namespace KFSolutionsWPF.ViewModels
                 NewEmployee.EmpContract.DateOfStart = DateTime.Now;
                 NewEmployee.DateOfBirth = new DateTime(2000, 1, 1);
                 NewEmployee.IsActive = true;
-            }
-            else
-            {
+
 
             }
 
@@ -142,9 +140,17 @@ namespace KFSolutionsWPF.ViewModels
             //Console.WriteLine(NewEmployee.EmpAppAccount.UserName);
 
 
-            NewEmployee.EmpAppAccount.AppPermissions = NewEmployee.EmpDepartment.DefaultPermissions;
+            //NewEmployee.EmpAppAccount.AppPermissions = NewEmployee.EmpDepartment.DefaultPermissions;
+
+            NewEmployee.EmpAppAccount.AppPermissions = DepartmentsAvailable.First(x => x.Id == NewEmployee.Id_EmpDepartment).DefaultPermissions;
             //NewEmployee.EmpAppAccount.AppPermissions = 0b0111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111;
 
+
+
+            Console.WriteLine("===============================================================");
+            Console.WriteLine("depId: " + NewEmployee.Id_EmpDepartment);
+            Console.WriteLine("permiss:  " + NewEmployee.EmpAppAccount.AppPermissions);
+            Console.WriteLine("===============================================================");
 
             if (IsNewMode)
             {
@@ -171,7 +177,6 @@ namespace KFSolutionsWPF.ViewModels
 
                 try
                 {
-                    Console.WriteLine("================" +NewEmployee.FirstName);
                     _appDbRespository.Employee.Update(NewEmployee);
                     MessageBox.Show("TODO : Werkgever met succes aangepast");
                 }

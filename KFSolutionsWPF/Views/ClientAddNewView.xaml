@@ -133,21 +133,22 @@
                 <TextBlock Text="Adres gegevens" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
                 <TextBlock Text="Straat, nummer, bus" Grid.Row="7"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].Street}" Grid.Row="7" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].HouseNumber}"  Grid.Row="7" Grid.ColumnSpan="4"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
-                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].HouseNumberAddition}" Grid.Row="7" Grid.ColumnSpan="2"  Grid.Column="13" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding Path=NewClient.CltAddresssAsList[0].Street}" Grid.Row="7" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding Path=NewClient.CltAddresssAsList[0].HouseNumber}"  Grid.Row="7" Grid.ColumnSpan="4"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding Path=NewClient.CltAddresssAsList[0].HouseNumberAddition}" Grid.Row="7" Grid.ColumnSpan="2"  Grid.Column="13" Style="{StaticResource textboxData}"></TextBox>
 
                 <TextBlock Text="Postcode, gemeente,land" Grid.Row="8"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].Zipcode}" Grid.Row="8" Grid.ColumnSpan="4"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].City}" Grid.Row="8" Grid.ColumnSpan="5"  Grid.Column="5" Style="{StaticResource textboxData}"></TextBox>
-                <TextBox Text="{Binding Path=NewClient.CltAddresss[0].Country}" Grid.Row="8" Grid.ColumnSpan="5"  Grid.Column="10" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding Path=NewClient.CltAddresssAsList[0].Zipcode}" Grid.Row="8" Grid.ColumnSpan="4"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding Path=NewClient.CltAddresssAsList[0].City}" Grid.Row="8" Grid.ColumnSpan="5"  Grid.Column="5" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Text="{Binding Path=NewClient.CltAddresssAsList[0].Country}" Grid.Row="8" Grid.ColumnSpan="5"  Grid.Column="10" Style="{StaticResource textboxData}"></TextBox>
 
-                <!--====================== web credentials Informatie ==============================-->
-                <TextBlock Text="WebSite inloggegevens " Grid.Row="13"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+                <!--====================== web credentials Informatie ==============================--><!--
+                    <TextBlock  Visibility="{Binding IsNewMode, Converter={StaticResource VisibilityConverter}}" 
+                                Text="WebSite inloggegevens " Grid.Row="13"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
-                <TextBlock Text="Username, paswoord" Grid.Row="14"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                <TextBox Text="{Binding NewClient.CltWebCredentials.UserName}" Grid.Row="14" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                <TextBox Text="{Binding NewClient.CltWebCredentials.Password}" Grid.Row="14" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBlock Visibility="{Binding IsNewMode, Converter={StaticResource VisibilityConverter}}" Text="Username, paswoord" Grid.Row="14"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                    <TextBox Visibility="{Binding IsNewMode, Converter={StaticResource VisibilityConverter}}" Text="{Binding NewClient.CltWebCredentials.UserName}" Grid.Row="14" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox Visibility="{Binding IsNewMode, Converter={StaticResource VisibilityConverter}}" Text="{Binding NewClient.CltWebCredentials.Password}" Grid.Row="14" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>-->
 
 
                 <!--====================== ADDbutton ==============================--><!--

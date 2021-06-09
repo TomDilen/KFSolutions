@@ -63,6 +63,12 @@ namespace KFSolutionsModel
 
         public virtual ICollection<ProductQuotation> ProductQuotations { get; set; }
 
+
+        [NotMapped]
+        public CmpSiteAddress AddressForDetails { get; set; }
+        
+                              
+
     }
 }
 

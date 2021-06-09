@@ -23,9 +23,10 @@ namespace KFSolutionsWPF.ViewModels
         public Client NewClient { get; set; }
 
 
+        public bool IsNewMode { get; set; } = false;
         //==============================================================================
 
-        public ClientAddNewViewModel( AppRepository<KfsContext> aAppDbRepository, TDS_wpf_extentions2.Transactioncontrol.TDStransactionControl aTDStransactionControl)
+        public ClientAddNewViewModel( AppRepository<KfsContext> aAppDbRepository,TDStransactionControl aTDStransactionControl , Client aClient = null)
             : base(aAppDbRepository, aTDStransactionControl)
         {
             _myView = new ClientAddNewView();
@@ -37,10 +38,24 @@ namespace KFSolutionsWPF.ViewModels
 
             Command_AddClient = new RelayCommand(SaveClient);
 
-            NewClient = new Client() { IsActive = true };
-            NewClient.CltAddresss = new List<CltAddress>() { new CltAddress()  };
-            NewClient.CltWebCredentials = new CltWebCredentials();
 
+            NewClient = aClient;
+
+            if(aClient == null) {
+                IsNewMode = true;
+
+                NewClient = new Client() { IsActive = true };
+                NewClient.CltAddresss = new List<CltAddress>() { new CltAddress()  };
+                //NewClient.CltWebCredentials = new CltWebCredentials();
+
+                NewClient.CltAddresssAsList = new List<CltAddress>() { new CltAddress() };
+            }
+            else
+            {
+                Header = "Klant bewerken";
+
+                NewClient.CltAddresssAsList = NewClient.CltAddresss.ToList(); // new List<CltAddress>() { new CltAddress() };
+            }
         }
 
 
@@ -54,21 +69,42 @@ namespace KFSolutionsWPF.ViewModels
         private void NavigateBack(object obj)
         {
             _transactionControl.SlideNewContent(
-                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                new ClientDetailsViewModel(_appDbRespository, _transactionControl),
                 TDStransactionControl.TransactionDirection.Right, 500);
         }
 
         private void SaveClient(object obj)
         {
 
-            try
+            if (IsNewMode)
             {
-                _appDbRespository.Client.Add(NewClient);
-                MessageBox.Show("Client met succes toegevoegd");
+                //try
+                //{
+                    NewClient.CltAddresss = NewClient.CltAddresssAsList;
+                    Console.WriteLine(NewClient.CltAddresss.ToList()[0].Street);
+                    _appDbRespository.Client.Add(NewClient);
+
+                    MessageBox.Show("Client met succes toegevoegd");
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message + ex.InnerException);
+                //}
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message + ex.InnerException);
+                //try
+                //{
+                    //console.WriteLine("================" + NewClient.FirstName);
+                    NewClient.CltAddresss = NewClient.CltAddresssAsList;
+                    _appDbRespository.Client.Update(NewClient);
+                    MessageBox.Show("Client met succes aangepast");
+                //}
+                //catch (Exception ex)
+                //{
+
+                //    MessageBox.Show(ex.Message + ex.InnerException);
+                //}
             }
 
         }

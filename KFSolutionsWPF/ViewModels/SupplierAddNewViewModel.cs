@@ -62,7 +62,7 @@ namespace KFSolutionsWPF.ViewModels
         private void NavigateBack(object obj)
         {
             _transactionControl.SlideNewContent(
-                new MainMenuViewModel(_appDbRespository, _transactionControl),
+                new SupplierDetailsViewModel(_appDbRespository, _transactionControl),
                 TDStransactionControl.TransactionDirection.Right, 500);
         }
         private void SaveSupplier(object obj)

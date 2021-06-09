@@ -81,8 +81,10 @@
                             <DataGridTextColumn IsReadOnly="True" Header="Webiste"  Binding="{Binding Website}"></DataGridTextColumn>
 
 
+
+
                             <!--bekijken button-->
-                            <DataGridTemplateColumn>
+                            <!--<DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button 
@@ -92,9 +94,9 @@
                                                 Content="?" FontWeight="ExtraBold"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>-->
 
-                            <!--bewerken button-->
+                            <!--bewerken button--><!--
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -105,7 +107,7 @@
                                                 Content="..." FontWeight="ExtraBold"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>-->
 
                             <!--verwijderen button-->
                             <DataGridTemplateColumn>
@@ -120,8 +122,73 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                        </DataGrid.Columns>
 
+
+
+                        </DataGrid.Columns>
+                        <!--Supplier_Product_Prices-->
+                        <DataGrid.RowDetailsTemplate >
+                            
+                            
+                            
+                            <DataTemplate>
+
+                                <Grid Background="#FFD0FFD0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition  Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <TextBlock Margin="20,0" Grid.Row="1" Grid.Column="0">Straat:</TextBlock>
+                                    <TextBlock Text="{Binding Path=AddressForDetails.Street}" Grid.Row="1" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="3" Grid.Column="0">Nr:</TextBlock>
+                                    <TextBlock Text="{Binding Path=AddressForDetails.HouseNumber}" Grid.Row="3" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="5" Grid.Column="0">Bus:</TextBlock>
+                                    <TextBlock Text="{Binding Path=AddressForDetails.HouseNumberAddition}" Grid.Row="5" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="7" Grid.Column="0">Postcode</TextBlock>
+                                    <TextBlock Text="{Binding Path=AddressForDetails.Zipcode}" Grid.Row="7" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="9" Grid.Column="0">Gemeente</TextBlock>
+                                    <TextBlock Text="{Binding Path=AddressForDetails.City}"  Grid.Row="9" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="11" Grid.Column="0">Land</TextBlock>
+                                    <TextBlock Text="{Binding Path=AddressForDetails.Country}" Grid.Row="11" Grid.Column="1"></TextBlock>
+                               
+
+
+
+                                    <DataGrid Grid.Row="12" Grid.ColumnSpan="2" Margin="20,10" ItemsSource="{Binding Supplier_Product_Prices}" AutoGenerateColumns="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=EAN_Product}"/>
+                                            <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding Path=Product.ProductTitle}"/>
+                                            <DataGridTextColumn IsReadOnly="True" Header="Aankoopprijs" Binding="{Binding Path=UnitPrice}"/>
+                                            <DataGridTextColumn IsReadOnly="True" Header="Locatie" Binding="{Binding Path=Product.WareHouseLocation}"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+                                </Grid>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
                     </DataGrid>
 
 

@@ -84,8 +84,8 @@
 
                     <StackPanel Grid.Row="2" Grid.Column="6" >
                         <Button Command="{Binding Command_NewOrderOut}" Margin="5"  Height="50" Background="Yellow">bedien klant</Button>
-                        <Button Command="{Binding Command_OrderInHandler}" Background="#FF7FE47F" Margin="5"  Height="50">binnengekomen orders</Button> 
-                        <Button Margin="5"  Height="50">ik ben 23</Button>
+                        <Button Command="{Binding Command_OrderInHandler}" Background="#FF7FE47F" Margin="5"  Height="50">binnengekomen orders</Button>
+                        <Button Command="{Binding Command_CompanyBalanceSheet}" Background="DarkGreen" Margin="5"  Height="50">Bedrijfscijfers</Button>
                     </StackPanel>
 
                 </Grid>

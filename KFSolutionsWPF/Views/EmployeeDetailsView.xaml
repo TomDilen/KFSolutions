@@ -122,6 +122,59 @@
 
                         </DataGrid.Columns>
 
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+
+                                <Grid Background="#FFD0FFD0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition  Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <TextBlock Margin="20,0" Grid.Row="1" Grid.Column="0">Straat:</TextBlock>
+                                    <TextBlock Text="{Binding Path=EmpAddress.Street}" Grid.Row="1" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="3" Grid.Column="0">Nr:</TextBlock>
+                                    <TextBlock Text="{Binding Path=EmpAddress.HouseNumber}" Grid.Row="3" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="5" Grid.Column="0">Bus:</TextBlock>
+                                    <TextBlock Text="{Binding Path=EmpAddress.HouseNumberAddition}" Grid.Row="5" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="7" Grid.Column="0">Postcode</TextBlock>
+                                    <TextBlock Text="{Binding Path=EmpAddress.Zipcode}" Grid.Row="7" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="9" Grid.Column="0">Gemeente</TextBlock>
+                                    <TextBlock Text="{Binding Path=EmpAddress.City}"  Grid.Row="9" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Margin="20,0" Grid.Row="11" Grid.Column="0">Land</TextBlock>
+                                    <TextBlock Text="{Binding Path=EmpAddress.Country}" Grid.Row="11" Grid.Column="1"></TextBlock>
+                                </Grid>
+                                <!--<DataGrid Margin="20,10" ItemsSource="{Binding OrderLineIns}" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Aantal" Binding="{Binding Path=NumberOfProducts}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=Product.EAN}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Produkt" Binding="{Binding Path=Product.ProductTitle}"/>
+                                        <DataGridTextColumn IsReadOnly="True" Header="Locatie" Binding="{Binding Path=Product.WareHouseLocation}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>-->
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
+
                     </DataGrid>
 
 

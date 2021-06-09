@@ -81,7 +81,7 @@
                             <DataGridTextColumn IsReadOnly="True" Header="Telefoon"  Binding="{Binding PhoneNumber}"></DataGridTextColumn>
                             
 
-                            <!--bekijken button-->
+                            <!--bekijken button--><!--
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -92,7 +92,7 @@
                                                 Content="?" FontWeight="ExtraBold"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>-->
 
                             <!--bewerken button-->
                             <DataGridTemplateColumn>

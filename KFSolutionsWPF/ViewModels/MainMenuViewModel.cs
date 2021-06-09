@@ -46,6 +46,7 @@ namespace KFSolutionsWPF.ViewModels
 
 
         public ICommand Command_OrderInHandler { get; }
+        public ICommand Command_CompanyBalanceSheet { get; }
 
 
 
@@ -79,6 +80,13 @@ namespace KFSolutionsWPF.ViewModels
             
             Command_OrderIn = new RelayCommand(NavigateToOrderIn);
             Command_OrderInHandler = new RelayCommand(NavigateToOrderInHandler);
+            Command_CompanyBalanceSheet = new RelayCommand(NavigateToCompanyBalanceSheet);
+        }
+
+        private void NavigateToCompanyBalanceSheet(object obj)
+        {
+            _transactionControl.SlideNewContent(new CompanyBalanceSheetViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Left, 500);
         }
 
         private void NavigateToOrderInHandler(object obj)

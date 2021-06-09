@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TDS_wpf_extentions2.Transactioncontrol;
 
@@ -72,7 +73,7 @@ namespace KFSolutionsWPF.ViewModels
 
         private void UpdateDBitemButtonInDatagridClick(object obj)
         {
-            Console.WriteLine("geklikt op bewerken => " + SelectedItemFromDB.Id);
+            //Console.WriteLine("geklikt op bewerken => " + SelectedItemFromDB.Id);
             _transactionControl.SlideNewContent(
                 new EmployeeAddNewViewModel(_appDbRespository, _transactionControl, SelectedItemFromDB),
                 TDStransactionControl.TransactionDirection.Left, 500);
@@ -80,8 +81,27 @@ namespace KFSolutionsWPF.ViewModels
 
         private void DeleteDBitemButtonInDatagridClick(object obj)
         {
-            Console.WriteLine("geklikt op delete => " +SelectedItemFromDB.Id);
-            Console.WriteLine(SelectedItemFromDB.EmpDepartment.DescriptionNL);
+
+            //Console.WriteLine("geklikt op delete => " +SelectedItemFromDB.Id);
+
+            if (MessageBoxResult.Yes ==
+                MessageBox.Show(
+                    $"Weet je zeker dat je {SelectedItemFromDB.FirstName} {SelectedItemFromDB.LastName} wil verwijderen?", "Verwijderen",
+                    MessageBoxButton.YesNo, MessageBoxImage.Question))
+            {
+                try
+                {
+                    _appDbRespository.Employee.Delete(SelectedItemFromDB);
+
+                    ItemsFromDB = _appDbRespository.Employee.GetAllForOverview();
+                    MessageBox.Show("Werkgever met succes verwijderd");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message + ex.InnerException);
+                }
+            }
+            //refreshen
         }
 
         private void NavigateToMainMenu(object obj)
