@@ -1,12 +1,14 @@
 ﻿using KFSolutionsModel;
 using KFSolutionsWPF.Commands;
 using KFSolutionsWPF.DialogWindows;
+using KFSolutionsWPF.PDF;
 using KFSolutionsWPF.Views;
 using KFSrepository_EF6;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,7 +52,11 @@ namespace KFSolutionsWPF.ViewModels
         public InternalOrderlineHelper SelectedProductOrdered { get; set; }
 
 
-        
+        public string TTexclBtw { get; set; } = "0.00€";
+        public string TTbtw { get; set; } = "0.00€";
+        public string TTinclBtw { get; set; } = "0.00€";
+
+
 
         private List<Product> _workingProductList;
         private bool _isSavedToDB = false;
@@ -104,6 +110,8 @@ namespace KFSolutionsWPF.ViewModels
 
             ProductsOrdered = new ObservableCollection<InternalOrderlineHelper>();
 
+            CalculateTotals();
+
             SelectedClient = null;
             _isSavedToDB = false;
         }
@@ -147,14 +155,36 @@ namespace KFSolutionsWPF.ViewModels
                     _calculatedPriceWithBtw = prijsZonderBtw + btwToeslag,
                     _ProduktTitle = SelectedProductFromAssortiment.ProductTitle,
                 }) ;
-                Console.WriteLine("update" + ProductsOrdered.Count);
+                //Console.WriteLine("update" + ProductsOrdered.Count);
+                CalculateTotals();
             };
 
         }
         private void DataGridOrdersButtonclick(object obj)
         {
             ProductsOrdered.Remove(SelectedProductOrdered);
+            CalculateTotals();
         }
+
+        private void CalculateTotals()
+        {
+            double _TTexclBtw =0;
+            double _TTbtw = 0;
+            double _TTinclBtw = 0;
+
+            foreach (var item in ProductsOrdered)
+            {
+                _TTexclBtw += item._calculatedPriceWithoutBTW;
+                _TTbtw += item._BTWaddition;
+                _TTinclBtw += item._calculatedPriceWithBtw;
+            }
+
+            TTexclBtw = _TTexclBtw.ToString("0.00") + "€";
+            TTbtw = _TTbtw.ToString("0.00") + "€";
+            TTinclBtw = _TTinclBtw.ToString("0.00") +"€";
+        }
+
+
         private bool CanSaveToDB(object obj)
         {
             if (_isSavedToDB) return false;
@@ -182,6 +212,7 @@ namespace KFSolutionsWPF.ViewModels
             }
             SelectedClient = null;
             ProductsOrdered.Clear();
+            CalculateTotals();
             _isSavedToDB = false;
         }
 
@@ -221,17 +252,21 @@ namespace KFSolutionsWPF.ViewModels
                 MessageBox.Show(ex.Message + ex.InnerException);
                 return;
             }
-            MessageBox.Show("Verkoop met succes geregistreerd");
+
+            string filename = PDFinvoice.Create(bestelling.Id ,_appDbRespository);
+
+            if(MessageBoxResult.Yes ==
+                MessageBox.Show("Verkoop met succes geregistreerd\n wil je het factuur openen?", 
+                "openen", MessageBoxButton.YesNo, MessageBoxImage.Question))
+            {
+                Process.Start(filename);
+            }
+
+
+            
 
             //enkel als effectief gesaved is
             _isSavedToDB = true;
-
-
-
-            Console.WriteLine("=======================PDF===============");
-
-            OrderOut orderToPrint = bestelling;
-
 
 
         }

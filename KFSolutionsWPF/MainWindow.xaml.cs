@@ -116,7 +116,7 @@ namespace KFSolutionsWPF
 
             //_transactionControl.SlideNewContent(new InloggenViewModel(_appDbRespository, _transactionControl));
 
-            _transactionControl.SlideNewContent(new MainMenuViewModel(_appDbRespository, _transactionControl));
+            //_transactionControl.SlideNewContent(new MainMenuViewModel(_appDbRespository, _transactionControl));
 
 
 
@@ -137,6 +137,8 @@ namespace KFSolutionsWPF
 
 
             //_transactionControl.SlideNewContent(new InvoiceViewModel(_appDbRespository, _transactionControl));
+
+            _transactionControl.SlideNewContent(new CompanyBalanceSheetViewModel(_appDbRespository, _transactionControl));
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

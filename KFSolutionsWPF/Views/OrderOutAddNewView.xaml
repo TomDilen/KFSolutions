@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="550" d:DesignWidth="800">
 
     
     <Grid>
@@ -76,6 +76,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
 
                     </Grid.RowDefinitions>
 
@@ -104,7 +107,7 @@
                         <TextBox Text="{Binding Path=SelectedClient.LastName}" Grid.Row="1" Grid.ColumnSpan="1"  Grid.Column="2" Style="{StaticResource textboxData}" IsEnabled="False"></TextBox>
                         
                     </Grid>
-                    <Expander Grid.Column="0" Grid.Row="2" Margin="20,0">
+                    <Expander Grid.Column="0" Grid.Row="2" Margin="20,0" Grid.ColumnSpan="200">
                         <DataGrid  ItemsSource="{Binding ClientsAll}"
                                AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
                                Margin="5"  Background="#FF012E01" Opacity="0.9" 
@@ -124,14 +127,14 @@
 
                     <!--======== grid assortiment ==========-->
 
-                    <TextBlock Text="Ons assortiment"  Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="1"
+                    <TextBlock Text="Ons assortiment"  Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="1" 
                                Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
 
                     <DataGrid  ItemsSource="{Binding ProductsAll}"
                                SelectedItem="{Binding Path=SelectedProductFromAssortiment}"
                                AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
-                               Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
+                               Grid.Row="7" Margin="5" Grid.RowSpan="1000"  Background="#FF012E01" Opacity="0.9" >
                         
                         <DataGrid.Columns>
                             <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=EAN}"/>
@@ -156,18 +159,6 @@
 
                     </DataGrid>
 
-                    <!--EAN = ID (geen oplopend nummer)
-
-ProductTitle
-ExtraInfo
-
-SellingPriceRecommended
-CountInStock
-MinCountInStock
-MaxCountInStock
-WareHouseLocation
-Image
-BTWpercentage-->
 
 
                     <!--======== grid bestelling==========-->
@@ -209,6 +200,33 @@ BTWpercentage-->
 
                     </DataGrid>
 
+                    <!--======== bedrag details==========-->
+                    <TextBlock Text="Bedrag van bestelling"  Grid.Row="10"  Grid.Column="1" Grid.ColumnSpan="1"
+                               Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                    <Grid Grid.Row="11" Grid.Column="1" Background="#FF012E01" Opacity="0.9" Margin="5" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Style="{StaticResource labelData}" FontSize="12">Excl. btw:</TextBlock>
+                        <TextBlock Text="{Binding TTexclBtw}" Grid.Row="0" Grid.Column="1" Style="{StaticResource labelData}" FontSize="12"></TextBlock>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource labelData}" FontSize="12">BTW:</TextBlock>
+                        <TextBlock Text="{Binding TTbtw}" Grid.Row="1" Grid.Column="1" Style="{StaticResource labelData}" FontSize="12"></TextBlock>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource labelData}" FontSize="20">Incl. btw:</TextBlock>
+                        <TextBlock Text="{Binding TTinclBtw}" Grid.Row="2" Grid.Column="1" Style="{StaticResource labelData}" FontSize="20"></TextBlock>
+
+                    </Grid>
 
 
                 </Grid>

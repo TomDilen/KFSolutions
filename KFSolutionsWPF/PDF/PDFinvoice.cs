@@ -6,6 +6,7 @@ using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,20 +19,18 @@ namespace KFSolutionsWPF.PDF
         private const string PATH_TO_INVOICES = @"accountancy\invoices\";
 
         //=============================================================================
-        public static void Create(int aId_OrderOut , AppRepository<KfsContext> aAppDbRespository)
+        public static string Create(int aId_OrderOut , AppRepository<KfsContext> aAppDbRespository)
         {
-           Create(  aAppDbRespository.OrderOut.GetForInvoiceById(aId_OrderOut));
+           return Create(  aAppDbRespository.OrderOut.GetForInvoiceById(aId_OrderOut));
         }
 
         //=============================================================================
-        public static void Create(OrderOut aOrderOut)
+        public static string  Create(OrderOut aOrderOut)
         {
-            if(aOrderOut == null)
-            {
-                throw new KeyNotFoundException("kan order niet vinden in DB");
-            }
-
  
+            return filename;
+
+
 
         }
     }

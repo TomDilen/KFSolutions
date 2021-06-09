@@ -13,6 +13,9 @@ namespace KFSrepository_EF6
     public interface IOrderOutRepository : ITDSrepository<OrderOut>
     {
         OrderOut GetForInvoiceById(int aOrderoutId);
+
+        List<OrderOut> GetForBalance();
+        
     }
 
     public class OrderOutRepository : TDSrepository<OrderOut>, IOrderOutRepository
@@ -48,6 +51,8 @@ namespace KFSrepository_EF6
             return terug;
         }
 
+
+
         public OrderOut GetForInvoiceById(int aOrderoutId)
         {
             OrderOut terug = null;
@@ -63,13 +68,28 @@ namespace KFSrepository_EF6
                     
                     .FirstOrDefault();
             }
-//Een factuur heeft
-//de   naam van   de producten, omschrijving, aantal,
-//prijs, totale prijs zonder btw, btw en prijs inclusief
-//btw.
+            return terug;
+        }
+
+        public List<OrderOut> GetForBalance()
+        {
+            List<OrderOut> terug = new List<OrderOut>();
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.OrderOuts
+                    .Include(nameof(OrderOut.Client))
+                    //.Include(nameof(OrderOut.Client) + "." + nameof(Client.CltAddresss))
+                    .Include(nameof(OrderOut.OrderLineOuts))
+                    .Include(nameof(OrderOut.OrderLineOuts) + "." + nameof(OrderLineOut.Product))
+
+                    .ToList();
+            }
 
             return terug;
         }
+
+
 
     }
 

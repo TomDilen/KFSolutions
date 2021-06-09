@@ -42,6 +42,79 @@
             <ScrollViewer Style="{StaticResource CustomScrollViewer}"
                     ScrollViewer.VerticalScrollBarVisibility="Auto">
 
+
+                <Grid>
+                    <TabControl>
+                        <TabItem Header="General">
+                            <Label Content="Content goes here..." />
+                        </TabItem>
+                        
+                        <!--========================== TAB VERKOOP ========================================-->
+                        <TabItem IsSelected="True" Header="Details verkoop">
+
+
+                            <DataGrid  ItemsSource="{Binding OrdersOutFromDB}"
+                               SelectedItem="{Binding Path=SelectedOrdersOutFromDBInDatagridDetailsVerkoop}"
+                               AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                               Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
+
+
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn IsReadOnly="True" Header="Factuur" Binding="{Binding Id, StringFormat=D8}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Datum" Binding="{Binding SoldAt}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Klant" Binding="{Binding _FullNameClient}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="TTstuks" Binding="{Binding _AantalStuks}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="TTprijs" Binding="{Binding _TTverkoopPrijs, StringFormat=N2}" ></DataGridTextColumn>
+
+
+                                    <!--bekijken button-->
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button 
+                                                        Command="{Binding Path=DataContext.Command_ViewInvoiceButtonInDatagridClick,       
+                                                            RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"
+                                                    ToolTip="maak/bekijk factuur"
+                                                        Content="Factuur" FontWeight="ExtraBold"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+
+
+                                </DataGrid.Columns>
+                                <DataGrid.RowDetailsTemplate >
+                                    <DataTemplate>
+                                        <DataGrid   Margin="20,10" ItemsSource="{Binding OrderLineOuts}" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=EAN_Product}"/>
+                                                <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding Path=Product.ProductTitle}"/>
+                                                <DataGridTextColumn IsReadOnly="True" Header="Verkoopprijs" Binding="{Binding Path=UnitPrice}"/>
+                                                <DataGridTextColumn IsReadOnly="True" Header="Aantal" Binding="{Binding Path=NumberOfProducts}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
+
+
+                            </DataGrid>
+                        </TabItem>
+                        
+                        
+                        
+                        
+                        <TabItem Header="Details aankoop">
+
+                        </TabItem>
+                        <TabItem Header="Details Stock">
+                            
+                            
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+
+
             </ScrollViewer>
 
         </components:AppLayout1>
