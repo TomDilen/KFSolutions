@@ -41,9 +41,13 @@ namespace KFSrepository_EF6
         {
             public enum Permissions
             {
-                EmployeeAddNew = 61,
-                EmployeeUpdate = 62,
-                EmployeeRemove = 63,
+                //EmployeeAddNew = 61,
+                //EmployeeUpdate = 62,
+                //EmployeeRemove = 63,
+
+                Admin = 63,
+                Verkoop = 10,
+                Magazijn=36,
             }
 
             public int Id { get; set; }
@@ -104,7 +108,7 @@ namespace KFSrepository_EF6
             {
                 gevonden = ctx.Set<EmpAppAccount>()
                     .Include(nameof(EmpAppAccount.Employee))
-                    .FirstOrDefault(u => u.UserName == aUsername);
+                    .FirstOrDefault(u => u.UserName == aUsername && u.Employee.IsActive);
             }
 
             if(gevonden != null)
@@ -148,10 +152,10 @@ namespace KFSrepository_EF6
                     }
                 }
 
-                //foreach (var item in tmptest)
-                //{
-                //    //Console.WriteLine(item);
-                //}
+                foreach (var item in tmptest)
+                {
+                    Console.WriteLine(item);
+                }
 
                 //bool IsBitSet(byte b, int pos)
                 //{

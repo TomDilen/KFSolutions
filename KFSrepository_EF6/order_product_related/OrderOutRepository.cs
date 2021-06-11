@@ -64,6 +64,7 @@ namespace KFSrepository_EF6
                     .Include(nameof(OrderOut.Client) + "." + nameof(Client.CltAddresss))
                     .Include(nameof( OrderOut.OrderLineOuts))
                     .Include(nameof(OrderOut.OrderLineOuts) + "." + nameof(OrderLineOut.Product))
+                    .Include(nameof(OrderOut.SoldBy))
                     .Where(x => x.Id == aOrderoutId)
                     
                     .FirstOrDefault();
@@ -82,7 +83,7 @@ namespace KFSrepository_EF6
                     //.Include(nameof(OrderOut.Client) + "." + nameof(Client.CltAddresss))
                     .Include(nameof(OrderOut.OrderLineOuts))
                     .Include(nameof(OrderOut.OrderLineOuts) + "." + nameof(OrderLineOut.Product))
-
+                    .Include(nameof(OrderOut.SoldBy))
                     .ToList();
             }
 

@@ -321,6 +321,8 @@ namespace KFSolutionsWPF.ViewModels
             public string ProductName { get; set; }
             public string Name_supplier { get; set; }
 
+            
+
             public event PropertyChangedEventHandler PropertyChanged;
         }
 

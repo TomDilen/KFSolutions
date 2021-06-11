@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,11 @@ namespace KFSrepository_EF6
 
         List<Product> GetAllforOrderOut();
 
+        List<Product> GetAllForOverview();
+
+        Product Update(Product aProduct);
+
+        List<Product> GetForBalance();
     }
 
     public class ProductRepository : TDSrepository<Product>, IProductRepository
@@ -117,6 +123,8 @@ namespace KFSrepository_EF6
             foreach (var item in opgehaald)
             {
                 item.SuplierName = opgehaaldSupplierMin.Where(x => x.Id == item.ID_Supplier).Select(x=>x.Name).FirstOrDefault();
+                //1 als bijbestellen nodig is
+                item.IsOrderNeeded = (item.CountInStock + item.CountInProgress) < item.MinCountInStock;
             }
 
             //Console.WriteLine("===================================================");
@@ -150,34 +158,88 @@ namespace KFSrepository_EF6
         }
 
 
+        public List<Product> GetAllForOverview()
+        {
+            List<Product> terug = new List<Product>();
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.Set<Product>()
+                    .Include(nameof(Product.Supplier_Product_Prices))
+                    .Include(nameof(Product.Supplier_Product_Prices) +"."+ nameof(Supplier_Product_Price.Supplier))
+                    //.Include(nameof(Employee.EmpContract) + "." + nameof(EmpContract.EmpContractStatuutType))
+                    //.Include(nameof(Employee.EmpContract) + "." + nameof(EmpContract.EmpContractType))
+                    //.Include(nameof(Employee.EmpAppAccount))
+                    .ToList();
+            }
+            return terug;
+        }
 
 
 
+        public Product Update(Product aProduct)
+        {
+            Product gevonden = null;
 
 
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                gevonden = ctx.Set<Product>()
+                    .FirstOrDefault(u => u.EAN == aProduct.EAN);
+
+                if (gevonden == null)
+                {
+                    throw new DuplicateNameException($"user with {aProduct.EAN} not exist");
+                }
+
+                ctx.Entry(gevonden).CurrentValues.SetValues(aProduct);
+                //ctx.Entry(gevonden.EmpAddress).CurrentValues.SetValues(aEmployee.EmpAddress);
+                //ctx.Entry(gevonden.EmpContract).CurrentValues.SetValues(aEmployee.EmpContract);
+                //ctx.Entry(gevonden.EmpAppAccount).CurrentValues.SetValues(aEmployee.EmpAppAccount);
+                ctx.SaveChanges();
+
+            }
 
 
+            return gevonden;
+        }
 
+        public List<Product> GetForBalance()
+        {
+            List<Product> terug = new List<Product>();
 
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.Products
+                    
+                    ////.Include(nameof(OrderOut.Client) + "." + nameof(Client.CltAddresss))
+                    //.Include(nameof(OrderIn.OrderLineIns))
+                    //.Include(nameof(OrderIn.OrderLineIns) + "." + nameof(OrderLineIn.OrderIn))
+                    //.Include(nameof(OrderIn.OrderedBy))
+                    //.Include(nameof(OrderIn.HandledBy))
+                    .ToList();
+            }
 
+            return terug;
+        }
 
+        public List<Product> GetForSalesBalance()
+        {
+            List<Product> terug = new List<Product>();
 
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.Products
 
+                    ////.Include(nameof(OrderOut.Client) + "." + nameof(Client.CltAddresss))
+                    //.Include(nameof(OrderIn.OrderLineIns))
+                    //.Include(nameof(OrderIn.OrderLineIns) + "." + nameof(OrderLineIn.OrderIn))
+                    //.Include(nameof(OrderIn.OrderedBy))
+                    //.Include(nameof(OrderIn.HandledBy))
+                    .ToList();
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            return terug;
+        }
 
 
 
@@ -203,6 +265,8 @@ namespace KFSrepository_EF6
             public int ID_Supplier { get; set; }
             public string SuplierName { get; set; }
             public float UnitPrice { get; set; }
+
+            public bool IsOrderNeeded { get; set; }
         }
         public class SupplierMinDTO : BaseDTO
         {

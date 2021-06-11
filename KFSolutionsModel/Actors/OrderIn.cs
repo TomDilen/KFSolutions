@@ -55,6 +55,16 @@ namespace KFSolutionsModel
         //OrderLines
 
 
+        //[NotMapped]
+        //public string _FullNameSupplier { get; set; }
+        [NotMapped]
+        public double _TTaankoopPrijs { get; set; }
+        [NotMapped]
+        public int _AantalStuks { get; set; }
+        [NotMapped]
+        public string _FullNameEmployeeHandledBy{ get; set; }
+        [NotMapped]
+        public string _FullNameEmployeeOrderedBy { get; set; }
 
 
 

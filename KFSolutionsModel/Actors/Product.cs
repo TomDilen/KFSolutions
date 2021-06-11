@@ -76,11 +76,16 @@ namespace KFSolutionsModel
 
         public virtual ICollection<Supplier_Product_Price> Supplier_Product_Prices { get; set; }
 
-        
+
+
+        [NotMapped]
+        public double CalculatatedStockValue { get; set; }
 
         //[NotMapped]
-        //public virtual ICollection<ProductQuotation> ProductQuotations { get; set; }
+        //public int CalculatatedTTnumberSoldedForBalance { get; set; }
 
+        //[NotMapped]
+        //public double CalculatatedTTAmountSoldedForBalance { get; set; }
 
     }
 }

@@ -13,6 +13,7 @@ namespace KFSrepository_EF6
     public interface IOrderInRepository : ITDSrepository<OrderIn>
     {
         List<OrderIn> GetAll_forOrderInHandling();
+        List<OrderIn> GetForBalance();
         void HandlelOrders(List<int> aListOrder, int aEmployeeId);
     }
 
@@ -71,9 +72,28 @@ namespace KFSrepository_EF6
 
                 ctx.SaveChanges();
             }
-
-
         }
+
+        public List<OrderIn> GetForBalance()
+        {
+            List<OrderIn> terug = new List<OrderIn>();
+
+            using (KfsContext ctx = new KfsContext(_constring))
+            {
+                terug = ctx.OrderIns
+                    .Include(nameof(OrderIn.Supplier))
+                    ////.Include(nameof(OrderOut.Client) + "." + nameof(Client.CltAddresss))
+                    .Include(nameof(OrderIn.OrderLineIns))
+                    .Include(nameof(OrderIn.OrderLineIns) + "." + nameof(OrderLineIn.Product))
+                    .Include(nameof(OrderIn.OrderedBy))
+                    .Include(nameof(OrderIn.HandledBy))
+                    .ToList();
+            }
+
+            return terug;
+        }
+
     }
 
 }
+

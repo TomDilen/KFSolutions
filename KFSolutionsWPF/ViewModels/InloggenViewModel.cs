@@ -23,8 +23,8 @@ namespace KFSolutionsWPF.ViewModels
 
         public string StatusMessage { get; set; }
 
-        public string Username { get; set; } = "Tom_0123";
-        public string Password { get; set; } = "Tom_0123";
+        public string Username { get; set; } //= "Tom_0123";
+        public string Password { get; set; } //= "Tom_0123";
 
 
         //==============================================================================

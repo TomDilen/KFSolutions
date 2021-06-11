@@ -38,12 +38,21 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>university.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
@@ -105,6 +114,7 @@
     <Compile Include="Components\NavBar.xaml.cs">
       <DependentUpon>NavBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanToBrushConverter.cs" />
     <Compile Include="Converters\BoolRadioConverter.cs" />
     <Compile Include="Converters\StringToImageConverter.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
@@ -119,6 +129,7 @@
     </Compile>
     <Compile Include="PDF\PDFinvoice.cs" />
     <Compile Include="TDS\Extentions.cs" />
+    <Compile Include="TDS\RegexUtilities.cs" />
     <Compile Include="UserControls\test.xaml.cs">
       <DependentUpon>test.xaml</DependentUpon>
     </Compile>
@@ -133,6 +144,7 @@
     <Compile Include="ViewModels\OrderInHandlerViewModel.cs" />
     <Compile Include="ViewModels\OrderOutAddNewViewModel.cs" />
     <Compile Include="ViewModels\ProductAddNewViewModel.cs" />
+    <Compile Include="ViewModels\ProductDetailsViewModel.cs" />
     <Compile Include="ViewModels\QuatationsViewModel.cs" />
     <Compile Include="ViewModels\StockManagementViewModel.cs" />
     <Compile Include="ViewModels\SupplierAddNewViewModel.cs" />
@@ -170,6 +182,9 @@
     </Compile>
     <Compile Include="Views\ProductAddNewView.xaml.cs">
       <DependentUpon>ProductAddNewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductDetailsView.xaml.cs">
+      <DependentUpon>ProductDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QuatationsView.xaml.cs">
       <DependentUpon>QuatationsView.xaml</DependentUpon>
@@ -260,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProductAddNewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -364,6 +383,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\addEmployee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Close.png" />
+    <Resource Include="img\minimize.png" />
+    <Resource Include="img\minimize2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Untitled2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="university.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

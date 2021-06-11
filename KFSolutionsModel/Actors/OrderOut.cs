@@ -61,6 +61,8 @@ namespace KFSolutionsModel
         public double _TTverkoopPrijs { get; set; }
         [NotMapped]
         public int _AantalStuks { get; set; }
+        [NotMapped]
+        public string _FullNameEmployeeSolded { get; set; }
 
 
 

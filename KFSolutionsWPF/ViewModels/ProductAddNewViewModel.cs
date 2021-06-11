@@ -36,6 +36,8 @@ namespace KFSolutionsWPF.ViewModels
         public ObservableCollection<Single> BtwAvailable { get; set; } = new ObservableCollection<Single>() { 6, 12, 21 };
 
         private ViewType _viewtype;
+
+        public bool IsNewMode { get; set; } = false;
         //==============================================================================
 
 
@@ -68,12 +70,18 @@ namespace KFSolutionsWPF.ViewModels
                     throw new NotImplementedException("niet geimplementeerd");
                     break;
                 case ViewType.Edit:
-                    throw new NotImplementedException("niet geimplementeerd");
+                    Header  = "Bewerk Produkt";
+                    if (aInitProduct == null) throw new NotImplementedException("ainitproduct mag niet null zijn");
+                    NewProduct = aInitProduct;
                     break;
                 case ViewType.New:
+                    Header = "Nieuw Produkt";
+                    IsNewMode = true;
                     break;
                 case ViewType.NewFromQuatations:
-                    if(aInitProduct==null) throw new NotImplementedException("ainitproduct mag niet null zijn");
+                    Header = "Nieuw Produkt";
+                    IsNewMode = true;
+                    if (aInitProduct==null) throw new NotImplementedException("ainitproduct mag niet null zijn");
                     NewProduct = aInitProduct;
                     break;
                 default:
@@ -94,9 +102,28 @@ namespace KFSolutionsWPF.ViewModels
 
         private void NavigateBack(object obj)
         {
-            _transactionControl.SlideNewContent(
-                new MainMenuViewModel(_appDbRespository, _transactionControl),
-                TDStransactionControl.TransactionDirection.Right, 500);
+            switch (_viewtype)
+            {
+                case ViewType.ReadOnly:
+                    break;
+                case ViewType.Edit:
+                    _transactionControl.SlideNewContent(
+                        new ProductDetailsViewModel(_appDbRespository, _transactionControl),
+                        TDStransactionControl.TransactionDirection.Right, 500);
+                    break;
+                case ViewType.New:
+                    _transactionControl.SlideNewContent(
+                        new ProductDetailsViewModel(_appDbRespository, _transactionControl),
+                        TDStransactionControl.TransactionDirection.Right, 500);
+                    break;
+                case ViewType.NewFromQuatations:
+                    _transactionControl.SlideNewContent(
+                        new QuatationsViewModel(_appDbRespository, _transactionControl),
+                        TDStransactionControl.TransactionDirection.Right, 500);
+                    break;
+                default:
+                    break;
+            }
         }
         private void SaveProduct(object obj)
         {
@@ -134,17 +161,25 @@ namespace KFSolutionsWPF.ViewModels
                     throw new NotImplementedException("niet geimplementeerd");
                     break;
                 case ViewType.Edit:
-                    throw new NotImplementedException("niet geimplementeerd");
+                    try
+                    {
+                        _appDbRespository.Product.Update(NewProduct);
+                        MessageBox.Show("Produkt met succes aangepast");
+                        NavigateBack(null);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message + ex.InnerException);
+                        return;
+                    }
                     break;
                 case ViewType.New:
-                    throw new NotImplementedException("niet geimplementeerd");
-                    break;
                 case ViewType.NewFromQuatations:
                     try
                     {
                         _appDbRespository.Product.Add(NewProduct);
                         MessageBox.Show("Produkt met succes toegevoegd");
-                        NavigateBack();
+                        NavigateBack(null);
                     }
                     catch (Exception ex)
                     {
@@ -157,28 +192,28 @@ namespace KFSolutionsWPF.ViewModels
                     break;
             }
         }
-        public void NavigateBack()
-        {
-            switch (_viewtype)
-            {
-                case ViewType.ReadOnly:
-                    throw new NotImplementedException("niet geimplementeerd");
-                    break;
-                case ViewType.Edit:
-                    throw new NotImplementedException("niet geimplementeerd");
-                    break;
-                case ViewType.New:
-                    throw new NotImplementedException("niet geimplementeerd");
-                    break;
-                case ViewType.NewFromQuatations:
-                    _transactionControl.SlideNewContent(new QuatationsViewModel(_appDbRespository, _transactionControl),
-                        TDStransactionControl.TransactionDirection.Right, 500);
-                    break;
-                default:
-                    throw new NotImplementedException("niet geimplementeerd");
-                    break;
-            }
-        }
+        //public void NavigateBack()
+        //{
+        //    switch (_viewtype)
+        //    {
+        //        case ViewType.ReadOnly:
+        //            throw new NotImplementedException("niet geimplementeerd");
+        //            break;
+        //        case ViewType.Edit:
+        //            throw new NotImplementedException("niet geimplementeerd");
+        //            break;
+        //        case ViewType.New:
+        //            throw new NotImplementedException("niet geimplementeerd");
+        //            break;
+        //        case ViewType.NewFromQuatations:
+        //            _transactionControl.SlideNewContent(new QuatationsViewModel(_appDbRespository, _transactionControl),
+        //                TDStransactionControl.TransactionDirection.Right, 500);
+        //            break;
+        //        default:
+        //            throw new NotImplementedException("niet geimplementeerd");
+        //            break;
+        //    }
+        //}
 
 
     }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KFSolutionsWPF" 
         xmlns:usercontrols="clr-namespace:KFSolutionsWPF.UserControls" xmlns:Transactioncontrol1="clr-namespace:TDS_wpf_extentions2.Transactioncontrol;assembly=TDS_wpf_extentions2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="950" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="950" MinHeight="650" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="650" Width="950" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" MinWidth="950" MinHeight="650" WindowStartupLocation="CenterScreen" Icon="Untitled2.png">
 
 
     <Window.Effect>
@@ -32,7 +32,7 @@
             
         </Grid.ColumnDefinitions>-->
         <Grid.RowDefinitions>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="55"/>
             <RowDefinition Height="0"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -42,9 +42,9 @@
         <Grid Grid.Row="0" Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" MouseDown="ColumnDefinition_MouseDown"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="45"/>
+                <ColumnDefinition Width="45"/>
+                <ColumnDefinition Width="45"/>
             </Grid.ColumnDefinitions>
             <Rectangle x:Name="tittleBar" Margin="0" Grid.Row="0" Grid.ColumnSpan="40" MouseDown="ColumnDefinition_MouseDown">
                 <Rectangle.Fill>
@@ -64,9 +64,21 @@
                         </LinearGradientBrush>
                     </TextBlock.Foreground></TextBlock>
             </Viewbox>
-            <Button Grid.Column="1" Width="auto" Height="auto" Margin="5" Click="Button_Minimizid">-</Button>
-            <Button Grid.Column="2" Width="auto" Height="auto" Margin="5" Click="Button_ToggleMaximized">O</Button>
-            <Button Grid.Column="3" Width="auto" Height="auto" Margin="5" Click="Button_Close">X</Button>
+            <!--<Button Command="{Binding Command_NavigatBack}" Style="{StaticResource GreenNavButton}"  ToolTip="Naar vorige">
+                <Image Height="36"  Source="/img/leftarrow.png" Margin="-3,2,0,0" />
+            </Button>-->
+            <Button Grid.Column="1" Width="auto" Height="auto" Margin="3,8" Click="Button_Minimizid" 
+                    Style="{StaticResource GreenNavButton}" ToolTip="Minimalizeren">
+                <Image Height="22"  Source="/img/minimize2.png" Margin="0,0,0,0" />
+            </Button>
+            <Button Grid.Column="2" Width="auto" Height="auto" Margin="3,8" Click="Button_ToggleMaximized" 
+                    Style="{StaticResource GreenNavButton}"  ToolTip="Maximalizeren/verkleinen">
+                <Image Height="24"  Source="/img/minimize.png" Margin="0,2,0,0" />
+            </Button>
+            <Button Grid.Column="3" Width="auto" Height="auto" Margin="3,8" Click="Button_Close" 
+                    Style="{StaticResource GreenNavButton}"  ToolTip="Sluiten">
+                <Image Height="22"  Source="/img/Close.png" Margin="2,1,0,0" />
+            </Button>
         </Grid>
 
 

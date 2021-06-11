@@ -52,7 +52,7 @@ namespace KFSrepository_EF6
 
                 for (int i = 0; i < terug.Count; i++)
                 {
-                    terug[i].Supplier_Product_Prices = terug[i].Supplier_Product_Prices.OrderBy(x => x.Product.ProductTitle).ToList();
+                    terug[i].Supplier_Product_Prices = terug[i].Supplier_Product_Prices.OrderBy(x => x.Product.ProductTitle).ThenBy(x=>x.Id).ToList();
 
                     //address ook nog als default setten
                     terug[i].AddressForDetails = terug[i].CmpSites.ToList()[0].CmpSiteAddress;

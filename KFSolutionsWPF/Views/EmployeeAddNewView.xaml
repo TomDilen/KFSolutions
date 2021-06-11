@@ -161,7 +161,17 @@
                     <TextBlock Text="Administratieve gegevens" Grid.Row="9"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
                     <TextBlock Text="Rijksregegister:" Grid.Row="10"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                    <TextBox Text="{Binding NewEmployee.PassPortID}" Grid.Row="10" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    
+                    <TextBox Text="{Binding NewEmployee.PassPortID}" 
+                             Grid.Row="10" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+
+                    <!--<TextBox Text="{Binding NewEmployee.PassPortID, ValidatesOnDataErrors=True,
+                            UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding ErrorCollection[PassPortID]}"
+                             Grid.Row="10" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>-->
+
+                    <!--<TextBox Text="{Binding Username, ValidatesOnDataErrors=True,
+                UpdateSourceTrigger=PropertyChanged}"
+                     ToolTip="{Binding ErrorCollection[Username]}"/>-->
 
                     <TextBlock Text="IBAN:" Grid.Row="11"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
                     <TextBox Text="{Binding NewEmployee.IBAN}" Grid.Row="11" Grid.ColumnSpan="14"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>

@@ -57,7 +57,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="3" Opacity="0.7"
+                    <Border BorderThickness="1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="7" Grid.RowSpan="3" Opacity="0.5"
                             CornerRadius="10" BorderBrush="Black">
                         <Border.Effect>
                             <DropShadowEffect Color="#FF072C0A" BlurRadius="20"/>
@@ -71,21 +71,32 @@
                     </Border>
 
                     <StackPanel Grid.Row="2" Grid.Column="2" >
-                        <Button Command="{Binding Command_EmployeeDetails}" Margin="5"  Height="50" Background="red">Werknemer details</Button>
-                        <Button Command="{Binding Command_ClientDetails}" Margin="5"  Height="50" Background="#FFAA5555">Klant details</Button>
-                        <Button Command="{Binding Command_SupplierDetails}" Margin="5" Height="50" Background="#FFCB9494">Leverancier details</Button>
+                        <Button Command="{Binding Command_EmployeeDetails}"  Visibility="{Binding IsAdminEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Margin="5"  Height="50" Background="red" FontSize="16">Werknemer details</Button>
+                        <Button Command="{Binding Command_ClientDetails}" Visibility="{Binding IsSalesEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Margin="5"  Height="50" Background="#FFE2D924" FontSize="16">Klant details</Button>
+                        <Button Command="{Binding Command_SupplierDetails}"  Visibility="{Binding IsWareHouseEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Margin="5" Height="50" Background="#FF94A0CB" FontSize="16">Leverancier details</Button>
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="4" >
-                        <Button Command="{Binding Command_Quatations}" Margin="5"  Height="50" Background="Green">quatations</Button>
-                        <Button Command="{Binding Command_OrderIn}" Margin="5"  Height="50" Background="#FF4FBB4F" >bestel bij leverancier</Button> <!--Visibility="Collapsed"-->
-                        <Button Margin="5"  Height="50">ik ben 13</Button>
+                        <Button Command="{Binding Command_Quatations}" Visibility="{Binding IsWareHouseEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Margin="5"  Height="50" Background="#FF4B93BB" FontSize="16">Offertes</Button>
+                        <Button Command="{Binding Command_OrderIn}" Visibility="{Binding IsWareHouseEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Margin="5"  Height="50" Background="#FF4F85BB" FontSize="16" >bestel bij leverancier</Button> <!--Visibility="Collapsed"-->
+                        <Button Command="{Binding Command_ProductDetails}" Visibility="{Binding IsWareHouseEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Margin="5"  Height="50" Background="#FF2A5C8D" FontSize="16" >Product details</Button>
+                        <!--Visibility="Collapsed"-->
+                        <!--<Button Margin="5"  Height="50" FontSize="16">ik ben 13</Button>-->
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Grid.Column="6" >
-                        <Button Command="{Binding Command_NewOrderOut}" Margin="5"  Height="50" Background="Yellow">bedien klant</Button>
-                        <Button Command="{Binding Command_OrderInHandler}" Background="#FF7FE47F" Margin="5"  Height="50">binnengekomen orders</Button>
-                        <Button Command="{Binding Command_CompanyBalanceSheet}" Background="DarkGreen" Margin="5"  Height="50">Bedrijfscijfers</Button>
+                        <Button Command="{Binding Command_NewOrderOut}"  Visibility="{Binding IsSalesEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Margin="5"  Height="50" Background="#FFC3C31F" FontSize="16">bedien klant</Button>
+                        <Button Command="{Binding Command_OrderInHandler}" Visibility="{Binding IsWareHouseEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Background="#FF7FC4E4" Margin="5"  Height="50" FontSize="16">binnengekomen orders</Button>
+                        <Button Command="{Binding Command_CompanyBalanceSheet}" Visibility="{Binding IsAdminEmployeeLoggedIn, Converter={StaticResource VisibilityConverter}}"
+                                Background="#FFBD8CCB" Margin="5"  Height="50" FontSize="16">Bedrijfscijfers</Button>
                     </StackPanel>
 
                 </Grid>

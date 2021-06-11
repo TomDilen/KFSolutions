@@ -1,11 +1,14 @@
 ﻿using KFSolutionsModel;
 using KFSolutionsWPF.Commands;
+using KFSolutionsWPF.TDS;
 using KFSolutionsWPF.Views;
 using KFSrepository_EF6;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -21,6 +24,7 @@ namespace KFSolutionsWPF.ViewModels
 
     public class EmployeeAddNewViewModel : _appViewModel
     {
+
         //==============================================================================
 
 
@@ -101,6 +105,10 @@ namespace KFSolutionsWPF.ViewModels
         private void SaveEmployee(object obj)
         {
 
+
+            if (!ValidateAll()) return;
+
+
             Console.WriteLine(NewEmployee.FirstName);
             Console.WriteLine(NewEmployee.NameAddition);
             Console.WriteLine(NewEmployee.LastName);
@@ -142,15 +150,15 @@ namespace KFSolutionsWPF.ViewModels
 
             //NewEmployee.EmpAppAccount.AppPermissions = NewEmployee.EmpDepartment.DefaultPermissions;
 
-            NewEmployee.EmpAppAccount.AppPermissions = DepartmentsAvailable.First(x => x.Id == NewEmployee.Id_EmpDepartment).DefaultPermissions;
+            //NewEmployee.EmpAppAccount.AppPermissions = DepartmentsAvailable.First(x => x.Id == NewEmployee.Id_EmpDepartment).DefaultPermissions;
             //NewEmployee.EmpAppAccount.AppPermissions = 0b0111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111_1111;
 
 
 
-            Console.WriteLine("===============================================================");
-            Console.WriteLine("depId: " + NewEmployee.Id_EmpDepartment);
-            Console.WriteLine("permiss:  " + NewEmployee.EmpAppAccount.AppPermissions);
-            Console.WriteLine("===============================================================");
+            //Console.WriteLine("===============================================================");
+            //Console.WriteLine("depId: " + NewEmployee.Id_EmpDepartment);
+            //Console.WriteLine("permiss:  " + NewEmployee.EmpAppAccount.AppPermissions);
+            //Console.WriteLine("===============================================================");
 
             if (IsNewMode)
             {
@@ -173,7 +181,6 @@ namespace KFSolutionsWPF.ViewModels
 
             else
             {
-               
 
                 try
                 {
@@ -188,8 +195,176 @@ namespace KFSolutionsWPF.ViewModels
 
 
         }
+
+        private bool ValidateAll()
+        {
+            if (string.IsNullOrEmpty(NewEmployee.FirstName) || NewEmployee.FirstName.Length < 2 || NewEmployee.FirstName.Length > 25)
+            {
+                MessageBox.Show("Voornaam moet 2 tot 25 tekens bevatten");
+                return false;
+            }
+            if (NewEmployee.NameAddition != null && NewEmployee.NameAddition.Length > 10)
+            {
+                MessageBox.Show("tussenvoegsel mag maximum 10 tekens bevatten");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(NewEmployee.LastName) || NewEmployee.LastName.Length < 2 || NewEmployee.LastName.Length > 25)
+            {
+                MessageBox.Show("Achternaam moet 2 tot 25 tekens bevatten");
+                return false;
+            }
+
+            if (!RegexUtilities.IsValidEmail(NewEmployee.Email))
+            {
+                MessageBox.Show("Email is geen geldig email");
+                return false;
+            }
+
+            if (NewEmployee.MobileNumber != null && NewEmployee.MobileNumber.Length > 20)
+            {
+                MessageBox.Show("Gsm mag maximum 20 tekens bevatten");
+                return false;
+            }
+            if (NewEmployee.PhoneNumber != null && NewEmployee.PhoneNumber.Length > 15)
+            {
+                MessageBox.Show("Telefoon mag maximum 15 tekens bevatten");
+                return false;
+            }
+            if (string.IsNullOrEmpty(NewEmployee.EmpAddress.Street) || NewEmployee.EmpAddress.Street.Length < 2 || NewEmployee.EmpAddress.Street.Length > 30)
+            {
+                MessageBox.Show("Straat moet 2 tot 30 tekens bevatten");
+                return false;
+            }
+            if (NewEmployee.EmpAddress.HouseNumber < 1 || NewEmployee.EmpAddress.HouseNumber > 3000)
+            {
+                MessageBox.Show("geen geldig huisnummer");
+                return false;
+            }
+            if (NewEmployee.EmpAddress.HouseNumberAddition != null && NewEmployee.EmpAddress.HouseNumberAddition.Length > 8)
+            {
+                MessageBox.Show("Bus kan maximum 8 tekens bevatten");
+                return false;
+            }
+            if (string.IsNullOrEmpty(NewEmployee.EmpAddress.Zipcode) || NewEmployee.EmpAddress.Zipcode.Length < 4 || NewEmployee.EmpAddress.Zipcode.Length > 12)
+            {
+                MessageBox.Show("postcode moet 4 tot maximum 12 tekens bevatten");
+                return false;
+            }
+            if (string.IsNullOrEmpty(NewEmployee.EmpAddress.City) || NewEmployee.EmpAddress.City.Length < 4 || NewEmployee.EmpAddress.City.Length > 20)
+            {
+                MessageBox.Show("Gemeente moet 4 tot maximum 20 tekens bevatten");
+                return false;
+            }
+            if (string.IsNullOrEmpty(NewEmployee.EmpAddress.Country) || NewEmployee.EmpAddress.Country.Length < 4 || NewEmployee.EmpAddress.Country.Length > 20)
+            {
+                MessageBox.Show("Land moet 4 tot maximum 20 tekens bevatten");
+                return false;
+            }
+            if (string.IsNullOrEmpty(NewEmployee.PassPortID) || NewEmployee.PassPortID.Length < 4 || NewEmployee.PassPortID.Length > 15)
+            {
+                MessageBox.Show("rijksregisternummer moet 5 tot maximum 15 tekens bevatten");
+                return false;
+            }
+            if (string.IsNullOrEmpty(NewEmployee.IBAN) || NewEmployee.IBAN.Length < 4 || NewEmployee.IBAN.Length > 15)
+            {
+                MessageBox.Show("IBAN moet 5 tot maximum 15 tekens bevatten");
+                return false;
+            }
+            if (NewEmployee.Id_EmpDepartment < 1)
+            {
+                MessageBox.Show("Afdeling is niet ingevuld");
+                return false;
+            }
+            if (NewEmployee.EmpContract.Id_EmpContractType < 1)
+            {
+                MessageBox.Show("contracttype is niet ingevuld");
+                return false;
+            }
+            if (NewEmployee.EmpContract.Id_EmpContractStatuutType < 1)
+            {
+                MessageBox.Show("Statuut is niet ingevuld");
+                return false;
+            }
+            if (NewEmployee.EmpContract.MonthSalary < 1)
+            {
+                MessageBox.Show("Ongeldig maandsalaris");
+                return false;
+            }
+            if (NewEmployee.EmpContract.DateOfStart == null)
+            {
+                MessageBox.Show("Startdatum moet ingevuld zijn");
+                return false;
+            }
+
+
+            if (IsNewMode)
+            {
+
+                //cijfers, grote en kleine letters, underscores en range
+                if ( string.IsNullOrEmpty(NewEmployee.EmpAppAccount.UserName) ||
+                    !new Regex("^[0-9A-Za-z_]{5,20}$").IsMatch(NewEmployee.EmpAppAccount.UserName))
+                {
+                    MessageBox.Show("Geen geldig gebruikersnaam");
+                    return false;
+                }
+
+                if (string.IsNullOrEmpty(NewEmployee.EmpAppAccount.Password) ||
+                    !new Regex(
+                        "^"
+                        +
+                        "(?=.*[A-Z]+)"          // [A-Z] betekend een hoofdletter, het plusje betekend '1 of meer'
+                        +
+                        "(?=.*[a-z]+)"          // [a-z] betekend een kleine letter, het plusje betekend '1 of meer'
+                        +
+                        "(?=.*[0-9]+)"          // [0-9] betekend een digital, het plusje betekend '1 of meer'
+                        +
+                        $"(?=.*[_]+)"           //tekens tss aanhalingstekenz, het plusje betekend '1 of meer'
+                        +
+                        ".{8,20}$"              //kijken of het geheel 8tot 20 lang is, 
+                    ).IsMatch(NewEmployee.EmpAppAccount.Password))
+                {
+                    MessageBox.Show("Geen geldig Passwoord");
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
+
+
+            //NewEmployee.FirstName
+            //NewEmployee.NameAddition
+            //NewEmployee.LastName
+            //NewEmployee.Email
+            //NewEmployee.MobileNumber
+            //NewEmployee.PhoneNumber
+
+            //NewEmployee.EmpAddress.Street
+            //NewEmployee.EmpAddress.HouseNumber
+            //NewEmployee.EmpAddress.HouseNumberAddition
+
+            //NewEmployee.EmpAddress.Zipcode
+            //NewEmployee.EmpAddress.City
+            //NewEmployee.EmpAddress.Country
+
+            //NewEmployee.PassPortID
+            //NewEmployee.IBAN
+            //NewEmployee.Id_EmpDepartment = min1
+            //NewEmployee.EmpContract.Id_EmpContractStatuutType
+            //NewEmployee.EmpContract.Id_EmpContractType
+            //NewEmployee.EmpContract.MonthSalary
+            //NewEmployee.EmpContract.DateOfStart
+
+
+            //username en paswoord enkel bij nieuwe controleren
+
+            //NewEmployee.EmpAppAccount.UserName
+            //NewEmployee.EmpAppAccount.Password
+
+
 
 
 

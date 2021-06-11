@@ -21,6 +21,16 @@ namespace KFSolutionsWPF.ViewModels
         public string Header { get; set; } = "Hoofd menu";
 
 
+        //============================== permissies ====================
+        public bool IsWareHouseEmployeeLoggedIn { get; set; } = false;
+        public bool IsSalesEmployeeLoggedIn { get; set; } = false;
+        public bool IsAdminEmployeeLoggedIn { get; set; } = false;
+
+
+        //==============================================================
+
+
+
         //-------------------- navbar -----------------------------
         public ICommand Command_LogOut { get; }
 
@@ -42,6 +52,8 @@ namespace KFSolutionsWPF.ViewModels
         public ICommand Command_ClientDetails { get; }
         public ICommand Command_SupplierDetails { get; }
 
+
+        public ICommand Command_ProductDetails { get; }
         public ICommand Command_OrderIn { get; }
 
 
@@ -57,6 +69,42 @@ namespace KFSolutionsWPF.ViewModels
         {
             _myView = new MainMenuView();
             _myView.DataContext = this;
+
+            Header = $"Hoofdmenu, welkom {_appDbRespository.Employee.InloggedEmployee.FirstName}";
+
+            if(_appDbRespository.Employee.InloggedEmployee.AppPermissions.
+                Contains(EmployeeRepository.EmployeeLoggedInDTO.Permissions.Admin))
+            {
+                Header += " [Admin]";
+            }
+            else if (_appDbRespository.Employee.InloggedEmployee.AppPermissions.
+                Contains(EmployeeRepository.EmployeeLoggedInDTO.Permissions.Verkoop))
+            {
+                Header += " [Verkoper]";
+            }
+            else if (_appDbRespository.Employee.InloggedEmployee.AppPermissions.
+                Contains(EmployeeRepository.EmployeeLoggedInDTO.Permissions.Magazijn))
+            {
+                Header += " [Magazijnier]";
+            }
+
+            //=================================PERMISSIONS =========================
+            IsWareHouseEmployeeLoggedIn  = _appDbRespository.Employee.InloggedEmployee.AppPermissions.Contains
+                (EmployeeRepository.EmployeeLoggedInDTO.Permissions.Magazijn);
+
+            IsSalesEmployeeLoggedIn  = _appDbRespository.Employee.InloggedEmployee.AppPermissions.Contains
+                (EmployeeRepository.EmployeeLoggedInDTO.Permissions.Verkoop);
+
+            IsAdminEmployeeLoggedIn = _appDbRespository.Employee.InloggedEmployee.AppPermissions.Contains
+                (EmployeeRepository.EmployeeLoggedInDTO.Permissions.Admin);
+
+            Console.WriteLine("====================================");
+            Console.WriteLine("IsWareHouseEmployeeLoggedIn " + IsWareHouseEmployeeLoggedIn);
+            Console.WriteLine("IsSalesEmployeeLoggedIn " + IsSalesEmployeeLoggedIn);
+            Console.WriteLine("IsAdminEmployeeLoggedIn " + IsAdminEmployeeLoggedIn);
+            Console.WriteLine("====================================");
+
+            //======================================================================
 
 
             //-------------------- navbar -----------------------------
@@ -79,8 +127,15 @@ namespace KFSolutionsWPF.ViewModels
 
             
             Command_OrderIn = new RelayCommand(NavigateToOrderIn);
-            Command_OrderInHandler = new RelayCommand(NavigateToOrderInHandler);
-            Command_CompanyBalanceSheet = new RelayCommand(NavigateToCompanyBalanceSheet);
+            Command_OrderInHandler = new RelayCommand(NavigateToOrderInHandler); 
+             Command_CompanyBalanceSheet = new RelayCommand(NavigateToCompanyBalanceSheet);
+            Command_ProductDetails = new RelayCommand(NavigateToProductDetails);
+        }
+
+        private void NavigateToProductDetails(object obj)
+        {
+            _transactionControl.SlideNewContent(new ProductDetailsViewModel(_appDbRespository, _transactionControl),
+                TDStransactionControl.TransactionDirection.Left, 500);
         }
 
         private void NavigateToCompanyBalanceSheet(object obj)

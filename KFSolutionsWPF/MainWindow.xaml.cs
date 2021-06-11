@@ -95,12 +95,12 @@ namespace KFSolutionsWPF
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //inloggen
-            EmployeeRepository.EmployeeLoggedInDTO IngelogdGebruiker = _appDbRespository.Employee.LogIn("Tom_0123", "Tom_0123");
-            if (_appDbRespository.Employee.InloggedEmployee == null)
-            {
-                MessageBox.Show("niet ingelogd tijdens test");
-            }
-            Console.WriteLine("ingelogd tijdens test: " + _appDbRespository.Employee.InloggedEmployee.FirstName);
+            //EmployeeRepository.EmployeeLoggedInDTO IngelogdGebruiker = _appDbRespository.Employee.LogIn("Tom_0123", "Tom_0123");
+            //if (_appDbRespository.Employee.InloggedEmployee == null)
+            //{
+            //    MessageBox.Show("niet ingelogd tijdens test");
+            //}
+            //Console.WriteLine("ingelogd tijdens test: " + _appDbRespository.Employee.InloggedEmployee.FirstName);
 
 
 
@@ -114,7 +114,7 @@ namespace KFSolutionsWPF
 
 
 
-            //_transactionControl.SlideNewContent(new InloggenViewModel(_appDbRespository, _transactionControl));
+            _transactionControl.SlideNewContent(new InloggenViewModel(_appDbRespository, _transactionControl));
 
             //_transactionControl.SlideNewContent(new MainMenuViewModel(_appDbRespository, _transactionControl));
 
@@ -138,7 +138,7 @@ namespace KFSolutionsWPF
 
             //_transactionControl.SlideNewContent(new InvoiceViewModel(_appDbRespository, _transactionControl));
 
-            _transactionControl.SlideNewContent(new CompanyBalanceSheetViewModel(_appDbRespository, _transactionControl));
+            //_transactionControl.SlideNewContent(new CompanyBalanceSheetViewModel(_appDbRespository, _transactionControl));
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -107,12 +107,12 @@
 
 
                     <TextBlock Text="Produktnaam, EAN" Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                    <TextBox Text="{Binding NewProduct.ProductTitle}" Grid.Row="1" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                    <TextBox Text="{Binding NewProduct.EAN}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox IsEnabled="{Binding IsNewMode}" Text="{Binding NewProduct.ProductTitle}" Grid.Row="1" Grid.ColumnSpan="8"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
+                    <TextBox IsEnabled="{Binding IsNewMode}" Text="{Binding NewProduct.EAN}" Grid.Row="1" Grid.ColumnSpan="6"  Grid.Column="9" Style="{StaticResource textboxData}"></TextBox>
 
 
                     <TextBlock Text="Producttype, Verkoopprijs, BTW" Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
-                    <ComboBox ItemsSource="{Binding ProductTypesAvailable}" 
+                    <ComboBox  IsEnabled="{Binding IsNewMode}" ItemsSource="{Binding ProductTypesAvailable}" 
                     SelectedValue="{Binding NewProduct.Id_ProductType}"
                     DisplayMemberPath="DescriptionNL" 
                     SelectedValuePath="Id"
@@ -120,7 +120,7 @@
                     Style="{StaticResource comboData}">
                     </ComboBox>
                     <TextBox Text="{Binding NewProduct.SellingPriceRecommended}" Grid.Row="2" Grid.ColumnSpan="6"  Grid.Column="7" Style="{StaticResource textboxData}"></TextBox>
-                    <ComboBox ItemsSource="{Binding BtwAvailable}" 
+                    <ComboBox  IsEnabled="{Binding IsNewMode}" ItemsSource="{Binding BtwAvailable}" 
                             SelectedItem="{Binding Path=NewProduct.BTWpercentage}"
                             Grid.Row="2" Grid.ColumnSpan="2"  Grid.Column="13" 
                             Style="{StaticResource comboData}">
@@ -130,16 +130,16 @@
                     <!--====================== Magazijn gegevens ==============================-->
                     <TextBlock Text="Produkt Magazijn gegevens" Grid.Row="3"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
-                    <TextBlock Text="Locatie, In stock" Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
+                    <TextBlock Text="Locatie" Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
                     <TextBox Text="{Binding NewProduct.WareHouseLocation}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
-                    <TextBox IsReadOnly="true" Text="{Binding NewProduct.CountInStock}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
+                    <!--<TextBox IsReadOnly="true" Text="{Binding NewProduct.CountInStock}" Grid.Row="4" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>-->
 
                     <TextBlock Text="Stock min, Stock max" Grid.Row="5"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
                     <TextBox Text="{Binding NewProduct.MinCountInStock}" Grid.Row="5" Grid.ColumnSpan="7"  Grid.Column="1" Style="{StaticResource textboxData}"></TextBox>
                     <TextBox Text="{Binding NewProduct.MaxCountInStock}" Grid.Row="5" Grid.ColumnSpan="7"  Grid.Column="8" Style="{StaticResource textboxData}"></TextBox>
 
                     <!--====================== Extra info ==============================-->
-                    <TextBlock Text="Extra info" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+                    <TextBlock  Text="Extra info" Grid.Row="6"  Grid.Column="0" Grid.ColumnSpan="15" Style="{StaticResource labelHoofdings}"  ></TextBlock>
 
                     <TextBlock Text="Extra info:" Grid.Row="7"  Grid.Column="0" Style="{StaticResource labelData}"  ></TextBlock>
                     <TextBox Text="{Binding NewProduct.ExtraInfo}" Grid.Row="7" Grid.ColumnSpan="14"  Grid.Column="1"  

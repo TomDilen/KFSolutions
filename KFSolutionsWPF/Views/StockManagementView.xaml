@@ -108,7 +108,21 @@
                             <DataGridTextColumn Width="40"  Header="Min" Binding="{Binding MinCountInStock}" ></DataGridTextColumn>
                             <DataGridTextColumn Width="40"  Header="Max" Binding="{Binding MaxCountInStock}" ></DataGridTextColumn>
                             <DataGridTextColumn Width="50"  Header="Locatie"  Binding="{Binding WareHouseLocation}" ></DataGridTextColumn>
+                            <!--<DataGridCheckBoxColumn Width="50"  Header="Locatie"  Binding="{Binding IsOrderNeeded}" ></DataGridCheckBoxColumn>-->
+                            
                         </DataGrid.Columns>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsOrderNeeded}" Value="True">
+                                        <Setter Property="Background" Value="#FFEC5D5D"></Setter>
+                                    </DataTrigger>
+                                    <!--<DataTrigger Binding="{Binding IsOrderNeeded}" Value="False">
+                                        <Setter Property="Background" Value="Green"></Setter>
+                                    </DataTrigger>-->
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
                     </DataGrid>
 
                     

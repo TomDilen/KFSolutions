@@ -5,10 +5,50 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KFSolutionsWPF.Views"
              xmlns:components="clr-namespace:KFSolutionsWPF.Components"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="850" d:DesignWidth="800">
 
-    <Grid>
+    <!--<UserControl.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border>
+                            <Grid>
+                                <Grid>
+                                    <Border x:Name="border" 
+                                            CornerRadius="3,3,0,0"
+                                            Background="WhiteSmoke"/>
+                                </Grid>
+                                <ContentPresenter ContentSource="Header"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="LightGray" />
+                            </Trigger>
+                            <Trigger Property="IsSelected"
+                                     Value="True">
+                                <Setter TargetName="border"
+                                        Property="Background"
+                                        Value="LightGray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>-->
+
+
+    <Grid >
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -36,36 +76,201 @@
 
 
 
-        <components:AppLayout1 Grid.Row="1" MaxWidth="800">
+        <components:AppLayout1 Grid.Row="1" MaxWidth="900" >
+
+            <Grid Background="#FF012E01" Opacity="0.9"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
 
-            <ScrollViewer Style="{StaticResource CustomScrollViewer}"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <!--+++++++++++++++++++++ DATUM SELECTIE +++++++++++++++++++++++++++++-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="" Grid.Row="0"></TextBlock> <!--dummy-->
+                    <TextBlock Text="datum van, tot: " Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                    <DatePicker SelectedDate="{Binding SelectedDateFrom}" Grid.Row="1"   Grid.Column="1" Style="{StaticResource DateboxData}"></DatePicker>
+                    <DatePicker SelectedDate="{Binding SelectedDateTo}" Grid.Row="1"   Grid.Column="2" Style="{StaticResource DateboxData}"></DatePicker>
+                    <TextBlock Text="" Grid.Row="2"></TextBlock>
+                </Grid>
+                
+                
+                
+                
+                
+                
+                <!--+++++++++++++++++++++ TABCONTROL +++++++++++++++++++++++++++++-->
+                
+                
+                
+                
+                
+                
+                <TabControl  Background="#FF012E01" Opacity="0.9" Grid.Row="5" >
+
+                    <!--========================== TAB Algemeen ========================================-->
+                    <TabItem Header="Algemeen"  Background="#FF035D03" Opacity="0.9" >
+
+                        <ScrollViewer>
 
 
-                <Grid>
-                    <TabControl>
-                        <TabItem Header="General">
-                            <Label Content="Content goes here..." />
-                        </TabItem>
-                        
-                        <!--========================== TAB VERKOOP ========================================-->
-                        <TabItem IsSelected="True" Header="Details verkoop">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+
+                                <TextBlock Text="Aangekocht" Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                                <TextBlock Text="Aangekochte aantal: " Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTproduktenBuyed }" Grid.Row="1"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                                <TextBlock Text="TT bedrag aangekocht: " Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTsumBuyed , StringFormat=N2}" Grid.Row="2"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                                <TextBlock Text="Aangekochte aantal (incl. onderweg): " Grid.Row="3"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTproduktenBuyedAfterHandled }" Grid.Row="3"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                                <TextBlock Text="TT bedrag aangekocht (incl. onderweg): " Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTsumBuyedAfterHandled , StringFormat=N2}" Grid.Row="4"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+
+
+
+
+                                <TextBlock Text="Verkocht" Grid.Row="5"  Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                                <TextBlock Text="Aantal producten verkocht: " Grid.Row="7"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTproduktenSolded}" Grid.Row="7"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                                <TextBlock Text="TT bedrag alle produkten: " Grid.Row="8"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTsumSolded , StringFormat=N2}" Grid.Row="8"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+
+
+                                <TextBlock Text="Stock" Grid.Row="10"  Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                                <TextBlock Text="Aantal Produkten in stok: " Grid.Row="11"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTstockProductCount }" Grid.Row="11"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+
+                                <TextBlock Text="Totale stockwaarde (ahv verkoopprijs): " Grid.Row="12"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTstockValue , StringFormat=N2}" Grid.Row="12"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+
+                            
+                            
+                                <TextBlock Text="Balance aangekocht/verkocht/stock" Grid.Row="15"  Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource labelHoofdings}"  ></TextBlock>
+
+                                <TextBlock Text="Aangekochte aantal: " Grid.Row="16"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTproduktenBuyed }" Grid.Row="16"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="Aantal Produkten in stok: " Grid.Row="17"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTstockProductCount }" Grid.Row="17"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="Aantal producten verkocht: " Grid.Row="18"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding TTproduktenSolded}" Grid.Row="18"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="Balance: " Grid.Row="19"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                                <TextBlock Text="{Binding AangkochtStockVerkochtBalance}" Grid.Row="19"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                                
+
+                            </Grid>
+                        </ScrollViewer>
+                    </TabItem>
+                    
+                    
+                    
+                    
+                    <!--========================== TAB VERKOOP ========================================-->
+                    <TabItem  Header="Details verkoop" Background="#FF035D03" Opacity="0.9" >
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Aantal producten verkocht: " Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTproduktenSolded}" Grid.Row="1"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                            <TextBlock Text="TT bedrag alle produkten: " Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTsumSolded , StringFormat=N2}" Grid.Row="2"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                            
+
+
+
 
 
                             <DataGrid  ItemsSource="{Binding OrdersOutFromDB}"
-                               SelectedItem="{Binding Path=SelectedOrdersOutFromDBInDatagridDetailsVerkoop}"
-                               AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
-                               Grid.Row="7" Margin="5"  Background="#FF012E01" Opacity="0.9" >
-
-
+                            VerticalScrollBarVisibility="Auto"
+                            SelectedItem="{Binding Path=SelectedOrdersOutFromDBInDatagridDetailsVerkoop}"
+                            AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                            Grid.Row="9" Grid.ColumnSpan="2" Margin="5"  Background="Transparent" Opacity="0.9" >
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn IsReadOnly="True" Header="Factuur" Binding="{Binding Id, StringFormat=D8}" ></DataGridTextColumn>
-                                    <DataGridTextColumn IsReadOnly="True" Header="Datum" Binding="{Binding SoldAt}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Datum" Binding="{Binding SoldAt , StringFormat=\{0:dd/MM/yy HH:mm:ss\}}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Door" Binding="{Binding _FullNameEmployeeSolded}" ></DataGridTextColumn>
                                     <DataGridTextColumn IsReadOnly="True" Header="Klant" Binding="{Binding _FullNameClient}" ></DataGridTextColumn>
                                     <DataGridTextColumn IsReadOnly="True" Header="TTstuks" Binding="{Binding _AantalStuks}" ></DataGridTextColumn>
-                                    <DataGridTextColumn IsReadOnly="True" Header="TTprijs" Binding="{Binding _TTverkoopPrijs, StringFormat=N2}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="TTprijs" Binding="{Binding _TTverkoopPrijs, StringFormat=N2}" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
 
 
                                     <!--bekijken button-->
@@ -73,10 +278,10 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Button 
-                                                        Command="{Binding Path=DataContext.Command_ViewInvoiceButtonInDatagridClick,       
-                                                            RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"
-                                                    ToolTip="maak/bekijk factuur"
-                                                        Content="Factuur" FontWeight="ExtraBold"/>
+                                                    Command="{Binding Path=DataContext.Command_ViewInvoiceButtonInDatagridClick,       
+                                                        RelativeSource= {RelativeSource FindAncestor,AncestorType={x:Type DataGrid}}}"
+                                                ToolTip="maak/bekijk factuur"
+                                                    Content="Factuur" FontWeight="ExtraBold"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -99,23 +304,393 @@
 
 
                             </DataGrid>
-                        </TabItem>
-                        
-                        
-                        
-                        
-                        <TabItem Header="Details aankoop">
+                        </Grid>
+                    </TabItem>
 
-                        </TabItem>
-                        <TabItem Header="Details Stock">
+
+
+
+                    <!--========================== TAB AANKOOP ========================================-->
+                    <TabItem Header="Details aankoop"  Background="#FF035D03" Opacity="0.9" >
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Aangekochte aantal: " Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTproduktenBuyed }" Grid.Row="1"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                            <TextBlock Text="TT bedrag aangekocht: " Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTsumBuyed , StringFormat=N2}" Grid.Row="2"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+                            
+                            <TextBlock Text="Aangekochte aantal (incl. onderweg): " Grid.Row="3"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTproduktenBuyedAfterHandled }" Grid.Row="3"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                            <TextBlock Text="TT bedrag aangekocht (incl. onderweg): " Grid.Row="4"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTsumBuyedAfterHandled , StringFormat=N2}" Grid.Row="4"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+
+                            <DataGrid  ItemsSource="{Binding OrdersInFromDB}"
+                            VerticalScrollBarVisibility="Auto"
+                           
+                            AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                            Grid.Row="9" Grid.ColumnSpan="2" Margin="5"  Background="Transparent" Opacity="0.9" >
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn IsReadOnly="True" Header="Datum besteld" Binding="{Binding OrderedAt  , StringFormat=\{0:dd/MM/yy HH:mm:ss\}}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Bij leverancier" Binding="{Binding Supplier.Name}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Door" Binding="{Binding _FullNameEmployeeOrderedBy}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Datum afgehandeld" Binding="{Binding HandledAt , StringFormat=\{0:dd/MM/yy HH:mm:ss\}}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Door" Binding="{Binding _FullNameEmployeeHandledBy}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="TTstuks" Binding="{Binding _AantalStuks}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="TTprijs" Binding="{Binding _TTaankoopPrijs, StringFormat=N2}" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    
+
+
+                                </DataGrid.Columns>
+                                <DataGrid.RowDetailsTemplate >
+                                    <DataTemplate>
+                                        <DataGrid   Margin="20,10" ItemsSource="{Binding OrderLineIns}" AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding Path=EAN_Product}"/>
+                                                <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding Path=Product.ProductTitle}"/>
+                                                <DataGridTextColumn IsReadOnly="True" Header="Aankoopprijs" Binding="{Binding Path=UnitPrice}"/>
+                                                <DataGridTextColumn IsReadOnly="True" Header="Aantal" Binding="{Binding Path=NumberOfProducts}"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
+
+
+                            </DataGrid>
+
                             
                             
-                        </TabItem>
-                    </TabControl>
-                </Grid>
+                        </Grid>
+                    </TabItem>
 
 
-            </ScrollViewer>
+
+                    <!--========================== Details Stock ========================================-->
+                    <TabItem  Header="Details Stock"  Background="#FF035D03" Opacity="0.9" >
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Aantal Produkten in stok: " Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTstockProductCount }" Grid.Row="1"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+                            
+                
+                            <TextBlock Text="Totale stockwaarde (ahv verkoopprijs): " Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTstockValue , StringFormat=N2}" Grid.Row="2"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                            <DataGrid  ItemsSource="{Binding ProductsFromDBforStock}"
+                            VerticalScrollBarVisibility="Auto"
+                            AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                            Grid.Row="9" Grid.ColumnSpan="2" Margin="5"  Background="Transparent" Opacity="0.9" >
+                                <DataGrid.Columns>
+
+                                    <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding EAN}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding ProductTitle}" ></DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="Verkoopprijs" Binding="{Binding SellingPriceRecommended, StringFormat=N2}" Width="80">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn IsReadOnly="True" Header="# stock" Binding="{Binding CountInStock}" ></DataGridTextColumn>
+                                    <DataGridTextColumn  IsReadOnly="True" Header="TT waarde" Binding="{Binding CalculatatedStockValue, StringFormat=N2}" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="HorizontalAlignment" Value="Right" />
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+
+
+
+                                </DataGrid.Columns>
+
+
+
+                            </DataGrid>
+
+
+
+                        </Grid>
+                    </TabItem>
+
+                    
+                    
+                    
+
+                    <!--========================== Details Produkten ========================================-->
+                    <TabItem  Header="Best verkochte Producten"  Background="#FF035D03" Opacity="0.9" >
+
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Aantal producten verkocht: " Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTproduktenSolded}" Grid.Row="1"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                            <TextBlock Text="TT bedrag alle produkten: " Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTsumSolded , StringFormat=N2}" Grid.Row="2"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+
+                            <ScrollViewer Grid.Row="9" Grid.ColumnSpan="2">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="300"/>
+                                    </Grid.RowDefinitions>
+                                
+                                        <!--ProductHelpersForProducts-->
+                                    <DataGrid  ItemsSource="{Binding ProductHelpersForProducts}"
+                                    AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                                    Grid.Row="0" Grid.ColumnSpan="2" Margin="5"  Background="Transparent" Opacity="0.9" >
+
+                                        <DataGrid.Columns>
+
+                                            <DataGridTextColumn IsReadOnly="True" Header="EAN" Binding="{Binding EAN}" ></DataGridTextColumn>
+                                            <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding ProductTitle}" ></DataGridTextColumn>
+
+                                            <!--<DataGridTextColumn IsReadOnly="True" Header="Datum" Binding="{Binding DateSaled , StringFormat=\{0:dd/MM/yy HH:mm:ss\}}" ></DataGridTextColumn>
+                                            <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding EmpFullName}" ></DataGridTextColumn>
+
+                                            <DataGridTextColumn IsReadOnly="True" Header="Verk. prijs/st" Binding="{Binding UnitPrice, StringFormat=N2}" Width="80">
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>-->
+                                            <DataGridTextColumn IsReadOnly="True" Header="Aant verkocht" Binding="{Binding NumberOfProducts}" >
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn  IsReadOnly="True" Header="TT waarde" Binding="{Binding TTPrice, StringFormat=N2}" >
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+
+                                    <lvc:CartesianChart Background="#1E1E1E1E" Grid.Row="1"  >
+                            
+            
+                                        <lvc:CartesianChart.Series>
+                                            <lvc:ColumnSeries   Values="{Binding Chart_ProductHelpersForProductsValues}">
+                                                <lvc:ColumnSeries.Fill>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#FF031904" Offset="0"/>
+                                                        <GradientStop Color="#FF34CB3B" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </lvc:ColumnSeries.Fill>
+                                            </lvc:ColumnSeries>
+                                        </lvc:CartesianChart.Series>
+                                        <lvc:CartesianChart.AxisX >
+                                            <lvc:Axis  Title=" "  Labels="{Binding Chart_ProductHelpersForProductsNames}" FontSize="18" LabelsRotation="25" Foreground="#FF40FF51">
+                                                <lvc:Axis.Separator>
+                                                    <lvc:Separator Step="1"/>
+                                                </lvc:Axis.Separator>
+                                            </lvc:Axis>
+                                        </lvc:CartesianChart.AxisX>
+                                        <lvc:CartesianChart.AxisY>
+                                            <lvc:Axis  Title="" Foreground="#FF40FF51" FontSize="14"/>
+                                        </lvc:CartesianChart.AxisY>
+                                    </lvc:CartesianChart>
+
+
+
+                                </Grid>
+
+                            </ScrollViewer>
+
+
+                        </Grid>
+
+                    </TabItem>
+
+
+
+                    <!--========================== Details Employees ========================================-->
+                    <TabItem  Header="Beste verkopers"  Background="#FF035D03" Opacity="0.9" >
+
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Aantal producten verkocht: " Grid.Row="1"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTproduktenSolded}" Grid.Row="1"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+                            <TextBlock Text="TT bedrag alle produkten: " Grid.Row="2"  Grid.Column="0" Style="{StaticResource labelData}" Margin="10,5" ></TextBlock>
+                            <TextBlock Text="{Binding TTsumSolded , StringFormat=N2}" Grid.Row="2"  Grid.Column="1" Style="{StaticResource labelData}" TextAlignment="Left" Margin="10,5" ></TextBlock>
+
+
+                            <ScrollViewer Grid.Row="9" Grid.ColumnSpan="2">
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="300"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!--ProductHelpersForProducts-->
+                                    <DataGrid  ItemsSource="{Binding ProductHelpersForEmployees}"
+                                    AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single"
+                                    Grid.Row="0" Grid.ColumnSpan="2" Margin="5"  Background="Transparent" Opacity="0.9" >
+
+                                        <DataGrid.Columns>
+
+                                            <DataGridTextColumn IsReadOnly="True" Header="Verkoper" Binding="{Binding EmpFullName}" ></DataGridTextColumn>
+                                            <!--<DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding ProductTitle}" ></DataGridTextColumn>-->
+
+                                            <!--<DataGridTextColumn IsReadOnly="True" Header="Datum" Binding="{Binding DateSaled , StringFormat=\{0:dd/MM/yy HH:mm:ss\}}" ></DataGridTextColumn>
+                                            <DataGridTextColumn IsReadOnly="True" Header="Product" Binding="{Binding EmpFullName}" ></DataGridTextColumn>
+
+                                            <DataGridTextColumn IsReadOnly="True" Header="Verk. prijs/st" Binding="{Binding UnitPrice, StringFormat=N2}" Width="80">
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>-->
+                                            <DataGridTextColumn IsReadOnly="True" Header="Aant verkocht" Binding="{Binding NumberOfProducts}" >
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+                                            <DataGridTextColumn  IsReadOnly="True" Header="TT waarde" Binding="{Binding TTPrice, StringFormat=N2}" >
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right" />
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+
+                                    <lvc:CartesianChart Background="#1E1E1E1E" Grid.Row="1"  >
+
+
+                                        <lvc:CartesianChart.Series>
+                                            <lvc:ColumnSeries   Values="{Binding Chart_ProductHelpersForEmployeesValues}">
+                                                <lvc:ColumnSeries.Fill>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#FF031904" Offset="0"/>
+                                                        <GradientStop Color="#FF34CB3B" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </lvc:ColumnSeries.Fill>
+                                            </lvc:ColumnSeries>
+                                        </lvc:CartesianChart.Series>
+                                        <lvc:CartesianChart.AxisX >
+                                            <lvc:Axis  Title=" "  Labels="{Binding Chart_ProductHelpersForEmployeesNames}" FontSize="18" LabelsRotation="25" Foreground="#FF40FF51">
+                                                <lvc:Axis.Separator>
+                                                    <lvc:Separator Step="1"/>
+                                                </lvc:Axis.Separator>
+                                            </lvc:Axis>
+                                        </lvc:CartesianChart.AxisX>
+                                        <lvc:CartesianChart.AxisY>
+                                            <lvc:Axis  Title="" Foreground="#FF40FF51" FontSize="14"/>
+                                        </lvc:CartesianChart.AxisY>
+                                    </lvc:CartesianChart>
+
+
+
+                                </Grid>
+
+                            </ScrollViewer>
+
+
+                        </Grid>
+
+                    </TabItem>
+
+
+
+                </TabControl>
+            </Grid>
+
+
+            <!--</ScrollViewer>-->
 
         </components:AppLayout1>
 
